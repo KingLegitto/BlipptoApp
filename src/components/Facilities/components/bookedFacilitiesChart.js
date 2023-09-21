@@ -85,7 +85,8 @@ export default function BookedFacilitiesChart() {
                     type="monotone"
                     dataKey="value"
                     fill="#6484E6"
-                    barSize={20}
+                    barSize={25}
+                    
                     // strokeWidth={"3px"}
                     // fillOpacity={1}
                     // fill="url(#colorUv)"

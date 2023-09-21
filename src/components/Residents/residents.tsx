@@ -110,23 +110,23 @@ export default function Residents() {
         <FirstResidentChart />
       </div>
       <div className=" bg-white  shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] rounded-2xl">
-        <div className="flex justify-between items-center border-b px-6 py-4">
+        <div className="flex justify-between items-center border-b px-2.5 xl:px-6 py-4">
           <h5 className="text-sm sm:text-sm xl:text-2xl font-bold">
             Residents
           </h5>
           <div className="flex ">
-            <div className="h-9 md:h-10 w-9 md:w-10 rounded-md mr-3 bg-brand flex justify-center items-center">
+            <div className="h-8 md:h-10 w-8 md:w-10 rounded-md mr-3 bg-brand flex justify-center items-center">
               <MenuIcon className="scale-[0.7] xl:scale-75" />
             </div>
-            <div className="h-9 md:h-10 w-9 md:w-10 border-[1px] border-[#6484E6] rounded-md  flex justify-center items-center">
+            <div className="h-8 md:h-10 w-8 md:w-10 border-[1px] border-[#6484E6] rounded-md  flex justify-center items-center">
               <Expand className="scale-[0.7] xl:scale-75" />
             </div>
           </div>
         </div>
         <table className="w-full min-w-max table-auto text-center">
           <thead>
-            <tr className="h-9 md:h-12 border-b">
-              <th className="text-xs md:text-sm">Select</th>
+            <tr className="h-9 md:h-12 border-b ">
+              <th className="text-xs md:text-sm ml-2.5">Select</th>
               <th className="text-xs md:text-sm">Resident</th>
               <th className="text-xs md:text-sm ">Phone Number</th>
               <th className="text-xs md:text-sm hidden md:table-cell">
@@ -147,7 +147,7 @@ export default function Residents() {
                 return (
                   <tr key={i} className="h-9 md:h-12 border-b">
                     <td>
-                      <input type="checkbox" className="select" />
+                      <input type="checkbox" />
                     </td>
                     <td className="text-xs md:text-sm">{resident}</td>
                     <td className="text-xs md:text-sm">{phoneNumber}</td>

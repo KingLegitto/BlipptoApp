@@ -68,7 +68,7 @@ export default function FirstResidentChart(){
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" fontSize={'10px'}/>
           <YAxis type="number" domain={[0, 100]} />
           <Tooltip />
           <Area
