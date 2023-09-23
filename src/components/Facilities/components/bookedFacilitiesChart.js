@@ -5,93 +5,97 @@ import {
     XAxis,
     YAxis,
     CartesianGrid,
+    Tooltip,
     ResponsiveContainer,
 } from "recharts";
 
 
-const data = [
-    {
-        name: "Jan",
-        value: "20",
-    },
-    {
-        name: "Feb",
-        value: 50,
-    },
-    {
-        name: "Mar",
-        value: "20",
-    },
-    {
-        name: "Apr",
-        value: 95,
-    },
-    {
-        name: "May",
-        value: "20",
-    },
-    {
-        name: "Jun",
-        value: 73,
-    },
-    {
-        name: "Jul",
-        value: "20",
-    },
-    {
-        name: "Aug",
-        value: 60,
-    },
-    {
-        name: "Sep",
-        value: "60",
-    },
-    {
-        name: "Oct",
-        value: "60",
-    },
-    {
-        name: "Nov",
-        value: "60",
-    },
-    {
-        name: "Dec",
-        value: "60",
-    },
-];
+const data = [20,50,20,95,20,73,20,60,57,60,60,60];
 
-export default function BookedFacilitiesChart() {
+const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+
+const BookedFacilitiesChart = () => {
+    const fontSize = window.innerWidth < 768 ? 10 : 17
+    let barSize
+    if(window.innerWidth < 768){
+       barSize = 13
+    }
+    if(window.innerWidth > 768 && window.innerWidth < 1440){
+        barSize = 17
+    } 
+    if(window.innerWidth > 1440){
+        barSize = 35
+    }
+
     return (
         <ResponsiveContainer width="100%" height="85%">
             <BarChart
-                data={data}
+                data={getColorOfBars(data, months, "#6484E6", "#e4e6f7" )}
                 margin={{
                     top: 10,
                     right: 0,
                     left: -20,
-                    bottom: 0,
+                    bottom: 10,
                 }}
             >
-                {/* <defs>
-                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#6484E6" stopOpacity={0.5} />
-                        <stop offset="95%" stopColor="#6484E6" stopOpacity={0.2} />
-                    </linearGradient>
-                </defs> */}
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="name" fontSize={fontSize}/>
                 <YAxis type="number" domain={[0, 100]} />
+                <Tooltip cursor={{fill: 'transparent'}} />
                 <Bar
                     type="monotone"
                     dataKey="value"
-                    fill="#6484E6"
-                    barSize={25}
-                    
-                    // strokeWidth={"3px"}
-                    // fillOpacity={1}
-                    // fill="url(#colorUv)"
+                    barSize={barSize}
                 />
             </BarChart>
         </ResponsiveContainer>
     )
 }
+
+export default BookedFacilitiesChart
+
+function getColorOfBars(data,months, color1, color2){
+    let previousElement= null
+    let previousColor = null
+    const newArray = data.map((el,idx)=> {
+     if(idx === 0){
+       previousColor = color1
+       previousElement = el
+       return {
+         name: months[idx],
+         value: el,
+         fill: color1
+       }
+     }
+     else{
+       if(el > previousElement){
+         previousColor = color1
+         previousElement = el
+         return {
+           name: months[idx],
+           value: el,
+           fill: color1
+         }
+       }
+       if(el < previousElement){
+         previousColor = color2
+         previousElement = el
+         return {
+           name: months[idx],
+           value: el,
+           fill: color2
+         }
+       }
+       if(el === previousElement){
+         previousElement = el
+         return {
+           name: months[idx],
+           value: el,
+           fill: previousColor
+         }
+       }
+     }
+    })
+   
+    return newArray
+   }

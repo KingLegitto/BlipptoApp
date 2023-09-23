@@ -47,7 +47,7 @@ const tableData = [
 
 export default function Residents() {
   return (
-    <div className="h-screen md:overflow-scroll  p-5 pr-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border">
+    <div className="h-full md:h-screen md:overflow-scroll  p-5 pr-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
       <div className="flex flex-col md:flex-row justify-between md:items-center h-[15vh] md:h-[6vh] mb-[4vh]">
         <div className="order-1 md:order-none w-full md:w-[60%] flex">
           <div className="w-10 h-10 rounded-md bg-brand mr-3 flex justify-center items-center">
@@ -109,8 +109,8 @@ export default function Residents() {
         </div>
         <FirstResidentChart />
       </div>
-      <div className=" bg-white  shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] rounded-2xl">
-        <div className="flex justify-between items-center border-b px-2.5 xl:px-6 py-4">
+      <div className=" bg-white  shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] rounded-2xl p-2">
+        <div className="flex justify-between items-center border-b px-2.5 xl:px-4 2xl:px-6 py-4">
           <h5 className="text-sm sm:text-sm xl:text-2xl font-bold">
             Residents
           </h5>

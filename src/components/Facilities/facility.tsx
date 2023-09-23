@@ -29,7 +29,7 @@ export default function Facility() {
   };
 
   return (
-    <div className="h-screen overflow-y-auto max-h-screen p-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border">
+    <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
       <div className="flex flex-col md:flex-row justify-between md:items-center h-[15vh] md:h-[6vh] mb-[4vh]">
         <div className="order-1 md:order-none w-full md:w-[60%] flex">
           <div className="w-10 h-10 rounded-md bg-brand mr-3 flex justify-center items-center">
@@ -252,3 +252,5 @@ export default function Facility() {
     </div>
   );
 }
+
+

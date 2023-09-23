@@ -72,10 +72,10 @@ export default function EstateDashboard() {
                 </div>
             </div>
             <div className="grid gap-3 2xl:gap-5 grid-cols-2 md:grid-cols-3 ">
-                <div className="bg-white rounded-2xl p-3 2xl:p-5 h-[22vh] md:h-[25vh] lg:h-[27vh] shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
+                <div className="bg-white rounded-2xl p-3 2xl:p-5 h-[22vh] md:h-[25vh] lg:h-[28vh] xl:h-[27vh] shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
                     <div className="flex justify-between items-center mb-2 h-[15%] lg:mb-5 ">
                         <h4 className="text-sm md:text-md xl:text-base  font-bold">Staff</h4>
-                        <p className="hidden md:block text-sm md:text-md xl:text-base">This week <span className="ml-0 lg:ml-1"><KeyboardArrowDownIcon /></span></p>
+                        <p className="hidden md:block text-sm md:text-md xl:text-sm">This week <span className="ml-0 lg:ml-1"><KeyboardArrowDownIcon /></span></p>
                         <span className="block md:hidden"><KeyboardArrowDownIcon /></span>
                     </div>
                     <div className="bg-primary p-2 rounded-2xl">
@@ -99,7 +99,7 @@ export default function EstateDashboard() {
                         </ul>
                     </div>
                 </div>
-                <div className="bg-white rounded-2xl h-[22vh] md:h-[25vh] 2xl:h-[27vh] p-3 2xl:p-5 shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
+                <div className="bg-white rounded-2xl h-[22vh] md:h-[25vh] lg:h-[28vh] xl:h-[27vh] p-3 2xl:p-5 shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
                     <div className="flex justify-between items-center h-[15%] mb-2 2xl:mb-4">
                         <h4 className="text-sm md:text-md xl:text-sm  font-bold">Services</h4>
                         <div className=" w-5 h-5 box-border p-0.5 2xl:w-8 2xl:h-8 flex justify-center items-center bg-primary rounded-md"><AddIcon className='scale-[0.7] lg:scale-75' /></div>
@@ -140,7 +140,7 @@ export default function EstateDashboard() {
                         </ul>
                     </div>
                 </div>
-                <div className=" h-[22vh] md:h-[25vh] 2xl:h-[27vh] box-border">
+                <div className=" h-[22vh] md:h-[25vh] lg:h-[28vh] xl:h-[27vh] box-border">
                     <div className="bg-white flex justify-between items-center mb-1  p-3 rounded-xl h-[23%] 2xl:h-[23%] shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
                         <h4 className="text-sm md:text-md xl:text-sm  font-bold">Residents</h4>
                         <p className="text-xs font-bold xl:text-sm">300</p>
@@ -155,37 +155,37 @@ export default function EstateDashboard() {
                                 <div className="bg-brand h-1.5 2xl:h-2.5 rounded-full" style={{ width: "80%" }}></div>
                             </div>
                         </>
-                        <div className="py-1 md:py-2 lg:py-1 xl:py-3 flex justify-between">
+                        <div className="py-1 md:py-2 lg:py-1 2xl:py-3 flex justify-between">
                             <h5 className="text-xs xl:text-sm">Approved Request</h5>
                             <p className="text-xs xl:text-sm">500</p>
                         </div>
-                        <div className="py-1 md:py-2 lg:py-1 xl:py-3 flex justify-between">
+                        <div className="py-1 md:py-2 lg:py-1 2xl:py-3 flex justify-between">
                             <h5 className="text-xs xl:text-sm">Visitation Request</h5>
                             <p className="text-xs xl:text-sm">1000</p>
                         </div>
                     </div>
                 </div>
-                <div className="bg-white rounded-2xl h-[22vh] md:h-[25vh] 2xl:h-[27vh] p-3 2xl:p-5 shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
-                    <div className="flex justify-between items-center mb-2 h-[15%]  lg:mb-2 xl:mb-5 2xl:mb-6">
+                <div className="bg-white rounded-2xl h-[22vh] md:h-[25vh] lg:h-[28vh] xl:h-[27vh] p-3 2xl:p-5 shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
+                    <div className="flex justify-between items-center mb-2 h-[15%]  lg:mb-2 xl:mb-5">
                         <h4 className="text-xs  xl:text-sm  font-bold">Guards</h4>
                         <p className="hidden md:block text-xs md:text-md xl:text-sm">This week <span className="ml-0 lg:ml-1"><KeyboardArrowDownIcon /></span></p>
                         <span className="block md:hidden"><KeyboardArrowDownIcon /></span>
                     </div>
-                    <div className="bg-primary p-2 2xl:p-4 rounded-2xl">
+                    <div className="bg-primary p-2  rounded-2xl">
                         <ul className="divide-y divide-gray-100">
                             <li className="flex justify-between gap-x-6 py-2 2xl:py-4">
-                                <h5 className="text-sm md:text-md xl:text-base">
+                                <h5 className="text-xs xl:text-sm">
                                     Steve K.
                                 </h5>
-                                <h5 className="text-sm md:text-md xl:text-base">
+                                <h5 className="text-xs xl:text-sm">
                                     4hrs
                                 </h5>
                             </li>
                             <li className="flex justify-between gap-x-6 py-2 2xl:py-4">
-                                <h5 className="text-sm md:text-md xl:text-base">
+                                <h5 className="text-xs xl:text-sm">
                                     John R.
                                 </h5>
-                                <h5 className="text-sm md:text-md xl:text-base">
+                                <h5 className="text-xs xl:text-sm">
                                     8hrs
                                 </h5>
                             </li>
@@ -193,30 +193,30 @@ export default function EstateDashboard() {
                     </div>
                 </div>
 
-                <div className=" bg-white rounded-2xl h-[22vh] md:h-[25vh] 2xl:h-[27vh] p-3 2xl:p-5 shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
+                <div className=" bg-white rounded-2xl h-[22vh] md:h-[25vh] lg:h-[28vh] xl:h-[27vh] p-3 2xl:p-5 shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
                     <div className="flex justify-between items-center mb-4 h-[15%]">
-                        <h4 className="text-sm md:text-md xl:text-base 2xl:text-xl font-bold">Bills</h4>
+                        <h4 className="text-xs xl:text-sm  font-bold">Bills</h4>
                         <span><MoreHorizIcon /></span>
                     </div>
                     <div>
                         <h4 className='text-base xl:text-xl font-semibold mb-3'>$6,567</h4>
                         <div className="flex justify-between items-center">
-                            <p className="hidden md:block text-sm md:text-md xl:text-base">This month <span className="ml-1"><KeyboardArrowDownIcon /></span></p>
-                            <span className="block md:hidden"><KeyboardArrowDownIcon /></span>
+                            <p className="block text-xs xl:text-sm">This month <span className="ml-1"><KeyboardArrowDownIcon /></span></p>
+                            {/* <span className="block md:hidden"><KeyboardArrowDownIcon /></span> */}
                             <h4 className="text-sm font-semibold text-center xl:text-xl bg-primary rounded-xl p-2 lg:w-24 xl:w-32">$1,567</h4>
                         </div>
                     </div>
                 </div>
-                <div className=" h-[22vh] md:h-[25vh] 2xl:h-[27vh] box-border">
+                <div className=" h-[22vh] md:h-[25vh] lg:h-[28vh] xl:h-[27vh] box-border">
                     <div className="bg-white flex justify-between items-center mb-1  p-3 rounded-xl h-[23%] 2xl:h-[23%] shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
-                        <h4 className="text-sm md:text-md xl:text-base 2xl:text-xl font-bold">Facility</h4>
+                        <h4 className="text-xs xl:text-sm font-bold">Facility</h4>
                         <p className="text-sm md:text-md xl:text-base">300</p>
                     </div>
                     <div className="bg-white px-3 py-1 md:py-3 lg:py-1 xl:py-3 rounded-xl h-[75%] shadow-[2.4px_2.4px_3.2px_rgba(0,0,0,0.15)]">
                         <>
                             <div className="flex justify-between mb-2 lg:mb-0.5 xl:mb-1">
-                                <h5 className="text-xs sm:text-sm  xl:text-base font-medium text-black ">Booked</h5>
-                                <span className="text-xs sm:text-sm  xl:text-base font-medium text-black ">80%</span>
+                                <h5 className="text-xs xl:text-sm font-medium text-black ">Booked</h5>
+                                <span className="text-xs xl:text-sm font-medium text-black ">80%</span>
                             </div>
                             <div className="w-full bg-[#adbded] rounded-full h-1.5 2xl:h-2.5 mb-1 ">
                                 <div className="bg-brand h-1.5 2xl:h-2.5 rounded-full" style={{ width: "80%" }}></div>
@@ -224,8 +224,8 @@ export default function EstateDashboard() {
                         </>
                         <>
                             <div className="flex justify-between mb-2 lg:mb-0.5 xl:mb-1">
-                                <h5 className="text-xs sm:text-sm  xl:text-base font-medium text-black ">Out of service</h5>
-                                <span className="text-xs sm:text-sm  xl:text-base font-medium text-black ">10%</span>
+                                <h5 className="text-xs xl:text-sm font-medium text-black ">Out of service</h5>
+                                <span className="text-xs xl:text-sm font-medium text-black ">10%</span>
                             </div>
                             <div className="w-full bg-[#adbded] rounded-full h-1.5 2xl:h-2.5 mb-1 ">
                                 <div className="bg-brand h-1.5 2xl:h-2.5 rounded-full" style={{ width: "10%" }}></div>
@@ -233,8 +233,8 @@ export default function EstateDashboard() {
                         </>
                         <>
                             <div className="flex justify-between mb-2 lg:mb-0.5 xl:mb-1">
-                                <h5 className="text-xs sm:text-sm xl:text-base font-medium text-black ">Pending Request</h5>
-                                <span className="text-xs sm:text-sm xl:text-base font-medium text-black ">10%</span>
+                                <h5 className="text-xs xl:text-sm font-medium text-black ">Pending Request</h5>
+                                <span className="text-xs xl:text-sm font-medium text-black ">10%</span>
                             </div>
                             <div className="w-full bg-[#adbded] rounded-full h-1.5 2xl:h-2.5 mb-1 ">
                                 <div className="bg-brand h-1.5 2xl:h-2.5 rounded-full" style={{ width: "10%" }}></div>
