@@ -79,9 +79,7 @@ $background-color: #f8f9ff;
 input[type='checkbox']{
   accent-color: #FFD601 !important; 
 }
-// .select:checked{
-//   background-color: yellow;
-// }
+
 .active > .selected > svg > path {
   stroke: black;
   // fill: black
@@ -402,4 +400,11 @@ input[data-id="0"]:focus, input[data-id="1"]:focus, input[data-id="2"]:focus,
   .navlink{
     flex-basis: 86%;
   }
+}
+
+@media screen and (min-width: 1024px) and (min-height: 601px) and (max-height:799px) {
+  .list{
+    row-gap: 1rem;
+  }
+ 
 }

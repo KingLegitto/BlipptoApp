@@ -16,7 +16,7 @@ import {
       value: "",
     },
     {
-      name: "Security Index",
+      name: "Safety Index",
       value: 50,
     },
     {
@@ -24,7 +24,7 @@ import {
       value: "20",
     },
     {
-      name: "Storage space",
+      name: "Storage",
       value: 95,
     },
     {
@@ -32,7 +32,7 @@ import {
       value: "20",
     },
     {
-      name: "Satisfactory score",
+      name: "Satisfaction",
       value: 73,
     },
     {
@@ -40,7 +40,7 @@ import {
       value: "20",
     },
     {
-      name: "Permanent guest",
+      name: "Perm. guest",
       value: 60,
     },
     {
@@ -50,6 +50,7 @@ import {
   ];
 
 export default function FirstResidentChart(){
+  const fontSize = window.innerWidth < 768 ? 10 : 17;
     return(
         <ResponsiveContainer width="100%" height="85%">
         <AreaChart
@@ -68,7 +69,7 @@ export default function FirstResidentChart(){
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" fontSize={fontSize}/>
           <YAxis type="number" domain={[0, 100]} />
           <Tooltip />
           <Area

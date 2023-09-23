@@ -64,12 +64,12 @@ export default function SideBar() {
                     <Logo alt='sidebar logo' className='mr-1 lg:mr-2 xl:mr-4 inline-block scale-[0.6] xl:scale-75' />
                     <span><h3 className="text-base xl:text-xl font-bold text-white">GateSage</h3></span>
                 </div>
-                <div className="md:basis-[83%] lg:basis-[77%] xl:basis-[80%] 2xl:basis-[81%] p-3 navlink">
-                    <ul>
+                <div className="md:basis-[83%] lg:basis-[77%] xl:basis-[80%] 2xl:basis-[81%] p-3 navlink ">
+                    <ul className='h-full flex flex-col justify-start md:gap-y-8 lg:gap-y-5 2xl:gap-y-8 list'>
                         {
                             categories.map((el, key) => {
                                 return <NavLink to={el.route} key={key}>
-                                    <div className="selected bg-brand mb-[3vh] xl:mb-[3.5vh] 2xl:mb-8 md:h-9 lg:h-8 xl:h-10 2xl:h-13 flex items-center p-2  xl:p-3 xl:pl-5">
+                                    <div className="selected bg-brand  md:h-9 lg:h-8 xl:h-10 2xl:h-13 flex items-center p-2  xl:p-3 xl:pl-5">
                                         <el.icon alt='sidebar logo' className='mr-1 lg:mr-2 xl:mr-4 inline-block scale-[0.6] xl:scale-75' />
                                         <span className="text-white text-sm xl:text-base">{el.title}</span>
                                     </div>
@@ -78,7 +78,7 @@ export default function SideBar() {
                         }
                     </ul>
                 </div>
-                <div className="bg-white p-2 2xl:p-3 flex rounded-md items-center justify-between">
+                <div className="bg-white p-2 2xl:p-3 flex rounded-md items-center justify-between h-14 2xl:h-auto">
                     <div className="hidden h-8 w-8 xl:w-9 xl:h-9 2xl:w-14 2xl:h-14 mr-1 xl:mr-3 rounded-full bg-gray-400 lg:flex items-center justify-center ">
                         <PersonIcon  className='scale-75 xl:scale-95 2xl:scale-100'/>
                     </div>
@@ -94,7 +94,7 @@ export default function SideBar() {
                 </div>
             </div>
             {/* for mobile screen */}
-            <div className="block fixed w-screen bottom-0 left-0 right-0 h-16 z-10 bg-brand md:hidden">
+            <div className="block fixed w-screen bottom-0 left-0 right-0 h-16 z-20 bg-brand md:hidden">
                 <ul className='flex w-full justify-around items-center h-16'>
                     {
                         categories.map((el, key) => {

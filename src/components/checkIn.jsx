@@ -40,7 +40,7 @@ export function CheckIn() {
         {open && (
           <Modal close={handleClose}>
             <div className="flex justify-between  items-center mb-[6vh]">
-              <div />
+              <div></div> 
               <h2 className="text-sm md:text-md xl:text-lg font-bold text-center">
                 What's your secret?
               </h2>
@@ -75,7 +75,7 @@ export function CheckIn() {
           </Modal>
         )}
       </div>
-      <Tabs value="checkIn">
+      <Tabs value="checkIn" className='overflow-visible'>
         <TabsHeader className="rounded-full h-12 xl:h-14 2xl:h-16 w-full md:w-[55%] lg:w-[45%] mx-auto bg-white p-0 tabHeader duration-1000 ease-in-out transition-all">
           <Tab value="checkIn" className="pills">
             CheckIn
@@ -84,11 +84,11 @@ export function CheckIn() {
             CheckOut
           </Tab>
         </TabsHeader>
-        <TabsBody className="bg-white mt-7 shadow-[4px_4px_3.2px_2px_rgba(100,132,230,0.20)] rounded-3xl">
+        <TabsBody className="bg-white mt-7 shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] rounded-3xl">
           <TabPanel value="checkIn" >
             <div className="checkin relative flex flex-col justify-between items-center bg-white  h-[35vh] md:h-[40vh] lg:h-[50vh] 2xl:h-[60vh] box-border p-4 md:p-5">
-              <div className="bg-white rounded-2xl md:h-[40%] lg:h-[60%]">
-                <h3 className="text-base md:text-3xl font-bold text-center mb-12 xl:mb-20 2xl:mb-24 passcode ">
+              <div className=" rounded-2xl md:h-[40%] lg:h-[60%] relative z-10">
+                <h3 className="text-base md:text-3xl font-bold text-center mb-[6vh] 2xl:mb-24 passcode ">
                   Enter passcode
                 </h3>
                 <ReactCodeInput
@@ -99,25 +99,25 @@ export function CheckIn() {
                   onChange={(e) => (code.current += e)}
                 />
               </div>
-              <div className="flex justify-center items-center bg-white rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">
-                <button className="flex justify-center items-center text-base  rounded-full bg-gray h-12 md:h-16 w-32 md:w-52 border-[#FFD601] border-2">
+              <div className="flex justify-center items-center  rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">
+                <button className="flex justify-center items-center text-base  rounded-full bg-gray h-10 md:h-12 2xl:h-16 w-32 md:w-52 border-[#FFD601] border-2">
                   Clear All
                 </button>
                 <button
                   onClick={() => setOpen(true)}
-                  className="flex relative  z-10 justify-center items-center  rounded-full text-base bg-accenture h-12 md:h-16 w-32 md:w-52"
+                  className="flex relative  z-10 justify-center items-center  rounded-full text-base bg-accenture h-10 md:h-12 2xl:h-16 w-32 md:w-52"
                 >
                   Check In
                 </button>
               </div>
-              <Topsvg className=" absolute  z-10 topSvg -top-12 -left-11 scale-75" style={{borderRadius: '35px 0px 0px 0px'}} />
+              <Topsvg className=" absolute topSvg -top-12 -left-11 scale-75" style={{borderRadius: '35px 0px 0px 0px'}} />
               <Bottomsvg className="absolute bottomSvg -bottom-12 -right-11 scale-75" style={{borderRadius: '0px 0px 38px 0px'}} />
             </div>
           </TabPanel>
           <TabPanel value="checkOut">
             <div className="checkout relative flex flex-col justify-between items-center bg-white rounded-2xl h-[35vh] md:h-[40vh] lg:h-[50vh] 2xl:h-[60vh] box-border p-4 md:p-5">
-              <div className="bg-white rounded-2xl md:h-[40%] lg:h-[60%]">
-                <h3 className="text-base md:text-3xl font-bold text-center mb-12 xl:mb-20 2xl:mb-24 passcode">
+              <div className=" rounded-2xl md:h-[40%] lg:h-[60%] relative z-10">
+                <h3 className="text-base md:text-3xl font-bold text-center mb-[6vh]  2xl:mb-24 passcode">
                   Enter passcode
                 </h3>
                 <ReactCodeInput
@@ -126,11 +126,11 @@ export function CheckIn() {
                   inputStyle={inputStyling}
                 />
               </div>
-              <div className="flex justify-center items-center bg-white rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">
-                <button className="flex justify-center items-center text-base  rounded-full bg-gray h-12 md:h-16 w-32 md:w-52 border-[#FFD601] border-2">
+              <div className="flex justify-center items-center  rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">
+                <button className="flex justify-center items-center text-base  rounded-full bg-gray h-10 md:h-12 2xl:h-16 w-32 md:w-52 border-[#FFD601] border-2">
                   Clear All
                 </button>
-                <button className="flex relative z-10 justify-center items-center rounded-full text-base bg-accenture h-12 md:h-16 w-32 md:w-52">
+                <button className="flex relative z-10 justify-center items-center rounded-full text-base bg-accenture h-10 md:h-12 2xl:h-16 w-32 md:w-52">
                   Check Out
                 </button>
               </div>
