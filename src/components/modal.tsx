@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import { ReactComponent as Envelope } from "../assets/envelope.svg";
@@ -23,7 +23,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  },
+  } as React.CSSProperties,
   contentStyle: {
     boxSizing: "border-box",
     // width: "70vw",
@@ -37,12 +37,12 @@ const styles = {
     // "@media (max-width: 767px)": {
     //   height: "40vh",
     // },
-  },
+  } as React.CSSProperties,
   imageStyle: {
     width: "100%",
     height: "100%",
     objectFit: "contain",
-  },
+  } as React.CSSProperties,
   closeButtonStyle: {
     postion: "absolute",
     cursor: "pointer",
@@ -53,10 +53,16 @@ const styles = {
     lineHeight: "75px",
     borderRadius: "50%",
     textAlign: "center",
-  },
-};
+  } as React.CSSProperties,
+} ;
 
-export default function Modal({ children }) {
+interface Props {
+  children: ReactElement;
+}
+
+const modalRoot = document.getElementById("modal-root") || document.body;
+
+const Modal:React.FC<Props> = ({ children }) => {
   return ReactDOM.createPortal(
     <div style={styles.backdropStyle} >
       <div className="w-1/5 lg:w-1/6 hidden md:block"></div>
@@ -109,6 +115,8 @@ export default function Modal({ children }) {
         </Tabs>
       </div>
     </div>,
-    document.getElementById("modal-root")
+    modalRoot
   );
 }
+
+export default Modal

@@ -24,21 +24,20 @@ const inputStyling = {
   boxSizing: "border-box",
   color: "black",
   backgroundColor: "white",
-};
+} as React.CSSProperties;
 
-export function CheckIn() {
+type Mode = "left" | "top" | "right" | "bottom";
+
+export function Keypad() {
   const [open, setOpen] = useState(false);
   const code = useRef("");
-
-  const handleClose = function () {
-    setOpen(false);
-  };
 
   return (
     <>
       <div>
         {open && (
-          <Modal close={handleClose}>
+          <Modal>
+            <div>
             <div className="flex justify-between  items-center mb-[6vh]">
               <div></div> 
               <h2 className="text-sm md:text-md xl:text-lg font-bold text-center">
@@ -72,6 +71,7 @@ export function CheckIn() {
             </div>
             <Topsvg className=" absolute  topSvg -top-12 -left-11 scale-75" style={{borderRadius: '24px 0px 0px 0px'}} />
             <Bottomsvg className=" absolute bottomSvg -bottom-12 -right-11 scale-75" style={{borderRadius: '0px 0px 24px 0px'}} />
+            </div>
           </Modal>
         )}
       </div>
@@ -92,11 +92,12 @@ export function CheckIn() {
                   Enter passcode
                 </h3>
                 <ReactCodeInput
-                  type="text"
+                  type='text'
                   fields={6}
                   inputStyle={inputStyling}
-                  value={code.current}
                   onChange={(e) => (code.current += e)}
+                  name="codeInput" 
+                  inputMode='text'
                 />
               </div>
               <div className="flex justify-center items-center  rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">
@@ -124,6 +125,8 @@ export function CheckIn() {
                   type="text"
                   fields={6}
                   inputStyle={inputStyling}
+                  name="codeInput" 
+                  inputMode='text'
                 />
               </div>
               <div className="flex justify-center items-center  rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">

@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { ReactComponent as MenuIcon } from "../../assets/menu.svg";
 
 
-export default function MenuComponent(props) {
+const MenuComponent= (props) => {
     const {data, onSelect} = props
 
   return (
@@ -26,7 +26,7 @@ export default function MenuComponent(props) {
           <div className="px-1 py-1 ">
             {data.map((el, idx) => {
               return (
-                <Menu.Item key={idx} onClick={(e) => onSelect(e.target.innerText)}>
+                <Menu.Item key={idx} onClick ={() => onSelect(el)}>
                   {({ active }) => (
                     <button
                       className={`${
@@ -46,5 +46,6 @@ export default function MenuComponent(props) {
   );
 }
 
+export default MenuComponent
 
 

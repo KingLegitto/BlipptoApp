@@ -42,7 +42,7 @@ export default function EstateDashboard() {
             <div className=" my-3 mb-6 md:my-5 bg-white rounded-2xl h-[32vh] md:h-[30vh] lg:h-[42vh] 2xl:h-[30vh] box-border hero ">
                 <div className="h-[75%] flex p-4 justify-between relative">
                     <div className="h-full w-[85%] max-w-[85%] ">
-                        <DoughnutChart legendPosition={'left'} title={'Traffic Pattern'} width={370} dataset={[700, 300, 500]} label={["Morning 46.7%", "Afternoon 20%", "Evening 33.3%"]} />
+                        <DoughnutChart legendPosition='left' title='Traffic Pattern' width={370} dataset={[700, 300, 500]} label={["Morning 46.7%", "Afternoon 20%", "Evening 33.3%"]} />
                     </div>
                     <div className=" bg-brand rounded-md w-7 h-7 lg:w-9 lg:h-9 2xl:w-11 2xl:h-11  mt-2 xl:mt-1 flex items-center justify-center">
                         <GridView className='scale-[0.6] lg:scale-75' />
