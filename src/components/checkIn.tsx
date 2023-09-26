@@ -38,7 +38,7 @@ export default function CheckIn() {
         </div>
       </div>
 
-      <CheckIn />
+      <Keypad />
     </div>
   );
 }
