@@ -26,7 +26,6 @@ const inputStyling = {
   backgroundColor: "white",
 } as React.CSSProperties;
 
-type Mode = "left" | "top" | "right" | "bottom";
 
 export function Keypad() {
   const [open, setOpen] = useState(false);

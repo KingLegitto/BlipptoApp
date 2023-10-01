@@ -68,51 +68,25 @@ function getColorOfBars(
   color1: string,
   color2: string
 ) {
-  let previousElement: number | null = null;
-  let previousColor: string | null = null;
-  const newArray = data.map((el, idx) => {
+  let previousColor: string  = color1;
+  return data.map((el, idx) => {
     if (idx === 0) {
-      previousColor = color1;
-      previousElement = el;
       return {
         name: months[idx],
         value: el,
         fill: color1,
       };
     } else {
-      if (el > previousElement!) {
-        previousColor = color1;
-        previousElement = el;
-        return {
-          name: months[idx],
-          value: el,
-          fill: color1,
-        };
-      }
-      if (el < previousElement!) {
-        previousColor = color2;
-        previousElement = el;
-        return {
-          name: months[idx],
-          value: el,
-          fill: color2,
-        };
-      }
-      if (el === previousElement) {
-        previousElement = el;
-        return {
-          name: months[idx],
-          value: el,
-          fill: previousColor,
-        };
-      }
+      const previousElement = data[idx - 1];
+      if (el > previousElement!)  previousColor = color1; 
+      if (el < previousElement!)  previousColor = color2;
+
+      const fill = el > previousElement ? color1 : el < previousElement ? color2 : previousColor;
       return{
         name: months[idx],
           value: el,
-          fill: null,
+          fill,
       }
     }
   });
-
-  return newArray;
 }

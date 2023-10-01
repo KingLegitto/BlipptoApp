@@ -51,15 +51,12 @@ function formatCurrentDate() {
   return formattedDate;
 }
 
-function showDynamicDate(UTCtime: string) {
-  const inputedDate = new Date(UTCtime).getTime();
+function showDynamicDate(utcTime: string) {
+  const inputedDate = new Date(utcTime).getTime();
   const currentDate = new Date().getTime();
   const aDayAgo = 24 * 3600 * 1000;
-  if (inputedDate > currentDate - aDayAgo) {
-    return convertUTCTo12Hour(UTCtime);
-  } else {
-    return new Date(UTCtime).toDateString().slice(4, 10);
-  }
+  if (inputedDate > currentDate - aDayAgo) return convertUTCTo12Hour(utcTime);
+ return new Date(utcTime).toDateString().slice(4, 10);
 }
 
 export { convertUTCTo12Hour, formatCurrentDate, showDynamicDate };

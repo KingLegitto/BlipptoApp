@@ -98,7 +98,7 @@ export default function SideBar() {
                 <ul className='flex w-full justify-around items-center h-16'>
                     {
                         categories.map((el, key) => {
-                            if (el.title === "Facilities" || el.title === "Staffs" || el.title === "Service Providers" || el.title === "Bills") return null
+                            if (el.title === "Guards" || el.title === "Staffs" || el.title === "Service Providers" || el.title === "Bills") return null
                             return <NavLink to={el.route} key={key}>
                                 <div className="mobile flex flex-col justify-between items-center rounded-md p-1">
                                     <el.icon alt='sidebar logo' className="visible " />
