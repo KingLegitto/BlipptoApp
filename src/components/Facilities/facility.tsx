@@ -131,7 +131,7 @@ export default function Facility() {
                   <span>Pending request 30</span>
                 </p>
                 <p className="text-xs xl:text-sm flex">
-                  <span className="flex justify-center items-center mr-2 bg-[#00FF00] h-5 w-5 rounded-full">
+                  <span className="flex justify-center items-center mr-2 bg-[#4BB543] h-5 w-5 rounded-full">
                     <Approved />
                   </span>
                   <span>Bookings 30</span>
@@ -172,7 +172,7 @@ export default function Facility() {
                   <span>Pending request 30</span>
                 </p>
                 <p className="text-xs xl:text-sm flex">
-                  <span className="flex justify-center items-center mr-2 bg-[#00FF00] h-5 w-5 rounded-full">
+                  <span className="flex justify-center items-center mr-2 bg-[#4BB543] h-5 w-5 rounded-full">
                     <Approved />
                   </span>
                   <span>Bookings 30</span>
@@ -213,7 +213,7 @@ export default function Facility() {
                   <span>Pending request 30</span>
                 </p>
                 <p className="text-xs xl:text-sm flex">
-                  <span className="flex justify-center items-center mr-2 bg-[#00FF00] h-5 w-5 rounded-full">
+                  <span className="flex justify-center items-center mr-2 bg-[#4BB543] h-5 w-5 rounded-full">
                     <Approved />
                   </span>
                   <span>Bookings 30</span>

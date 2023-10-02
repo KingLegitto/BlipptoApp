@@ -49,7 +49,7 @@ import {
     },
   ];
 
-export default function FirstResidentChart(){
+const FirstResidentChart:React.FC = () => {
   const fontSize = window.innerWidth < 768 ? 10 : 17;
     return(
         <ResponsiveContainer width="100%" height="85%">
@@ -84,3 +84,5 @@ export default function FirstResidentChart(){
       </ResponsiveContainer>
     )
 }
+
+export default FirstResidentChart

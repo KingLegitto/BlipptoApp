@@ -85,7 +85,7 @@ export default function SideBar() {
                     <div className="flex basis-full lg:basis-[70%] justify-between">
                         <div>
                             <h5 className="text-sm 2xl:text-base">Admin </h5>
-                            <p className="text-xs 2xl:text-sm"><span className=' bg-green-400 w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full inline-block mr-0.5 mb-0 xl:mr-1 xl:mb-0.3 2xl:mb-0.5'></span>Online</p>
+                            <p className="text-xs 2xl:text-sm"><span className=' bg-[#4BB543] w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full inline-block mr-0.5 mb-0 xl:mr-1 xl:mb-0.3 2xl:mb-0.5'></span>Online</p>
                         </div>
                         <span>
                             <ArrowDropDownIcon />
@@ -98,7 +98,7 @@ export default function SideBar() {
                 <ul className='flex w-full justify-around items-center h-16'>
                     {
                         categories.map((el, key) => {
-                            if (el.title === "Facilities" || el.title === "Staffs" || el.title === "Service Providers" || el.title === "Bills") return null
+                            if (el.title === "Guards" || el.title === "Staffs" || el.title === "Service Providers" || el.title === "Bills") return null
                             return <NavLink to={el.route} key={key}>
                                 <div className="mobile flex flex-col justify-between items-center rounded-md p-1">
                                     <el.icon alt='sidebar logo' className="visible " />

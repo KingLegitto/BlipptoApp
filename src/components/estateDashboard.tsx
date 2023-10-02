@@ -4,10 +4,9 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import AddIcon from '@mui/icons-material/Add';
 import { ReactComponent as GridView } from "../assets/gridView.svg"
-import { ReactComponent as Alarm } from "../assets/Alarm.svg"
-import { ReactComponent as Envelope } from "../assets/envelope.svg"
 import DoughnutChart from "./doughnutChart";
 import { ReactComponent as Bottomsvg } from "../assets/Group3.svg";
+import NotificationIcons from "./Notifications/notificationsIcons";
 
 
 
@@ -15,7 +14,7 @@ import { ReactComponent as Bottomsvg } from "../assets/Group3.svg";
 export default function EstateDashboard() {
     return (
         <div className="h-full md:h-screen md:overflow-scroll  p-5 pr-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
-            <div className="flex flex-col md:flex-row justify-between md:items-center h-[9.7vh] md:h-[4vh]">
+            <div className="flex flex-col md:flex-row justify-between md:items-center h-[13vh] md:h-[4vh]">
                 <div className="order-1 md:order-none header">
                     <h1 className="text-xl font-bold md:text-2xl 2xl:text-4xl ">Welcome back, Admin</h1>
                 </div>
@@ -23,26 +22,13 @@ export default function EstateDashboard() {
                     <div className="flex md:hidden w-10 h-10 rounded-full bg-white items-center justify-center ">
                         <PersonIcon />
                     </div>
-                    <div className="flex">
-                        <div className="bg-background md:bg-white relative shadow-none md:shadow-[0px_3px_5px_rgba(0,0,0,0.24)] rounded-full w-8 h-8 xl:w-10 xl:h-10 mr-2 flex items-center justify-center">
-                            <Alarm className="scale-[0.6] xl:scale-75" />
-                            <div className="flex items-center justify-center absolute w-5 h-5 rounded-full text-xs bg-accenture -top-3 -right-1.5">
-                                21
-                            </div>
-                        </div>
-                        <div className="bg-background md:bg-white relative shadow-none md:shadow-[0px_3px_5px_rgba(0,0,0,0.24)] rounded-full w-8 h-8 xl:w-10 xl:h-10 mr-2 flex items-center justify-center">
-                            <Envelope className="scale-[0.6] xl:scale-75" />
-                            <div className="flex items-center justify-center absolute w-5 h-5 rounded-full text-xs bg-accenture -top-3 -right-1.5">
-                                21
-                            </div>
-                        </div>
-                    </div>
+                   <NotificationIcons />
                 </div>
             </div>
             <div className=" my-3 mb-6 md:my-5 bg-white rounded-2xl h-[32vh] md:h-[30vh] lg:h-[42vh] 2xl:h-[30vh] box-border hero ">
                 <div className="h-[75%] flex p-4 justify-between relative">
                     <div className="h-full w-[85%] max-w-[85%] ">
-                        <DoughnutChart legendPosition={'left'} title={'Traffic Pattern'} width={370} dataset={[700, 300, 500]} label={["Morning 46.7%", "Afternoon 20%", "Evening 33.3%"]} />
+                        <DoughnutChart legendPosition='left' title='Traffic Pattern' width={370} dataset={[700, 300, 500]} label={["Morning 46.7%", "Afternoon 20%", "Evening 33.3%"]} />
                     </div>
                     <div className=" bg-brand rounded-md w-7 h-7 lg:w-9 lg:h-9 2xl:w-11 2xl:h-11  mt-2 xl:mt-1 flex items-center justify-center">
                         <GridView className='scale-[0.6] lg:scale-75' />
