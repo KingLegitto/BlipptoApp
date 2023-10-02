@@ -1,5 +1,5 @@
-import React from "react";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import React, { useState, useRef } from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ReactComponent as Search } from "../../assets/search.svg";
 import { ReactComponent as Filter } from "../../assets/Filter.svg";
 import { ReactComponent as Issues } from "../../assets/issues.svg";
@@ -10,85 +10,39 @@ import Select from "../utils/select";
 import AddIcon from "@mui/icons-material/Add";
 import { formatCurrentDate, showDynamicDate } from "../utils/helpersForDates";
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as Selected } from "../../assets/selected.svg";
+import { notificationsData } from "../../dummydata/notificationDummyData";
 
 const Notifications: React.FC = () => {
   // const [hasData] = useState<Boolean>(true);
-  const navigate = useNavigate()
+  const [tappedValues, setTappedValues] = useState<number[]>([]);
+  const [isTappedAndHeld, setTappedAndHeld] = useState<Boolean>(false);
+  const navigate = useNavigate();
+  const timerId = useRef<number | null>(null);
 
-  const notificationsData = [
-    {
-      resident: "Petraa Homes",
-      description:
-        "Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute positively",
-      priority: "high",
-      createdAt: "2023-09-26T01:30:00Z",
-      read: false,
-    },
-    {
-      resident: "Andron homes",
-      description:
-        "Requesting information about estate rules and regulations - Could you please Provide a comprehensive list of general rules that apply to residents within our estate?",
-      priority: "medium",
-      createdAt: "2023-09-26T00:45:00Z",
-      read: false,
-    },
-    {
-      resident: "Inn Estate",
-      description:
-        "Seeking clarificatons on utility and maintenance fees Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute fhfhfdhe positively",
-      priority: "medium",
-      createdAt: "2023-09-25T20:30:00Z",
-      read: true,
-    },
-    {
-      resident: "Petraa Homes",
-      description:
-        "Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute positively",
-      priority: "high",
-      createdAt: "2023-09-25T17:30:00Z",
-      read: true,
-    },
-    {
-      resident: "Andron homes",
-      description:
-        "Requesting information about estate rules and regulations - Could you please Provide a comprehensive list of general rules that apply to residents within our estate?",
-      priority: "medium",
-      createdAt: "2023-09-14T15:30:00Z",
-      read: true,
-    },
-    {
-      resident: "Inn Estate",
-      description:
-        "Seeking clarificatons on utility and maintenance fees Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute fhfhfdhe positively",
-      priority: "low",
-      createdAt: "2023-09-14T15:30:00Z",
-      read: true,
-    },
-    {
-      resident: "Petraa Homes",
-      description:
-        "Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute positively",
-      priority: "low",
-      createdAt: "2023-09-14T15:30:00Z",
-      read: true,
-    },
-    {
-      resident: "Andron homes",
-      description:
-        "Requesting information about estate rules and regulations - Could you please Provide a comprehensive list of general rules that apply to residents within our estate?",
-      priority: "medium",
-      createdAt: "2023-09-14T15:30:00Z",
-      read: true,
-    },
-    {
-      resident: "Inn Estate",
-      description:
-        "Seeking clarificatons on utility and maintenance fees Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute fhfhfdhe positively",
-      priority: "low",
-      createdAt: "2023-09-14T15:30:00Z",
-      read: true,
-    },
-  ];
+  const handleTapStart = (idx: number) => {
+    if (isTappedAndHeld && tappedValues.includes(idx)) {
+      const arrayOfIdsLeft = tappedValues.filter((id) => id !== idx);
+      setTappedValues(arrayOfIdsLeft);
+      return;
+    }
+    if (isTappedAndHeld) {
+      setTappedValues((prevState) => [...prevState!, idx]);
+      return;
+    }
+
+    timerId.current = window.setTimeout(() => {
+      setTappedAndHeld(true);
+      setTappedValues((prevState) => [...prevState!, idx]);
+    }, 500);
+  };
+
+  const handleTapEnd = () => {
+    // Clear the timer when the user releases the tap
+    if (timerId.current !== null) {
+      window.clearTimeout(timerId.current);
+    }
+  };
 
   return (
     <>
@@ -97,12 +51,18 @@ const Notifications: React.FC = () => {
           <div className="flex justify-between items-center h-[5vh] mb-4">
             <div>
               <h1 className="hidden md:flex items-center text-lg font-bold md:text-xl 2xl:text-3xl">
-              <div className="flex  w-10 h-10  items-center justify-center " onClick={() => navigate(-1)}>
-                <ArrowBackIcon />
-              </div>
+                <div
+                  className="flex w-10 h-10  items-center justify-center "
+                  onClick={() => navigate(-1)}
+                >
+                  <ArrowBackIcon />
+                </div>
                 {"Notifications"}
               </h1>
-              <div className="flex md:hidden w-10 h-10  items-center justify-center ">
+              <div
+                className="flex md:hidden w-10 h-10  items-center justify-center"
+                onClick={() => navigate(-1)}
+              >
                 <ArrowBackIcon />
               </div>
             </div>
@@ -137,7 +97,16 @@ const Notifications: React.FC = () => {
                 border={false}
                 shadow={true}
               />
-              <div className="flex items-center">
+              {!isTappedAndHeld && window.innerWidth < 768 && (
+                <div className="flex items-center md:hidden">
+                  <Issues className="scale-[0.6] xl:scale-75" />
+                  <p className="text-xs xl:text-sm mr-2">Issues</p>
+                  <div className="flex items-center justify-center w-5 h-5 rounded-full text-xs bg-accenture">
+                    8
+                  </div>
+                </div>
+              )}
+              <div className="hidden items-center md:flex">
                 <Issues className="scale-[0.6] xl:scale-75" />
                 <p className="text-xs xl:text-sm mr-2">Issues</p>
                 <div className="flex items-center justify-center w-5 h-5 rounded-full text-xs bg-accenture">
@@ -148,6 +117,19 @@ const Notifications: React.FC = () => {
                 <Delete className="scale-[0.6] xl:scale-75" />
                 <p className="text-xs xl:text-sm hidden lg:block">Delete</p>
               </div>
+              {isTappedAndHeld && (
+                <div className="flex items-center md:hidden">
+                  <div className="border-r-[1px] px-2">
+                    <input type="checkbox" />
+                  </div>
+                  <div className="border-r-[1px] px-2">
+                    <Delete className="scale-[0.6] xl:scale-75" />
+                  </div>
+                  <div className="border-r-[1px] px-2">
+                    <Star className="scale-[0.6] xl:scale-75" />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -166,13 +148,19 @@ const Notifications: React.FC = () => {
                 <li
                   key={idx}
                   className="flex items-center justify-between border-b-2 p-4"
+                  onTouchStart={() => handleTapStart(idx)}
+                  onTouchEnd={() => handleTapEnd}
                 >
                   <div className="basis-[10%] md:basis-[5%] flex items-center gap-x-2">
                     <input type="checkbox" className="hidden md:block" />
                     <Star className="hidden md:block scale-[0.6] xl:scale-75" />
                     {showPriorityLevel(notification.priority)}
                     <div className="flex md:hidden w-10 h-10 rounded-full bg-brand justify-center items-center text-white">
-                      {notification.resident[0]}
+                      {tappedValues!.includes(idx) ? (
+                        <Selected />
+                      ) : (
+                        notification.resident[0]
+                      )}
                     </div>
                   </div>
                   <div className="basis-[80%] md:basis-[80%] overflow-hidden">
@@ -182,7 +170,9 @@ const Notifications: React.FC = () => {
                       }`}
                     >
                       <span>{notification.resident}</span>
-                      <span className="inline-block sm:hidden">{showDynamicDate(notification.createdAt)}</span>
+                      <span className="inline-block sm:hidden">
+                        {showDynamicDate(notification.createdAt)}
+                      </span>
                     </p>
                     <p
                       className={`text-xs xl:text-sm truncate font-medium ${

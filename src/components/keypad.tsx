@@ -96,7 +96,7 @@ export function Keypad() {
                   inputStyle={inputStyling}
                   onChange={(e) => (code.current += e)}
                   name="codeInput" 
-                  inputMode='text'
+                  inputMode='email'
                 />
               </div>
               <div className="flex justify-center items-center  rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">
@@ -125,7 +125,7 @@ export function Keypad() {
                   fields={6}
                   inputStyle={inputStyling}
                   name="codeInput" 
-                  inputMode='text'
+                  inputMode='email'
                 />
               </div>
               <div className="flex justify-center items-center  rounded-2xl gap-x-8 md:gap-x-16 h-[45%] md:h-[50%] lg:h-[40%] ">
