@@ -69,7 +69,7 @@ const FirstResidentChart:React.FC = () => {
             </linearGradient>
           </defs>
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" fontSize={fontSize}/>
+          <XAxis dataKey="name" fontSize={fontSize} style={{wordWrap: "normal"}}/>
           <YAxis type="number" domain={[0, 100]} />
           <Tooltip />
           <Area

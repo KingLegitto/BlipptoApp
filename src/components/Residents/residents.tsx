@@ -5,11 +5,10 @@ import AddIcon from "@mui/icons-material/Add";
 import { ReactComponent as Filter } from "../../assets/Filter.svg";
 import { ReactComponent as Expand } from "../../assets/expand.svg";
 import { ReactComponent as MenuIcon } from "../../assets/menu.svg";
-import { ReactComponent as Alarm } from "../../assets/Alarm.svg";
-import { ReactComponent as Envelope } from "../../assets/envelope.svg";
 import { ReactComponent as Search } from "../../assets/search.svg";
 import FirstResidentChart from "./components/residentSatisfactoryChart";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import NotificationIcons from "../Notifications/notificationsIcons";
 
 
 const tableData = [
@@ -63,7 +62,7 @@ export default function Residents() {
               type="text"
               name="price"
               id="price"
-              className="block w-full  rounded-full h-full border-0 pl-10 bg-[#dcdcdf]  text-gray-900   outline-1  focus:outline-1  focus:outline-[#FFD601] sm:text-sm sm:leading-6"
+              className="block w-full  rounded-xl h-full bg-background border-[1px] pl-10 text-gray-900   outline-1  focus:outline-1  focus:outline-[#FFD601] sm:text-sm sm:leading-6"
               placeholder="Search..."
             />
           </div>
@@ -72,20 +71,7 @@ export default function Residents() {
           <div className="flex md:hidden w-10 h-10 rounded-full bg-gray-400 items-center justify-center ">
             <PersonIcon />
           </div>
-          <div className="flex">
-            <div className="bg-background md:bg-white relative shadow-none md:shadow-[0px_3px_5px_rgba(0,0,0,0.24)] rounded-full w-8 h-8 xl:w-10 xl:h-10 mr-2 flex items-center justify-center">
-              <Alarm className="scale-[0.6] xl:scale-75" />
-              <div className="flex items-center justify-center absolute w-5 h-5 rounded-full text-xs bg-accenture -top-3 -right-1.5">
-                21
-              </div>
-            </div>
-            <div className="bg-background md:bg-white relative shadow-none md:shadow-[0px_3px_5px_rgba(0,0,0,0.24)] rounded-full w-8 h-8 xl:w-10 xl:h-10 mr-2 flex items-center justify-center">
-              <Envelope className="scale-[0.6] xl:scale-75" />
-              <div className="flex items-center justify-center absolute w-5 h-5 rounded-full text-xs bg-accenture -top-3 -right-1.5">
-                21
-              </div>
-            </div>
-          </div>
+          <NotificationIcons />
         </div>
       </div>
       <button className="flex justify-center gap-x-1 md:gap-x-2 items-center rounded-full text-base bg-accenture h-9 md:h-10 w-28 md:w-32 ">

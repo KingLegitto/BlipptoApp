@@ -52,7 +52,7 @@ const Notifications: React.FC = () => {
             <div>
               <h1 className="hidden md:flex items-center text-lg font-bold md:text-xl 2xl:text-3xl">
                 <div
-                  className="flex w-10 h-10  items-center justify-center "
+                  className="flex w-10 h-10  items-center justify-center cursor-pointer"
                   onClick={() => navigate(-1)}
                 >
                   <ArrowBackIcon />
@@ -76,7 +76,7 @@ const Notifications: React.FC = () => {
               <div className="w-10 h-10 rounded-md bg-brand mr-1.5 flex justify-center items-center">
                 <Filter className="scale-[0.6] xl:scale-75" />
               </div>
-              <div className="relative  rounded-full  w-[95%] md:w-[70%] h-10 ">
+              <div className="relative  w-[95%] md:w-[70%] h-10 ">
                 <div className=" pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2 md:pl-3">
                   <span className="text-gray-500 sm:text-sm">
                     <Search />
@@ -86,7 +86,7 @@ const Notifications: React.FC = () => {
                   type="text"
                   name="price"
                   id="price"
-                  className="block w-full  rounded-xl h-full border-2 pl-10 bg-background  text-gray-900   outline-1  focus:outline-1  focus:outline-[#FFD601] sm:text-sm sm:leading-6"
+                  className="block w-full  rounded-xl h-full border-[1px] pl-10 bg-background  text-gray-900   outline-1  focus:outline-1  focus:outline-[#FFD601] sm:text-sm sm:leading-6"
                   placeholder="Search..."
                 />
               </div>
