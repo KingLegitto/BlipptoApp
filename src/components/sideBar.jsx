@@ -65,7 +65,7 @@ export default function SideBar() {
                     <span><h3 className="text-base xl:text-xl font-bold text-white">GateSage</h3></span>
                 </div>
                 <div className="md:basis-[83%] lg:basis-[77%] xl:basis-[80%] 2xl:basis-[81%] p-3 navlink ">
-                    <ul className='h-full flex flex-col justify-start md:gap-y-8 lg:gap-y-5 2xl:gap-y-8 list'>
+                    <ul className='h-full flex flex-col justify-start md:gap-y-8 lg:gap-y-5 xl:gap-y-8 2xl:gap-y-11 list'>
                         {
                             categories.map((el, key) => {
                                 return <NavLink to={el.route} key={key}>

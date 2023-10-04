@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import { ReactComponent as Alarm } from "../../assets/Alarm.svg";
-import { ReactComponent as Envelope } from "../../assets/envelope.svg";
 import { ReactComponent as Search } from "../../assets/search.svg";
 import { ReactComponent as TopRight } from "../../assets/Group 5.svg";
 import { ReactComponent as Filter } from "../../assets/Filter.svg";
@@ -13,6 +11,7 @@ import { ReactComponent as Calendar } from "../../assets/calendar.svg";
 import BookedFacilitiesChart from "./components/bookedFacilitiesChart";
 import Select from "../utils/select";
 import Menu from "../utils/menu";
+import NotificationIcons from "../Notifications/notificationsIcons";
 
 export default function Facility() {
   const [hasData] = useState<Boolean>(true);
@@ -45,7 +44,7 @@ export default function Facility() {
               type="text"
               name="price"
               id="price"
-              className="block w-full  rounded-full h-full border-0 pl-10 bg-[#dcdcdf]  text-gray-900   outline-1  focus:outline-1  focus:outline-[#FFD601] sm:text-sm sm:leading-6"
+              className="block w-full rounded-xl h-full border border-inherit pl-10 bg-background text-gray-900 outline-0 focus:border-yellow-300  focus:border-2 focu:outline-0 sm:text-sm sm:leading-6"
               placeholder="Search..."
             />
           </div>
@@ -54,20 +53,7 @@ export default function Facility() {
           <div className="flex md:hidden w-10 h-10 rounded-full bg-gray-400 items-center justify-center ">
             <PersonIcon />
           </div>
-          <div className="flex">
-            <div className="bg-background md:bg-white relative shadow-none md:shadow-[0px_3px_5px_rgba(0,0,0,0.24)] rounded-full w-8 h-8 xl:w-10 xl:h-10 mr-2 flex items-center justify-center">
-              <Alarm className="scale-[0.6] xl:scale-75" />
-              <div className="flex items-center justify-center absolute w-5 h-5 rounded-full text-xs bg-accenture -top-3 -right-1.5">
-                21
-              </div>
-            </div>
-            <div className="bg-background md:bg-white relative shadow-none md:shadow-[0px_3px_5px_rgba(0,0,0,0.24)] rounded-full w-8 h-8 xl:w-10 xl:h-10 mr-2 flex items-center justify-center">
-              <Envelope className="scale-[0.6] xl:scale-75" />
-              <div className="flex items-center justify-center absolute w-5 h-5 rounded-full text-xs bg-accenture -top-3 -right-1.5">
-                21
-              </div>
-            </div>
-          </div>
+        <NotificationIcons />
         </div>
       </div>
       {hasData ? (

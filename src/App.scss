@@ -85,11 +85,11 @@ input[type="checkbox"] {
 input[type="checkbox"]::before {
   content: "\2713";
   display: inline-block;
-  width: 13px;
-  height: 13px;
-  line-height: 13px;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
   text-align: center;
-  color: white;
+  color: transparent;
   border: 1px solid black;
   border-radius: 3px;
   
@@ -191,7 +191,8 @@ input[data-id="2"]:focus,
 input[data-id="3"]:focus,
 input[data-id="4"]:focus,
 input[data-id="5"]:focus {
-  outline: 2px solid #ffd601 !important;
+  border: 2px solid #ffd601 !important;
+  outline: none;
 }
 
 .modal {
@@ -237,7 +238,7 @@ input[data-id="5"]:focus {
     right: -2.6rem;
     bottom: -3rem;
     border-radius: 0px 0px 0px 0px !important;
-    opacity: 0.4;
+    opacity: 0.5;
   }
 }
 
@@ -332,7 +333,7 @@ input[data-id="5"]:focus {
     right: -3rem;
     bottom: -3.4rem;
     border-radius: 0px 0px 0px 0px !important;
-    opacity: 0.4;
+    opacity: 0.5;
   }
 }
 
@@ -431,8 +432,8 @@ input[data-id="5"]:focus {
   }
 }
 
-@media screen and (min-width: 1024px) and (min-height: 601px) and (max-height: 799px) {
+@media screen and (min-width: 1024px) and (min-height: 601px) and (max-height: 750px) {
   .list {
-    row-gap: 1rem;
+    row-gap: 1.1rem;
   }
 }

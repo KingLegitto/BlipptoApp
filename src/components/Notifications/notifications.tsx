@@ -14,7 +14,6 @@ import { ReactComponent as Selected } from "../../assets/selected.svg";
 import { notificationsData } from "../../dummydata/notificationDummyData";
 
 const Notifications: React.FC = () => {
-  // const [hasData] = useState<Boolean>(true);
   const [tappedValues, setTappedValues] = useState<number[]>([]);
   const [isTappedAndHeld, setTappedAndHeld] = useState<Boolean>(false);
   const navigate = useNavigate();
@@ -23,6 +22,11 @@ const Notifications: React.FC = () => {
   const handleTapStart = (idx: number) => {
     if (isTappedAndHeld && tappedValues.includes(idx)) {
       const arrayOfIdsLeft = tappedValues.filter((id) => id !== idx);
+
+      if (arrayOfIdsLeft.length === 0) {
+        setTappedAndHeld(false);
+      }
+
       setTappedValues(arrayOfIdsLeft);
       return;
     }
