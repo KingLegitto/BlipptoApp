@@ -62,7 +62,7 @@ export default function Residents() {
               type="text"
               name="price"
               id="price"
-              className="block w-full rounded-xl h-full border border-inherit pl-10 bg-background text-gray-900 outline-0 focus:border-yellow-300  focus:border-2 focu:outline-0 sm:text-sm sm:leading-6"
+              className="block w-full rounded-xl h-full border border-inherit pl-10 bg-background text-gray-900 outline-0 focus:border-yellow-300  focus:border-2 sm:text-sm sm:leading-6"
               placeholder="Search..."
             />
           </div>

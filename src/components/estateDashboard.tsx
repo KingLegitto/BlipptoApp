@@ -3,7 +3,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AddIcon from "@mui/icons-material/Add";
-import { ReactComponent as GridView } from "../assets/gridView.svg";
 import DoughnutChart from "./doughnutChart";
 import { ReactComponent as Bottomsvg } from "../assets/Group3.svg";
 import NotificationIcons from "./Notifications/notificationsIcons";
@@ -40,7 +39,7 @@ export default function EstateDashboard() {
               label={["Morning 46.7%", "Afternoon 20%", "Evening 33.3%"]}
             />
           </div>
-          <div className="relative z-10">
+          <div className="relative z-10 mt-1 mr-1.5">
           <Select
             data={[{ name: "this week" }, { name: "this month" }]}
             border={true}
@@ -57,7 +56,7 @@ export default function EstateDashboard() {
                 Alarms
               </h6>
               <p className="week text-white font-bold text-xs sm:text-sm">
-                Week's Insight(30)
+                Insight(30)
               </p>
             </div>
           </div>
@@ -67,7 +66,7 @@ export default function EstateDashboard() {
                 Notifications
               </h6>
               <p className="week text-white font-bold text-xs sm:text-sm">
-                Week's Insight(30)
+                Insight(30)
               </p>
             </div>
           </div>
