@@ -280,6 +280,10 @@ input[data-id="5"]:focus {
   .hero {
     height: 20vh;
   }
+  .checkin,
+  .checkout {
+    height: 40vh;
+  }
   .brand > span > h3 {
     font-size: 1.5rem;
   }

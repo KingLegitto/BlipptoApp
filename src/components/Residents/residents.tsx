@@ -7,8 +7,8 @@ import { ReactComponent as Expand } from "../../assets/expand.svg";
 import { ReactComponent as MenuIcon } from "../../assets/menu.svg";
 import { ReactComponent as Search } from "../../assets/search.svg";
 import FirstResidentChart from "./components/residentSatisfactoryChart";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import NotificationIcons from "../Notifications/notificationsIcons";
+import Select from "../utils/select";
 
 
 const tableData = [
@@ -44,10 +44,14 @@ const tableData = [
   },
 ];
 
+const selectedAction = function (value: string) {
+  alert(value);
+};
+
 export default function Residents() {
   return (
-    <div className="h-full md:h-screen md:overflow-scroll  p-5 pr-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
-      <div className="flex flex-col md:flex-row justify-between md:items-center h-[15vh] md:h-[6vh] mb-[4vh]">
+    <div className="h-full sm:h-screen md:overflow-scroll  p-5 pr-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 sm:mb-0">
+      <div className="flex flex-col md:flex-row justify-between md:items-center h-24 md:h-10 mb-5">
         <div className="order-1 md:order-none w-full md:w-[60%] flex">
           <div className="w-10 h-10 rounded-md bg-brand mr-3 flex justify-center items-center">
             <Filter className="scale-[0.6] xl:scale-75" />
@@ -86,12 +90,14 @@ export default function Residents() {
           <h5 className="text-sm md:text-md xl:text-2xl font-bold">
             Resident Analysis
           </h5>
-          <button className="flex justify-center gap-x-2 items-center rounded-md text-base border-[1px] h-7 md:h-10 w-24 md:w-28">
-            <p className="text-xs md:text-sm">This week</p>
-            <div className=" w-5 h-5  p-0.5 2xl:w-6 2xl:h-6 flex justify-center items-center">
-              <KeyboardArrowDownIcon className="scale-[0.7] lg:scale-75" />
-            </div>
-          </button>
+          <Select
+                data={[
+                  { name: "this week" },
+                  { name: "this month" },
+                ]}
+                border={true}
+                onClick={(value: string) => selectedAction(value)}
+              />
         </div>
         <FirstResidentChart />
       </div>
