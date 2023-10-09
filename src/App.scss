@@ -106,7 +106,7 @@ input[type="checkbox"]:checked::before {
   border:none;
 }
 
-.active > .selected > svg > path {
+.active > .selected > svg  path {
   stroke: black;
   // fill: black
 }
@@ -117,7 +117,7 @@ input[type="checkbox"]:checked::before {
   align-items: center;
 }
 
-.active > .mobile > .activated > svg > path {
+.active > .mobile > .activated > svg  path {
   stroke: black;
 }
 
@@ -283,6 +283,9 @@ input[data-id="5"]:focus {
   .checkin,
   .checkout {
     height: 40vh;
+  }
+  .facility {
+    height: 20vh
   }
   .brand > span > h3 {
     font-size: 1.5rem;
