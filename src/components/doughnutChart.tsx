@@ -40,12 +40,7 @@ const DoughnutChart:React.FC<DoughnutChartProps> = ({title, legendPosition, widt
         pie: {
           donut: {
             labels: {
-              show: true,
-              total: {
-                show: false,
-                showAlways: true,
-                color: '#BCC1C8',
-              },
+              show: false,
             },
           },
           customScale: 0.9,

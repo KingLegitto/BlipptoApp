@@ -99,7 +99,7 @@ export default function Facility() {
             </div>
           </div>
           <div className="grid gap-3 2xl:gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <div className="facility bg-white rounded-2xl p-3 2xl:p-5 h-60  md:h-[25vh] lg:h-[35vh] 2xl:h-[27vh] shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] relative">
+            <div className="facility bg-white rounded-2xl p-3 2xl:p-5 h-60  md:h-[25vh] lg:h-[35vh] 2xl:h-64 shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] relative">
               <div className="flex justify-between items-center h-[10%] ">
                 <h6 className="text-xs xl:text-sm  font-semibold">
                   {new Date().toDateString()}
@@ -140,7 +140,7 @@ export default function Facility() {
                 style={{ borderRadius: "0px 32px 0px 0px" }}
               />
             </div>
-            <div className="facilty bg-white rounded-2xl p-3 2xl:p-5 h-60 md:h-[25vh] lg:h-[35vh] 2xl:h-[27vh] shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] relative">
+            <div className="facility bg-white rounded-2xl p-3 2xl:p-5 h-60 md:h-[25vh] lg:h-[35vh] 2xl:h-[27vh] shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] relative">
               <div className="flex justify-between items-center h-[10%] ">
                 <h6 className="text-xs xl:text-sm font-bold">
                   {new Date().toDateString()}
@@ -194,7 +194,7 @@ export default function Facility() {
                 </div>
               </div>
               <div className="h-[45%] md:h-[50%] lg:h-[45%] flex flex-col justify-evenly">
-                <p className="text-xs xl:text-smflex">
+                <p className="text-xs xl:text-sm flex">
                   <Pending className="inline-block mr-2" />
                   <span>Pending request 30</span>
                 </p>

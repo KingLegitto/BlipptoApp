@@ -246,6 +246,12 @@ input[data-id="5"]:focus {
   .hero {
     height: 30vh;
   }
+  .list {
+    row-gap: 2.5rem;
+  }
+  .facility {
+    height: 20vh
+  }
   // .navlink{
   //   flex-basis:86%
   // }
@@ -284,8 +290,11 @@ input[data-id="5"]:focus {
   .checkout {
     height: 40vh;
   }
+  .list {
+    row-gap: 3.1rem;
+  }
   .facility {
-    height: 20vh
+    height: 24rem
   }
   .brand > span > h3 {
     font-size: 1.5rem;

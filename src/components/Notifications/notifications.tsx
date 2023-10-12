@@ -16,46 +16,50 @@ import { ReactComponent as EmptyNotification } from "../../assets/emptyNotificat
 
 const Notifications: React.FC = () => {
   const [hasNotifications] = useState<Boolean>(true);
-  const [tappedValues, setTappedValues] = useState<number[]>([]);
-  const [isTappedAndHeld, setTappedAndHeld] = useState<Boolean>(false);
+  const [selectedValues, setSelectedValues] = useState<number[]>([]);
+  const [isSelected, setSelected] = useState<Boolean>(false);
   const navigate = useNavigate();
   const timerId = useRef<number | null>(null);
 
   const handleTapStart = (idx: number) => {
-    if (isTappedAndHeld && tappedValues.includes(idx)) {
-      const arrayOfIdsLeft = tappedValues.filter((id) => id !== idx);
+    //remove previously selected ids
+    if (isSelected && selectedValues.includes(idx)) {
+      const arrayOfIdsLeft = selectedValues.filter((id) => id !== idx);
 
       if (arrayOfIdsLeft.length === 0) {
-        setTappedAndHeld(false);
+        setSelected(false);
       }
 
-      setTappedValues(arrayOfIdsLeft);
+      setSelectedValues(arrayOfIdsLeft);
       return;
     }
-    if (isTappedAndHeld) {
-      setTappedValues((prevState) => [...prevState!, idx]);
+    if (isSelected) {
+      setSelectedValues((prevState) => [...prevState, idx]);
       return;
     }
 
-    timerId.current = window.setTimeout(() => {
-      setTappedAndHeld(true);
-      setTappedValues((prevState) => [...prevState!, idx]);
-    }, 500);
+    window.innerWidth < 768
+      ? (timerId.current = window.setTimeout(() => {
+          setSelected(true);
+          setSelectedValues((prevState) => [...prevState, idx]);
+        }, 500))
+      : setSelected(true);
+        setSelectedValues((prevState) => [...prevState, idx]);
   };
 
   const handleTapEnd = () => {
     // Clear the timer when the user releases the tap
-    if (timerId.current !== null) {
-      window.clearTimeout(timerId.current);
+    if (timerId !== null) {
+      window.clearTimeout(timerId.current!);
     }
   };
 
   return (
     <>
       {hasNotifications ? (
-        <div className="h-screen overflow-y-auto max-h-screen  bg-background w-full max-w-full  box-border">
+        <div className="h-screen overflow-y-auto max-h-screen  bg-background w-full max-w-full box-border">
           <div className="px-5 py-6 md:py-0 md:pt-6 md:px-5 md:pr-9 border-b-2 md:border-b-0">
-            <div className="flex justify-between items-center h-[5vh] mb-4">
+            <div className="flex justify-between items-center h-10 mb-4">
               <div>
                 <h1 className="hidden md:flex items-center text-lg font-bold md:text-xl 2xl:text-3xl">
                   <div
@@ -75,9 +79,9 @@ const Notifications: React.FC = () => {
               </div>
               <NotificationIcons />
             </div>
-            <div className="flex flex-col md:flex-row justify-between md:items-center h-[13vh] sm:h-[8vh] mb-0 md:mb-4">
+            <div className="flex flex-col md:flex-row justify-between md:items-center h-24 md:h-12 mb-0 md:mb-5">
               <div className=" w-full md:w-[55%] xl:w-[50%] flex">
-                <button className="hidden md:flex justify-center  items-center rounded-xl text-xs xl:text-sm  bg-accenture h-10 w-auto px-2 py-0.5 mr-3">
+                <button className="hidden md:flex justify-center  items-center rounded-xl text-xs xl:text-sm  bg-accenture h-10 w-auto px-1.5 py-1 mr-3">
                   Create Notification
                 </button>
                 <div className="w-10 h-10 rounded-md bg-brand mr-1.5 flex justify-center items-center">
@@ -104,27 +108,25 @@ const Notifications: React.FC = () => {
                   border={false}
                   shadow={true}
                 />
-                {!isTappedAndHeld && window.innerWidth < 768 && (
-                    <div className="flex items-center md:hidden" onClick={() => navigate("/issues")}>
-                      <Issues className="scale-[0.6] xl:scale-75" />
-                      <p className="text-xs xl:text-sm mr-2">Issues</p>
-                      <div className="flex items-center justify-center w-5 h-5 rounded-full text-xs bg-accenture">
-                        8
-                      </div>
-                    </div>
-                )}
-                  <div className="hidden items-center md:flex" onClick={() => navigate("/issues")}>
+                {!isSelected && (
+                  <div
+                    className="flex items-center "
+                    onClick={() => navigate("/issues")}
+                  >
                     <Issues className="scale-[0.6] xl:scale-75" />
                     <p className="text-xs xl:text-sm mr-2">Issues</p>
                     <div className="flex items-center justify-center w-5 h-5 rounded-full text-xs bg-accenture">
                       8
                     </div>
                   </div>
-                <div className="hidden md:flex items-center justify-between p-2 gap-x-2 border-x-2">
-                  <Delete className="scale-[0.6] xl:scale-75" />
-                  <p className="text-xs xl:text-sm hidden lg:block">Delete</p>
-                </div>
-                {isTappedAndHeld && (
+                )}
+                {isSelected && window.innerWidth > 768 && (
+                  <div className="hidden md:flex items-center justify-between p-2 gap-x-2 border-x-2">
+                    <Delete className="scale-[0.6] xl:scale-75" />
+                    <p className="text-xs xl:text-sm hidden lg:block">Delete</p>
+                  </div>
+                )}
+                {isSelected && window.innerWidth < 768 && (
                   <div className="flex items-center md:hidden">
                     <div className="border-r-[1px] px-2">
                       <input type="checkbox" />
@@ -141,8 +143,7 @@ const Notifications: React.FC = () => {
             </div>
           </div>
           <div className="px-5 md:pr-9 hidden md:block">
-            <div className="flex p-4 h-14 rounded-xl justify-between items-center bg-primary">
-              <input type="checkbox" />
+            <div className="flex p-4 h-14 rounded-xl justify-end items-center bg-primary">
               <p className="text-xs xl:text-sm font-bold">
                 {formatCurrentDate()}
               </p>
@@ -151,6 +152,7 @@ const Notifications: React.FC = () => {
           <div className="px-0 md:px-5 py-0 md:pr-9">
             <ul>
               {notificationsData.map((notification, idx) => {
+                const { sender, priority, createdAt, description, read } = notification;
                 return (
                   <li
                     key={idx}
@@ -159,39 +161,44 @@ const Notifications: React.FC = () => {
                     onTouchEnd={() => handleTapEnd}
                   >
                     <div className="basis-[10%] md:basis-[5%] flex items-center gap-x-2">
-                      <input type="checkbox" className="hidden md:block" />
+                      <input
+                        type="checkbox"
+                        className="hidden md:block"
+                        onChange={() => handleTapStart(idx)}
+                      />
                       <Star className="hidden md:block scale-[0.6] xl:scale-75" />
-                      {showPriorityLevel(notification.priority)}
+                      {showPriorityLevel(priority, read)}
+                      {/* div for mobile view  */}
                       <div className="flex md:hidden w-10 h-10 rounded-full bg-brand justify-center items-center text-white">
-                        {tappedValues!.includes(idx) ? (
+                        {selectedValues.includes(idx) ? (
                           <Selected />
                         ) : (
-                          notification.resident[0]
+                          sender[0]
                         )}
                       </div>
                     </div>
                     <div className="basis-[80%] md:basis-[80%] overflow-hidden">
                       <p
                         className={`text-xs xl:text-sm flex justify-between font-semibold ${
-                          notification.read ? "opacity-60" : "opacity-100"
+                          read ? "opacity-60" : "opacity-100"
                         }`}
                       >
-                        <span>{notification.resident}</span>
+                        <span>{sender}</span>
                         <span className="inline-block sm:hidden">
-                          {showDynamicDate(notification.createdAt)}
+                          {showDynamicDate(createdAt)}
                         </span>
                       </p>
                       <p
                         className={`text-xs xl:text-sm truncate font-medium ${
-                          notification.read ? "opacity-60" : "opacity-100"
+                          read ? "opacity-60" : "opacity-100"
                         }`}
                       >
-                        {notification.description}
+                        {description}
                       </p>
                     </div>
                     <div className="basis-0 sm:basis-[7%] hidden sm:flex justify-end">
                       <p className="text-xs xl:text-sm font-bold">
-                        {showDynamicDate(notification.createdAt)}
+                        {showDynamicDate(createdAt)}
                       </p>
                     </div>
                   </li>
@@ -240,10 +247,10 @@ const Notifications: React.FC = () => {
 
 export default Notifications;
 
-function showPriorityLevel(priority: string) {
+function showPriorityLevel(priority: string, read: boolean) {
   if (priority === "low") {
-    return <span className="bg-[#4BB543] w-3 h-3 rounded-full" />;
+    return <span className={`bg-[#4BB543] w-3 h-3 rounded-full ${read ? "opacity-50" : "opacity-100" }`} />;
   } else if (priority === "medium") {
-    return <span className="bg-[#FFD601] w-3 h-3 rounded-full" />;
-  } else return <span className="bg-[#CE2029] w-3 h-3 rounded-full" />;
+    return <span className={`bg-[#FFD601] w-3 h-3 rounded-full ${read ? "opacity-50" : "opacity-100" }`} />;
+  } else return <span className={`bg-[#CE2029] w-3 h-3 rounded-full ${read ? "opacity-50" : "opacity-100" }`} />;
 }

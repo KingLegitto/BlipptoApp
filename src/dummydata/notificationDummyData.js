@@ -1,6 +1,6 @@
 export const notificationsData = [
     {
-      resident: "Petraa Homes",
+      sender: "Petraa Homes",
       description:
         "Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute positively",
       priority: "high",
@@ -8,7 +8,7 @@ export const notificationsData = [
       read: false,
     },
     {
-      resident: "Andron homes",
+      sender: "Andron homes",
       description:
         "Requesting information about estate rules and regulations - Could you please Provide a comprehensive list of general rules that apply to residents within our estate?",
       priority: "medium",
@@ -16,7 +16,7 @@ export const notificationsData = [
       read: false,
     },
     {
-      resident: "Inn Estate",
+      sender: "Inn Estate",
       description:
         "Seeking clarificatons on utility and maintenance fees Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute fhfhfdhe positively",
       priority: "medium",
@@ -24,7 +24,7 @@ export const notificationsData = [
       read: true,
     },
     {
-      resident: "Petraa Homes",
+      sender: "Petraa Homes",
       description:
         "Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute positively",
       priority: "high",
@@ -32,7 +32,7 @@ export const notificationsData = [
       read: true,
     },
     {
-      resident: "Andron homes",
+      sender: "Andron homes",
       description:
         "Requesting information about estate rules and regulations - Could you please Provide a comprehensive list of general rules that apply to residents within our estate?",
       priority: "medium",
@@ -40,7 +40,7 @@ export const notificationsData = [
       read: true,
     },
     {
-      resident: "Inn Estate",
+      sender: "Inn Estate",
       description:
         "Seeking clarificatons on utility and maintenance fees Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute fhfhfdhe positively",
       priority: "low",
@@ -48,7 +48,7 @@ export const notificationsData = [
       read: true,
     },
     {
-      resident: "Petraa Homes",
+      sender: "Petraa Homes",
       description:
         "Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute positively",
       priority: "low",
@@ -56,7 +56,7 @@ export const notificationsData = [
       read: true,
     },
     {
-      resident: "Andron homes",
+      sender: "Andron homes",
       description:
         "Requesting information about estate rules and regulations - Could you please Provide a comprehensive list of general rules that apply to residents within our estate?",
       priority: "medium",
@@ -64,7 +64,7 @@ export const notificationsData = [
       read: true,
     },
     {
-      resident: "Inn Estate",
+      sender: "Inn Estate",
       description:
         "Seeking clarificatons on utility and maintenance fees Seeking clarificatons on utility and maintenance fees - I believe that understanding these fees will help me and other residents manage  our expense better and contribute fhfhfdhe positively",
       priority: "low",
