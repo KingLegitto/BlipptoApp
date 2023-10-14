@@ -8,13 +8,14 @@ import { ReactComponent as Pending } from "../../assets/pending.svg";
 import { ReactComponent as Approved } from "../../assets/approved.svg";
 import AddIcon from "@mui/icons-material/Add";
 import { ReactComponent as Calendar } from "../../assets/calendar.svg";
+import { ReactComponent as EmptyFacility } from "../../assets/emptyFacility.svg";
 import BookedFacilitiesChart from "./components/bookedFacilitiesChart";
 import Select from "../utils/select";
 import Menu from "../utils/menu";
 import NotificationIcons from "../Notifications/notificationsIcons";
 
 export default function Facility() {
-  const [hasData] = useState<Boolean>(true);
+  const [hasData] = useState<Boolean>(false);
   const [selectAll, setSelectAll] = useState<Boolean>(false);
 
   const selectedAction = function (value: string) {
@@ -29,8 +30,8 @@ export default function Facility() {
 
   return (
     <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
-      <div className="flex flex-col md:flex-row justify-between md:items-center h-24 md:h-10 mb-5">
-        <div className="order-1 md:order-none w-full md:w-[60%] flex">
+      <div className={`flex flex-col md:flex-row md:items-center h-24 md:h-10 mb-5 ${hasData ? "justify-between" : "justify-end"}`}>
+       <div className={`order-1 md:order-none w-full md:w-[60%]  ${hasData ? "flex" : "hidden"}`}>
           <div className="w-10 h-10 rounded-md bg-brand mr-3 flex justify-center items-center">
             <Filter className="scale-[0.6] xl:scale-75" />
           </div>
@@ -225,15 +226,18 @@ export default function Facility() {
           </div>
         </>
       ) : (
-        <div className="flex justify-center items-center h-[70vh]">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold">No Facility Available</h1>
-            <p className="my-5">click the button below to add one</p>
-            <button className="flex  mx-auto justify-center items-center rounded-full text-base bg-accenture h-10 md:h-12 w-32 md:w-48">
-              Add Facility
-            </button>
-          </div>
+        <div className="flex justify-center items-center h-[80vh]">
+        <div className="flex justify-center flex-col items-center h-[60vh] md:h-[80vh] lg:h-[60vh] 2xl:h-[80vh]">
+          <EmptyFacility className="scale-[0.6] xl:scale-75 facilitySvg" />
+          <h1 className="text-3xl xl:text-5xl font-bold">
+            No Facility available
+          </h1>
+            <p className="my-5">click the button below to add one.</p>
+          <button className="flex  mx-auto justify-center items-center rounded-full font-medium text-xs sm:text-sm bg-accenture h-10 w-32 sm:w-40 p-2 ">
+            Add Facility
+          </button>
         </div>
+      </div>
       )}
     </div>
   );
