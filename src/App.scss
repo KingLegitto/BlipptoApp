@@ -318,7 +318,7 @@ input[data-id="5"]:focus {
     font-family: "Asap";
   }
   .apexcharts-inner {
-    transform: scale(4) translate(4%) !important;
+    transform: scale(4) translate(5%) !important;
   }
   .apexcharts-canvas {
     width: 100% !important;
@@ -331,6 +331,10 @@ input[data-id="5"]:focus {
   }
   .header > h1 {
     font-size: 2.5em;
+  }
+  .notificationSvg{
+    transform: scale(1.5);
+    margin-bottom: 20rem;
   }
 }
 

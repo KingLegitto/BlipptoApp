@@ -15,7 +15,7 @@ import { notificationsData } from "../../dummydata/notificationDummyData";
 import { ReactComponent as EmptyNotification } from "../../assets/emptyNotification.svg";
 
 const Notifications: React.FC = () => {
-  const [hasNotifications] = useState<Boolean>(true);
+  const [hasNotifications] = useState<Boolean>(false);
   const [selectedValues, setSelectedValues] = useState<number[]>([]);
   const [isSelected, setSelected] = useState<Boolean>(false);
   const navigate = useNavigate();
@@ -81,7 +81,7 @@ const Notifications: React.FC = () => {
             </div>
             <div className="flex flex-col md:flex-row justify-between md:items-center h-24 md:h-12 mb-0 md:mb-5">
               <div className=" w-full md:w-[55%] xl:w-[50%] flex">
-                <button className="hidden md:flex justify-center  items-center rounded-xl text-xs xl:text-sm  bg-accenture h-10 w-auto px-1.5 py-1 mr-3">
+                <button className="hidden md:flex justify-center  items-center rounded-xl text-xs xl:text-sm bg-accenture h-10 w-auto px-1.5 py-1 mr-3">
                   Create Notification
                 </button>
                 <div className="w-10 h-10 rounded-md bg-brand mr-1.5 flex justify-center items-center">
@@ -225,8 +225,8 @@ const Notifications: React.FC = () => {
             <NotificationIcons />
           </div>
           <div className="flex justify-center items-center h-[80vh]">
-            <div className="flex justify-center flex-col items-center h-[60vh] md:h-[80vh]">
-              <EmptyNotification className="scale-[0.6] xl:scale-75" />
+            <div className="flex justify-center flex-col items-center h-[60vh] md:h-[80vh] lg:h-[60vh] 2xl:h-[80vh]">
+              <EmptyNotification className="scale-[0.6] xl:scale-75 notificationSvg" />
               <h1 className="text-3xl xl:text-5xl font-bold">
                 No Notification
               </h1>
@@ -234,7 +234,7 @@ const Notifications: React.FC = () => {
                 {" "}
                 <p className="my-5">click here to see issues.</p>
               </Link>
-              <button className="flex  mx-auto justify-center items-center rounded-full text-base bg-accenture h-10 w-auto p-2 ">
+              <button className="flex  mx-auto justify-center items-center rounded-full font-medium text-xs sm:text-sm bg-accenture h-10 w-32 sm:w-48 p-2 ">
                 Create Notification
               </button>
             </div>
