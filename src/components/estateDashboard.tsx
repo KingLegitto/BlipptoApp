@@ -14,7 +14,7 @@ export default function EstateDashboard() {
   };
 
   return (
-    <div className="h-full md:h-screen md:overflow-scroll  p-5 pr-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
+    <div className="h-full md:h-screen md:overflow-scroll  p-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
       <div className="flex flex-col md:flex-row justify-between md:items-center h-[13vh] md:h-[4vh]">
         <div className="order-1 md:order-none header">
           <h1 className="text-xl font-bold md:text-2xl 2xl:text-4xl ">

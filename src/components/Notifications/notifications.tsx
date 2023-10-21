@@ -58,7 +58,7 @@ const Notifications: React.FC = () => {
     <>
       {hasNotifications ? (
         <div className="h-screen overflow-y-auto max-h-screen  bg-background w-full max-w-full box-border">
-          <div className="px-5 py-6 md:py-0 md:pt-6 md:px-5 md:pr-9 border-b-2 md:border-b-0">
+          <div className="px-5 py-6 md:py-0 md:pt-6 md:px-9 border-b-2 md:border-b-0">
             <div className="flex justify-between items-center h-10 mb-4">
               <div>
                 <h1 className="hidden md:flex items-center text-lg font-bold md:text-xl 2xl:text-3xl">
@@ -110,7 +110,7 @@ const Notifications: React.FC = () => {
                 />
                 {!isSelected && (
                   <div
-                    className="flex items-center "
+                    className="flex items-center"
                     onClick={() => navigate("/issues")}
                   >
                     <Issues className="scale-[0.6] xl:scale-75" />
@@ -142,14 +142,14 @@ const Notifications: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="px-5 md:pr-9 hidden md:block">
+          <div className="px-9 hidden md:block">
             <div className="flex p-4 h-14 rounded-xl justify-end items-center bg-primary">
               <p className="text-xs xl:text-sm font-bold">
                 {formatCurrentDate()}
               </p>
             </div>
           </div>
-          <div className="px-0 md:px-5 py-0 md:pr-9">
+          <div className="px-0 md:px-9 py-0">
             <ul>
               {notificationsData.map((notification, idx) => {
                 const { sender, priority, createdAt, description, read } = notification;

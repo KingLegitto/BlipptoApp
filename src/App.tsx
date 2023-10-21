@@ -7,6 +7,7 @@ import SideBar from "./components/sideBar";
 import Facility from "./components/Facilities/facility";
 import Residents from "./components/Residents/residents";
 import Notifications from "./components/Notifications/notifications";
+import Alarms from "./components/Alarms/alarms";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           </Route>
         </Route>
         <Route path='/notifications' element={<Notifications />} />
+        <Route path='/alarms' element={<Alarms />} />
       </Routes>
     </div>
   );
