@@ -5,16 +5,22 @@ $background-color: #f8f9ff;
   display: none;
 }
 
+.activeAlarms::-webkit-scrollbar {
+  display: block;
+}
+
 /* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+.activeAlarms::-webkit-scrollbar-track {
+  background: rgba(56,57,64,0.04);
+  width: 7px;
   border-radius: 5px;
   margin-top: 4px;
+
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
+.activeAlarms::-webkit-scrollbar-thumb {
+  background: #ffd601;
   border-radius: 7px;
 }
 
