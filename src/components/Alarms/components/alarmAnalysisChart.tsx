@@ -1,5 +1,6 @@
 import React from 'react'
-import { alarmAnalysisData } from '../../../dummydata/alarmAnalysis';
+import { alarmAnalysisData } from '../../../dummydata/alarmAnalysisDummyData';
+
 import {
     LineChart,
     Line,
@@ -15,7 +16,7 @@ const AlarmAnalysisChart:React.FC = () => {
     return(
         <ResponsiveContainer width="100%" height="85%">
         <LineChart
-          data={alarmAnalysisData}
+          data={ alarmAnalysisData }
           margin={{
             top: 10,
             right: 0,
@@ -29,15 +30,15 @@ const AlarmAnalysisChart:React.FC = () => {
           <Tooltip />
           <Line
             dataKey="uv"
-            stroke="#6484E6"
+            stroke="#6484e6"
           />
           <Line
             dataKey="pv"
-            stroke="#8884d8"
+            stroke="#ffd601"
           />
           <Line
             dataKey="sv"
-            stroke="#82ca9d"
+            stroke="#32cd32"
           />
         </LineChart>
       </ResponsiveContainer>

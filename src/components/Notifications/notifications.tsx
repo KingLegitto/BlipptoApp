@@ -145,7 +145,7 @@ const Notifications: React.FC = () => {
           <div className="px-9 hidden md:block">
             <div className="flex p-4 h-14 rounded-xl justify-end items-center bg-primary">
               <p className="text-xs xl:text-sm font-bold">
-                {formatCurrentDate()}
+                { formatCurrentDate() }
               </p>
             </div>
           </div>
@@ -157,8 +157,8 @@ const Notifications: React.FC = () => {
                   <li
                     key={idx}
                     className="flex items-center justify-between border-b-2 p-4"
-                    onTouchStart={() => handleTapStart(idx)}
-                    onTouchEnd={() => handleTapEnd}
+                    onTouchStart={ () => handleTapStart(idx) }
+                    onTouchEnd={ () => handleTapEnd }
                   >
                     <div className="basis-[10%] md:basis-[5%] flex items-center gap-x-2">
                       <input
@@ -167,10 +167,10 @@ const Notifications: React.FC = () => {
                         onChange={() => handleTapStart(idx)}
                       />
                       <Star className="hidden md:block scale-[0.6] xl:scale-75" />
-                      {showPriorityLevel(priority, read)}
+                      { showPriorityLevel(priority, read) }
                       {/* div for mobile view  */}
                       <div className="flex md:hidden w-10 h-10 rounded-full bg-brand justify-center items-center text-white">
-                        {selectedValues.includes(idx) ? (
+                        { selectedValues.includes(idx) ? (
                           <Selected />
                         ) : (
                           sender[0]
@@ -185,7 +185,7 @@ const Notifications: React.FC = () => {
                       >
                         <span>{sender}</span>
                         <span className="inline-block sm:hidden">
-                          {showDynamicDate(createdAt)}
+                          { showDynamicDate(createdAt) }
                         </span>
                       </p>
                       <p
@@ -193,12 +193,12 @@ const Notifications: React.FC = () => {
                           read ? "opacity-60" : "opacity-100"
                         }`}
                       >
-                        {description}
+                        { description }
                       </p>
                     </div>
                     <div className="basis-0 sm:basis-[7%] hidden sm:flex justify-end">
                       <p className="text-xs xl:text-sm font-bold">
-                        {showDynamicDate(createdAt)}
+                        { showDynamicDate(createdAt) }
                       </p>
                     </div>
                   </li>
@@ -216,7 +216,7 @@ const Notifications: React.FC = () => {
             <h1 className="flex items-center text-lg font-bold md:text-xl 2xl:text-3xl">
               <div
                 className="flex w-10 h-10  items-center justify-center cursor-pointer"
-                onClick={() => navigate(-1)}
+                onClick={ () => navigate(-1) }
               >
                 <ArrowBackIcon />
               </div>
@@ -247,7 +247,7 @@ const Notifications: React.FC = () => {
 
 export default Notifications;
 
-function showPriorityLevel(priority: string, read: boolean) {
+function showPriorityLevel( priority: string, read: boolean ) {
   if (priority === "low") {
     return <span className={`bg-[#4BB543] w-3 h-3 rounded-full ${read ? "opacity-50" : "opacity-100" }`} />;
   } else if (priority === "medium") {
