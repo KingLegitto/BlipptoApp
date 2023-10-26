@@ -16,7 +16,6 @@ import AlarmAnalysisChart from "./components/alarmAnalysisChart";
 import { ReactComponent as Calendar } from "../../assets/calendar.svg";
 import SecurityIndexChart from "./components/securityIndexChart";
 
-
 const Alarms = () => {
   const navigate = useNavigate();
 
@@ -118,7 +117,7 @@ const Alarms = () => {
               <h4 className="font-semibold text-lg">Alarm Analysis</h4>
               <Select
                 data={[{ name: "Alarm Frequency" }]}
-                border={ true }
+                border={true}
                 // onClick={(value: string) => selectedAction(value)}
               />
             </div>
@@ -159,16 +158,16 @@ const Alarms = () => {
                     ) => {
                       return (
                         <tr key={i} className="h-9 md:h-12 border-b">
-                          <td className="text-xs md:text-sm">{ alarmType }</td>
-                          <td className="text-xs md:text-sm">{ resident }</td>
+                          <td className="text-xs md:text-sm">{alarmType}</td>
+                          <td className="text-xs md:text-sm">{resident}</td>
                           <td className="text-xs md:text-sm hidden md:table-cell">
-                            { apartmentAddress }
+                            {apartmentAddress}
                           </td>
                           <td className="text-xs md:text-sm hidden lg:table-cell">
-                            { currentLocation }
+                            {currentLocation}
                           </td>
                         </tr>
-                      )
+                      );
                     }
                   )}
                 </tbody>

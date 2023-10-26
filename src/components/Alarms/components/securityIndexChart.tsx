@@ -20,18 +20,16 @@ const SecurityIndexChart: React.FC = () => {
             offsetY: -2,
             fontSize: "25px",
             show: true,
-            color: "#6484E6"
+            color: "#6484E6",
           },
         },
       },
     },
-    fill: {
-    
-    },
-    labels: [ "Progress" ],
+    fill: {},
+    labels: ["Progress"],
   };
 
-  return <ReactApexChart type="radialBar" options={ options } series={[67]} />;
+  return <ReactApexChart type="radialBar" options={options} series={[67]} />;
 };
 
 export default SecurityIndexChart;
