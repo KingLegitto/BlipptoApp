@@ -1,5 +1,5 @@
 # Stage 1: Build the Node.js application
-FROM node:20 as build
+FROM node:20-slim as build
 WORKDIR /app
 COPY ./public/ /app/public
 COPY ./src/ /app/src
