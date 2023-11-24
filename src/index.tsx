@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from "@material-tailwind/react";
-
+import * as serviceWorkerRegistation from "./serviceWorkerRegistration"
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +17,8 @@ root.render(
     </BrowserRouter>
   </ThemeProvider>
 );
+
+serviceWorkerRegistation.register()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

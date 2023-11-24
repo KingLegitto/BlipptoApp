@@ -62,7 +62,7 @@ export default function SideBar() {
             <div className="p-3 xl:p-6 h-screen max-h-screen bg-brand w-1/5 lg:w-1/6 hidden md:flex flex-col justify-between pt-6 sidebar">
                 <div className="h-10 2xl:h-14 flex items-center p-1 2xl:p-3 pl-5 xl:pl-7 2xl:pl-8 brand">
                     <Logo alt='sidebar logo' className='mr-1 lg:mr-2 xl:mr-4 inline-block scale-[0.6] xl:scale-75' />
-                    <span><h3 className="text-base xl:text-xl font-bold text-white">GateSage</h3></span>
+                    <span><h3 className="text-base xl:text-xl font-bold text-white">Blippto</h3></span>
                 </div>
                 <div className="md:basis-[83%] lg:basis-[77%] xl:basis-[80%] 2xl:basis-[81%] p-3 navlink ">
                     <ul className='h-full flex flex-col justify-start md:gap-y-8 lg:gap-y-5 xl:gap-y-8 2xl:gap-y-11 list'>
@@ -98,7 +98,7 @@ export default function SideBar() {
                 <ul className='flex w-full justify-around items-center h-16'>
                     {
                         categories.map((el, key) => {
-                            if (el.title === "Guards" || el.title === "Staffs" || el.title === "Service Providers" || el.title === "Bills") return null
+                            if ( el.title === "Staffs" || el.title === "Services" || el.title === "Bills") return null
                             return <NavLink to={el.route} key={key}>
                                 <div className="mobile flex flex-col justify-between items-center rounded-md p-1">
                                     <el.icon alt='sidebar logo' className="visible " />

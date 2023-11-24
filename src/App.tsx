@@ -8,6 +8,7 @@ import Facility from "./components/Facilities/facility";
 import Residents from "./components/Residents/residents";
 import Notifications from "./components/Notifications/notifications";
 import Alarms from "./components/Alarms/alarms";
+import Guards from "./components/Guards/guards";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/dashboard/keypad" element={<CheckIn />} />
             <Route path="/dashboard/facility" element={<Facility />} />
             <Route path="/dashboard/residents" element={<Residents />} />
+            <Route path="/dashboard/guards" element={<Guards />} />
           </Route>
         </Route>
         <Route path='/notifications' element={<Notifications />} />

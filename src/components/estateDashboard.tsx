@@ -8,7 +8,7 @@ import { ReactComponent as Bottomsvg } from "../assets/Group3.svg";
 import NotificationIcons from "./Notifications/notificationsIcons";
 import Select from "./utils/select";
 
-export default function EstateDashboard() {
+const EstateDashboard: React.FC = () => {
   const selectedAction = function (value: string) {
     alert(value);
   };
@@ -290,3 +290,5 @@ export default function EstateDashboard() {
     </div>
   );
 }
+
+export default EstateDashboard

@@ -15,7 +15,7 @@ import Menu from "../utils/menu";
 import NotificationIcons from "../Notifications/notificationsIcons";
 import { facilitiesData } from "../../dummydata/facilityDummyData";
 
-export default function Facility() {
+const Facility: React.FC = () => {
   const [hasData] = useState<Boolean>(false);
   const [selectAll, setSelectAll] = useState<Boolean>(false);
 
@@ -183,3 +183,5 @@ export default function Facility() {
     </>
   );
 }
+
+export default Facility

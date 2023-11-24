@@ -1,80 +1,80 @@
 export const alarmAnalysisData = [
     {
         name: "",
-        uv: 0,
-        pv: 0,
-        sv: 0
+        alarmFrequency: 0,
+        falseAlarms: 0,
+        validAlarms: 0
       },
     {
       name: "Jan",
-      uv: 20,
-      pv: 50,
-      sv: 70
+      alarmFrequency: 20,
+      falseAlarms: 50,
+      validAlarms: 70
     },
     {
         name: "Feb",
-        uv: 26,
-        pv: 40,
-        sv: 60
+        alarmFrequency: 26,
+        falseAlarms: 40,
+        validAlarms: 60
     },
     {
         name: "Mar",
-        uv: 60,
-        pv: 30,
-        sv: 79
+        alarmFrequency: 60,
+        falseAlarms: 30,
+        validAlarms: 79
     },
     {
         name: "Apr",
-        uv: 29,
-        pv: 20,
-        sv: 77
+        alarmFrequency: 29,
+        falseAlarms: 20,
+        validAlarms: 77
     },
     {
         name: "May",
-        uv: 27,
-        pv: 56,
-        sv: 21
+        alarmFrequency: 27,
+        falseAlarms: 56,
+        validAlarms: 21
     },
     {
         name: "Jun",
-        uv: 25,
-        pv: 50,
-        sv: 89
+        alarmFrequency: 25,
+        falseAlarms: 50,
+        validAlarms: 89
     },
     {
         name: "Jul",
-        uv: 46,
-        pv: 57,
-        sv: 70
+        alarmFrequency: 46,
+        falseAlarms: 57,
+        validAlarms: 70
     },
     {
         name: "Aug",
-        uv: 25,
-        pv: 50,
-        sv: 83
+        alarmFrequency: 25,
+        falseAlarms: 50,
+        validAlarms: 83
     },
     {
         name: "Sep",
-        uv: 46,
-        pv: 57,
-        sv: 90
+        alarmFrequency: 46,
+        falseAlarms: 57,
+        validAlarms: 90
     },
     {
         name: "Oct",
-        uv: 27,
-        pv: 56,
-        sv: 21
+        alarmFrequency: 27,
+        falseAlarms: 56,
+        validAlarms: 21
     },
     {
         name: "Nov",
-        uv: 29,
-        pv: 20,
-        sv: 77
+        alarmFrequency: 29,
+        falseAlarms: 20,
+        validAlarms: 77
     },
     {
         name: "Dec",
-        uv: 26,
-        pv: 40,
-        sv: 60
+        alarmFrequency: 26,
+        falseAlarms: 40,
+        validAlarms: 60
     },
   ];

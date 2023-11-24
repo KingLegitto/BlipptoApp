@@ -27,7 +27,7 @@ const inputStyling = {
 } as React.CSSProperties;
 
 
-export function Keypad() {
+const Keypad: React.FC = () => {
   const [open, setOpen] = useState(false);
   const code = useRef("");
 
@@ -145,3 +145,5 @@ export function Keypad() {
     </>
   );
 }
+
+export default Keypad

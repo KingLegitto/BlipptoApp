@@ -11,16 +11,15 @@ $background-color: #f8f9ff;
 
 /* Track */
 .activeAlarms::-webkit-scrollbar-track {
-  background: rgba(56,57,64,0.04);
-  width: 7px;
+  background: rgba(56, 57, 64, 0.04);
+  width: 4px;
   border-radius: 5px;
   margin-top: 4px;
-
 }
 
 /* Handle */
 .activeAlarms::-webkit-scrollbar-thumb {
-  background: #ffd601;
+  background: #6484E6;
   border-radius: 7px;
 }
 
@@ -98,7 +97,6 @@ input[type="checkbox"]::before {
   color: transparent;
   border: 1px solid black;
   border-radius: 3px;
-  
 }
 
 input[type="checkbox"]:checked::before {
@@ -109,10 +107,10 @@ input[type="checkbox"]:checked::before {
   width: 13px;
   height: 13px;
   line-height: 13px;
-  border:none;
+  border: none;
 }
 
-.active > .selected > svg  path {
+.active > .selected > svg path {
   stroke: black;
   // fill: black
 }
@@ -123,7 +121,7 @@ input[type="checkbox"]:checked::before {
   align-items: center;
 }
 
-.active > .mobile > .activated > svg  path {
+.active > .mobile > .activated > svg path {
   stroke: black;
 }
 
@@ -205,8 +203,56 @@ input[data-id="5"]:focus {
   opacity: 1 !important;
 }
 
-.apexcharts-radialbar{
+.apexcharts-radialbar {
   transform: scale(0.75) translate(-50px, -70px);
+}
+
+.react-calendar {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  border: none !important;
+  box-sizing: border-box;
+  line-height: normal !important;
+  // max-width: 70% !important;
+}
+
+.react-calendar__viewContainer {
+  height: 80% !important;
+}
+
+.react-calendar__navigation {
+  height: 15% !important;
+}
+
+.react-calendar__month-view {
+  height: 100% !important;
+}
+
+.react-calendar__month-view__days {
+  height: 90% !important;
+}
+
+.react-calendar__month-view__weekdays {
+  height: 10% !important;
+}
+
+.react-calendar__month-view > div,
+.react-calendar__month-view > div > div {
+  height: 100% !important;
+}
+
+.react-calendar__tile {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  max-height: 37px !important;
+  border-radius: 9999px !important;
+  padding: 6px 0px !important;
+}
+.react-calendar__tile--active {
+  max-width: 100% !important;
+  max-height: 37px !important;
+  border-radius: 9999px !important;
 }
 
 @media screen and (max-width: 425px) {
@@ -227,6 +273,17 @@ input[data-id="5"]:focus {
     right: -6.4rem;
     bottom: -7rem;
     border-radius: 0px 0px 75px 0px !important;
+  }
+  .react-calendar__navigation__label > span {
+    font-size: 12px !important;
+  }
+  .securityIndexDiv {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    height: 40% !important;
+    width: 75% !important;
+    transform: translateX(-50%)  !important;
   }
 }
 
@@ -260,7 +317,7 @@ input[data-id="5"]:focus {
     row-gap: 2.5rem;
   }
   .facility {
-    height: 20vh
+    height: 20vh;
   }
   // .navlink{
   //   flex-basis:86%
@@ -304,7 +361,7 @@ input[data-id="5"]:focus {
     row-gap: 3.1rem;
   }
   .facility {
-    height: 24rem
+    height: 24rem;
   }
   .brand > span > h3 {
     font-size: 1.5rem;
@@ -342,7 +399,8 @@ input[data-id="5"]:focus {
   .header > h1 {
     font-size: 2.5em;
   }
-  .notificationSvg, .facilitySvg{
+  .notificationSvg,
+  .facilitySvg {
     transform: scale(1.5);
     margin-bottom: 20rem;
   }
@@ -371,6 +429,14 @@ input[data-id="5"]:focus {
   .apexcharts-inner {
     transform: translate(145px, 38px);
   }
+  .securityIndexDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30% !important;
+    width: 70% !important;
+    transform: translateX(-50%)  !important;
+  }
 }
 
 @media screen and (min-width: 1536px) {
@@ -396,6 +462,14 @@ input[data-id="5"]:focus {
   input[data-id="5"] {
     padding-left: 0.6rem !important;
   }
+  .securityIndexDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30% !important;
+    width: 60% !important;
+    transform: translateX(-50%)  !important;
+  }
 }
 
 @media screen and (min-width: 540px) {
@@ -405,6 +479,29 @@ input[data-id="5"]:focus {
     height: 30%;
     width: 100%;
     gap: 3.5rem;
+  }
+  .securityIndexDiv {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    height: 40% !important;
+    width: 350px!important;
+    transform: translateX(-50%)  !important;
+  }
+}
+
+@media screen and (max-height: 740px) and (max-width: 425px) {
+  .guards {
+    height: 70vh;
+  }
+  .onDuty {
+    height: 40%;
+  }
+  .calendar {
+    height: 50%;
+  }
+  .react-calendar__navigation {
+    height: 30px !important;
   }
 }
 
@@ -424,7 +521,7 @@ input[data-id="5"]:focus {
   // .apexcharts-inner {
   //   transform: translate(150px, 40px);
   // }
-  .apexcharts-radialbar{
+  .apexcharts-radialbar {
     transform: scale(2) translateX(-50px);
   }
   .hero .bottomSvg {
@@ -432,6 +529,14 @@ input[data-id="5"]:focus {
     right: -3rem;
     bottom: -3.8rem;
     border-radius: 0px 0px 0px 0px !important;
+  }
+  .securityIndexDiv {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    height: 40% !important;
+    width: 70%!important;
+    transform: translateX(-50%)  !important;
   }
 }
 
