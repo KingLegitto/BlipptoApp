@@ -1,0 +1,33 @@
+@media screen and (max-width: 1431px) {
+  .blipto-signIn {
+    &-left {
+      margin: auto !important;
+    }
+    &-right {
+      > img {
+        width: 200px !important;
+        &:first-child {
+          right: 232px !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1098px) {
+  .blipto-signIn {
+    padding-left: 0 !important;
+    &-left {
+      margin: auto !important;
+    }
+    &-right {
+      display: none !important;
+    }
+  }
+}
+
+@media screen and (max-width: 579px) {
+  .blipto-signIn {
+    padding-left: 1.75rem !important;
+  }
+}
