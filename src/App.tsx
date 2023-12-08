@@ -9,10 +9,15 @@ import Residents from "./components/Residents/residents";
 import Notifications from "./components/Notifications/notifications";
 import Alarms from "./components/Alarms/alarms";
 import Guards from "./components/Guards/guards";
+import SignUp from "./components/signUp/signUp";
+import { QueryClientProvider, QueryClient } from "react-query";
 
-function App() {
+const queryClient = new QueryClient();
+
+const App:React.FC = () => {
   return (
     <div className="App">
+      <QueryClientProvider client={queryClient} >
       <Routes>
         <Route path="/">
           <Route index element={<Navigate to="/dashboard/home" replace />} />
@@ -26,7 +31,9 @@ function App() {
         </Route>
         <Route path='/notifications' element={<Notifications />} />
         <Route path='/alarms' element={<Alarms />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
+      </QueryClientProvider>
     </div>
   );
 }
