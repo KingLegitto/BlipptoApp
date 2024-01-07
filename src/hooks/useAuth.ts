@@ -7,7 +7,7 @@ type UserData = {
 };
 
 export const useLogin = () => {
-  const mutation = useMutation((data) => axiosAuth().post("/auth/login", data));
+  const mutation = useMutation((data: UserData) => axiosAuth().post("/api/auth/login", data));
   return mutation;
 };
 

@@ -19,7 +19,7 @@ $background-color: #f8f9ff;
 
 /* Handle */
 .activeAlarms::-webkit-scrollbar-thumb {
-  background: #6484E6;
+  background: #6484e6;
   border-radius: 7px;
 }
 
@@ -283,7 +283,7 @@ input[data-id="5"]:focus {
     left: 50%;
     height: 40% !important;
     width: 75% !important;
-    transform: translateX(-50%)  !important;
+    transform: translateX(-50%) !important;
   }
 }
 
@@ -435,7 +435,7 @@ input[data-id="5"]:focus {
     left: 50%;
     height: 30% !important;
     width: 70% !important;
-    transform: translateX(-50%)  !important;
+    transform: translateX(-50%) !important;
   }
 }
 
@@ -468,7 +468,7 @@ input[data-id="5"]:focus {
     left: 50%;
     height: 30% !important;
     width: 60% !important;
-    transform: translateX(-50%)  !important;
+    transform: translateX(-50%) !important;
   }
 }
 
@@ -485,8 +485,8 @@ input[data-id="5"]:focus {
     top: 35%;
     left: 50%;
     height: 40% !important;
-    width: 350px!important;
-    transform: translateX(-50%)  !important;
+    width: 350px !important;
+    transform: translateX(-50%) !important;
   }
 }
 
@@ -535,8 +535,8 @@ input[data-id="5"]:focus {
     top: 45%;
     left: 50%;
     height: 40% !important;
-    width: 70%!important;
-    transform: translateX(-50%)  !important;
+    width: 70% !important;
+    transform: translateX(-50%) !important;
   }
 }
 
@@ -573,5 +573,38 @@ input[data-id="5"]:focus {
 @media screen and (min-width: 1024px) and (min-height: 601px) and (max-height: 750px) {
   .list {
     row-gap: 1.1rem;
+  }
+}
+
+/* signin page styles */
+
+@media screen and (max-width: 1431px) {
+  .blipto-signIn {
+    &-left {
+      margin: auto !important;
+    }
+    &-right {
+      > img {
+        width: 48% !important;
+        &:first-child {
+          right: 50% !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1098px) {
+  .blipto-signIn {
+    padding-left: 0 !important;
+    &-left {
+      margin: auto !important;
+    }
+  }
+}
+
+@media screen and (max-width: 579px) {
+  .blipto-signIn {
+    padding-left: 1.75rem !important;
   }
 }

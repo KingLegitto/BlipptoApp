@@ -12,6 +12,7 @@ import Guards from "./components/Guards/guards";
 import SignUp from "./components/signUp/signUp";
 import { QueryClientProvider, QueryClient } from "react-query";
 import SignIn from "./components/SignIn/SignIn";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App:React.FC = () => {
             <Route path="/dashboard/facility" element={<Facility />} />
             <Route path="/dashboard/residents" element={<Residents />} />
             <Route path="/dashboard/guards" element={<Guards />} />
+              <Route path="/dashboard/user/profile" element={<UserProfile />} />
           </Route>
         </Route>
         <Route path='/notifications' element={<Notifications />} />

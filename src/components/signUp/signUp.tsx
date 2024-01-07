@@ -21,6 +21,7 @@ const SignUp: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState<Boolean>(false);
+  const [isError, setIsError] = useState<Boolean>(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,10 +29,16 @@ const SignUp: React.FC = () => {
   const authenticateWithGoogle = useHandleSignUpWithGoogle();
   const authenticateWithFacebook = useHandleSignUpWithFacebook();
 
+  const validateEmail = (emailAddress: string) => {
+    const emailPattern =
+      /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$/;
+    return emailPattern.test(emailAddress);
+  };
+
   const handleGoogleAuthentication = () => {
     const { data } = authenticateWithGoogle();
     const { token } = data?.data?.data;
-    
+
     if (data?.data.status !== 200) {
     }
     window.localStorage.setItem("Tkn", `${token}`);
@@ -49,6 +56,10 @@ const SignUp: React.FC = () => {
   };
 
   const handleSubmit = () => {
+    if (!validateEmail(emailRef.current!.value.trim())) {
+      setIsError(true);
+      return;
+    }
     setLoading(true);
     const data = {
       email: emailRef.current!.value.trim(),
@@ -145,8 +156,11 @@ const SignUp: React.FC = () => {
               required
               name="price"
               id="price"
-              className="block w-full rounded-[2rem] h-full bg-[#d9d9d93d] pl-16 xl:pl-20 text-gray-900 outline-0 focus:border-yellow-300 focus:border-2 sm:text-sm sm:leading-6"
+              className={`block w-full rounded-[2rem] h-full bg-[#d9d9d93d] pl-16 xl:pl-20 ${
+                isError ? "border-2 border-red-500 focus:border-red-500 " : ""
+              } text-gray-900 outline-0 focus:border-yellow-300 focus:border-2 sm:text-sm sm:leading-6`}
               placeholder="Email"
+              onChange={() => (isError ? setIsError(false) : "")}
             />
           </div>
           <div className="relative w-full h-12 2xl:h-16">
