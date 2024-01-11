@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NotificationIcons from "../Notifications/notificationsIcons";
+import NotificationIcons from "../notifications/notificationsIcons";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ActivateAlarms from "./components/activateAlarm";
 import SecurityIndex from "./components/securityIndex";
@@ -21,7 +21,7 @@ const Alarms = () => {
           <h1 className="hidden md:flex items-center text-lg font-bold md:text-xl 2xl:text-3xl">
             <div
               className="flex w-10 h-10  items-center justify-start cursor-pointer"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate("/dashboard/home")}
             >
               <ArrowBackIcon />
             </div>

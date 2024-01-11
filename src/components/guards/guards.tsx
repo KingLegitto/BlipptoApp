@@ -6,7 +6,7 @@ import { ReactComponent as ArrowUpRight } from "../../assets/arrowUpRight.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
 import { ReactComponent as SendMailIcon } from "../../assets/sendMail.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
-import NotificationIcons from "../Notifications/notificationsIcons";
+import NotificationIcons from "../notifications/notificationsIcons";
 import { scheduledGuardsData } from "../../dummydata/scheduledGuardsDummyData";
 import { estateGuardsData } from "../../dummydata/estateGuardsDummyData";
 import Select from "../utils/select";

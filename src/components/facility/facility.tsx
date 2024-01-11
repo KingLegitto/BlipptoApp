@@ -12,7 +12,7 @@ import { ReactComponent as EmptyFacility } from "../../assets/emptyFacility.svg"
 import BookedFacilitiesChart from "./components/bookedFacilitiesChart";
 import Select from "../utils/select";
 import Menu from "../utils/menu";
-import NotificationIcons from "../Notifications/notificationsIcons";
+import NotificationIcons from "../notifications/notificationsIcons";
 import { facilitiesData } from "../../dummydata/facilityDummyData";
 
 const Facility: React.FC = () => {
@@ -32,7 +32,7 @@ const Facility: React.FC = () => {
   return (
     <>
       {hasData ? (
-        <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
+        <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
           <div className="flex flex-col md:flex-row md:items-center h-24 md:h-10 mb-5 justify-between">
             <div className="order-1 md:order-none w-full md:w-[60%] flex">
               <div className="w-10 h-10 rounded-md bg-brand mr-3 flex justify-center items-center">
@@ -159,7 +159,7 @@ const Facility: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="h-screen bg-background w-full max-w-full box-border p-6 md:pr-9">
+        <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
           <div className="flex justify-between md:justify-end items-center h-10">
             <div className="flex md:hidden w-10 h-10 rounded-full bg-gray-400 items-center justify-center">
               <PersonIcon />

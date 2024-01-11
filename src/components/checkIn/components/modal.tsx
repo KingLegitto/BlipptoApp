@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 import PersonIcon from "@mui/icons-material/Person";
-import { ReactComponent as Envelope } from "../assets/envelope.svg";
-import { ReactComponent as Alarm } from "../assets/Alarm.svg";
+import { ReactComponent as Envelope } from "../../../assets/envelope.svg";
+import { ReactComponent as Alarm } from "../../../assets/Alarm.svg";
 import {
   Tabs,
   TabsHeader,
@@ -97,15 +97,15 @@ const Modal:React.FC<Props> = ({ children }) => {
         </div>
      
         <Tabs value="checkIn" >
-          <TabsHeader className="rounded-full h-12 xl:h-16 w-full md:w-[55%] lg:w-[45%] mx-auto bg-white p-0 tabHeader invisible">
-            <Tab value="checkIn" className="pills">
+          <TabsHeader placeholder="header" className="rounded-full h-12 xl:h-16 w-full md:w-[55%] lg:w-[45%] mx-auto bg-white p-0 tabHeader invisible">
+            <Tab placeholder="arrival" value="checkIn" className="pills">
               CheckIn
             </Tab>
-            <Tab value="checkOut" className="pills">
+            <Tab placeholder="departure" value="checkOut" className="pills">
               CheckOut
             </Tab>
           </TabsHeader>
-          <TabsBody className="bg-white mt-7 rounded-3xl">
+          <TabsBody placeholder="content" className="bg-white mt-7 rounded-3xl">
             <TabPanel value="checkIn" className="modal">
               <div className="checkin relative  h-[35vh] md:h-[40vh] lg:h-[50vh] 2xl:h-[60vh] box-border">
                 {children}

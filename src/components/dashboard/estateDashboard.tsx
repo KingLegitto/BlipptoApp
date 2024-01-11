@@ -3,10 +3,10 @@ import PersonIcon from "@mui/icons-material/Person";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AddIcon from "@mui/icons-material/Add";
-import DoughnutChart from "./doughnutChart";
-import { ReactComponent as Bottomsvg } from "../assets/Group3.svg";
-import NotificationIcons from "./Notifications/notificationsIcons";
-import Select from "./utils/select";
+import DoughnutChart from "../charts/doughnutChart";
+import { ReactComponent as Bottomsvg } from "../../assets/Group3.svg";
+import NotificationIcons from "../notifications/notificationsIcons";
+import Select from "../utils/select";
 
 const EstateDashboard: React.FC = () => {
   const selectedAction = function (value: string) {

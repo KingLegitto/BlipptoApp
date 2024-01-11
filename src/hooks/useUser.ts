@@ -1,6 +1,5 @@
 import { axiosAuth } from "../config/axios";
-import { useMutation, useQuery } from "react-query";
-
+import { useQuery } from "react-query";
 
 
 export const useGetUserProfile = () => {

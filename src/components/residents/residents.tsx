@@ -7,7 +7,7 @@ import { ReactComponent as Expand } from "../../assets/expand.svg";
 import { ReactComponent as MenuIcon } from "../../assets/menu.svg";
 import { ReactComponent as Search } from "../../assets/search.svg";
 import FirstResidentChart from "./components/residentSatisfactoryChart";
-import NotificationIcons from "../Notifications/notificationsIcons";
+import NotificationIcons from "../notifications/notificationsIcons";
 import Select from "../utils/select";
 
 

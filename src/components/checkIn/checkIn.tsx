@@ -1,7 +1,7 @@
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import  Keypad  from "./keypad";
-import NotificationIcons from "./Notifications/notificationsIcons";
+import  Keypad  from "./components/keypad";
+import NotificationIcons from "../notifications/notificationsIcons";
 
 const CheckIn: React.FC = () => {
   return (

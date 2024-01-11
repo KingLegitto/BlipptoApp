@@ -8,11 +8,11 @@ import { ReactComponent as VisibilityOff } from "../../assets/visibilityOff.svg"
 import GridPalette1 from "../../assets/GridPalette1.svg";
 import GridPalette2 from "../../assets/GridPalette2.svg";
 import VisibleIcon from "../icons/visibilityIcon";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   useLogin,
-  useHandleSignUpWithFacebook,
-  useHandleSignUpWithGoogle,
+  useSignUpWithFacebook,
+  useSignUpWithGoogle,
 } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -25,26 +25,23 @@ const SignIn: React.FC = () => {
   const [isError, setIsError] = useState<Boolean>(false);
   const [loading, setLoading] = useState<Boolean>(false);
   const navigate = useNavigate();
-  const location = useLocation();
   const { mutate: login } = useLogin();
-  const authenticateWithGoogle = useHandleSignUpWithGoogle();
-  const authenticateWithFacebook = useHandleSignUpWithFacebook();
+  const { data: googleData, refetch: googleRefetch } = useSignUpWithGoogle();
+  const { data: facebookData, refetch: facebookRefetch } = useSignUpWithFacebook();
 
   const handleGoogleAuthentication = () => {
-    const { data } = authenticateWithGoogle();
-    const { token } = data?.data?.data;
-
-    if (data?.data.status !== 200) {
+    googleRefetch();
+    const { token } = googleData?.data?.data;
+    if (googleData?.data.status !== 200) {
     }
     window.localStorage.setItem("Tkn", `${token}`);
     navigate("/dashboard/user/profile");
   };
 
   const handleFacebookAuthentication = () => {
-    const { data } = authenticateWithFacebook();
-    const { token } = data?.data?.data;
-
-    if (data?.data.status !== 200) {
+    facebookRefetch();
+    const { token } = facebookData?.data?.data;
+    if (facebookData?.data.status !== 200) {
     }
     window.localStorage.setItem("Tkn", `${token}`);
     navigate("/dashboard/user/profile");
@@ -79,12 +76,12 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex bg-background">
       <div className="w-full lg:w-[50%] flex flex-col items-center relative p-7 sm:p-10 h-screen">
         <p className="self-start">
           <InvertedLogo className="scale-[0.7] lg:scale-75" />
         </p>
-        <div className="w-full sm:w-[70%] 2xl:w-[522px] flex flex-col gap-y-4 xl:gap-y-6 signUpContainer mt-20 lg:mt-0 lg:scale-[0.8]">
+        <div className="w-full sm:w-[70%] 2xl:w-[522px] flex flex-col gap-y-4 xl:gap-y-6 signUpContainer mt-20 lg:mt-0 lg:scale-[0.8] 2xl:scale-100 2xl:mt-20">
           <div>
             <p className="font-semibold text-[2rem] 2xl:text-5xl text-center mb-2 2xl:mb-5">
               Let's get started
@@ -116,7 +113,7 @@ const SignIn: React.FC = () => {
           </button>
           <div className="h-10 2xl:h-12 flex relative items-center">
             <hr className="border-black w-full h-[0.05rem]" />
-            <div className="absolute h-10 2xl:h-12 w-16 z-10 bg-white flex justify-center items-center left-[50%] -translate-x-[50%]">
+            <div className="absolute h-10 2xl:h-12 w-16 z-10 bg-background flex justify-center items-center left-[50%] -translate-x-[50%]">
               or
             </div>
           </div>
@@ -130,13 +127,13 @@ const SignIn: React.FC = () => {
               ref={emailRef}
               type="email"
               required
-              name="price"
-              id="price"
-              className={` block w-full rounded-[2rem] h-full bg-[#d9d9d93d] pl-16 xl:pl-20 ${
+              name="email"
+              id="email"
+              className={`block w-full rounded-[2rem] h-full bg-[#d9d9d93d] pl-16 xl:pl-20 ${
                 isError && !validateEmail(emailRef.current!.value.trim())
                   ? "border-2 border-red-500 focus:border-red-500"
                   : ""
-              } text-gray-900 outline-none focus:border-yellow-300 focus:border-2 sm:text-sm sm:leading-6`}
+              } text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-sm sm:leading-6`}
               placeholder="Email"
               onChange={() => (isError ? setIsError(false) : "")}
             />
@@ -153,11 +150,11 @@ const SignIn: React.FC = () => {
               required
               name="password"
               id="password"
-              className={` block w-full rounded-[2rem] h-full bg-[#d9d9d93d] pl-16 xl:pl-20 ${
+              className={`block w-full rounded-[2rem] h-full bg-[#d9d9d93d] pl-16 xl:pl-20 ${
                 isError && passwordRef.current!.value.trim() === ""
-                  ? "border-2 border-red-500 focus:border-red-500 "
+                  ? "border-2 border-red-500 focus:border-red-500"
                   : ""
-              } text-gray-900 outline-none focus:border-yellow-300 focus:border-2 sm:text-sm sm:leading-6`}
+              } text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-sm sm:leading-6`}
               placeholder="Password"
               onChange={() => (isError ? setIsError(false) : "")}
             />
