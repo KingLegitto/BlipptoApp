@@ -83,10 +83,10 @@ $background-color: #f8f9ff;
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 input[type="number"] {
@@ -130,20 +130,21 @@ input[type="checkbox"]:checked::before {
   border: none;
 }
 
-.progressContainer{
-  position:relative;
+.progressContainer {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  width:70%;
+  width: 70%;
   height: 4rem;
   margin: 1.2rem auto;
 }
 
-.progressContainer::before, .progress{
+.progressContainer::before,
+.progress {
   content: "";
   position: absolute;
-  top:30%;
-  left:0;
+  top: 30%;
+  left: 0;
   transform: translateY(-50%);
   width: 100%;
   height: 3px;
@@ -152,32 +153,33 @@ input[type="checkbox"]:checked::before {
   z-index: 1;
 }
 
-.progress{
-  background-color: #6484E6;
-  width:0%;
-  transition: 500ms ease
+.progress {
+  background-color: #6484e6;
+  width: 0%;
+  transition: 500ms ease;
 }
 
 .progress-step::after {
-   content: attr(data-title);
-   position: absolute;
-   bottom: 0px;
-}
-
-.progress-step.active::after, .progress-step.completed::after {
   content: attr(data-title);
   position: absolute;
   bottom: 0px;
-  color: #6484E6;
 }
 
-.progress-step.active{
-  border: 2px solid #6484E6;
+.progress-step.active::after,
+.progress-step.completed::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 0px;
+  color: #6484e6;
 }
 
-.progress-step.completed{
-  background-color: #6484E6;
-  border: 2px solid #6484E6;
+.progress-step.active {
+  border: 2px solid #6484e6;
+}
+
+.progress-step.completed {
+  background-color: #6484e6;
+  border: 2px solid #6484e6;
 }
 
 .active > .selected > svg path {
@@ -324,6 +326,19 @@ input[data-id="5"]:focus {
   border-radius: 9999px !important;
 }
 
+.svg-loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70px;
+  height: 70px;
+  transform: translate(-50%, -50%);
+}
+
+.svg-loader path {
+  fill: #4c73eb !important;
+}
+
 @media screen and (max-width: 425px) {
   .apexcharts-legend-series {
     line-height: 1.7 !important;
@@ -355,21 +370,22 @@ input[data-id="5"]:focus {
     transform: translateX(-50%) !important;
   }
   .progress-step[data-title] {
-   font-size: 0.8rem;
+    font-size: 0.8rem;
   }
-  .progressContainer{
-    position:relative;
+  .progressContainer {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    width:90%;
+    width: 90%;
     height: 4rem;
     margin: 1.2rem auto;
   }
-  .progressContainer::before, .progress{
+  .progressContainer::before,
+  .progress {
     content: "";
     position: absolute;
-    top:25%;
-    left:0;
+    top: 25%;
+    left: 0;
     transform: translateY(-50%);
     width: 100%;
     height: 3px;
@@ -377,27 +393,28 @@ input[data-id="5"]:focus {
     transition: 500ms ease;
     z-index: 1;
   }
-  .progress{
-    background-color: #6484E6;
-    width:0%;
-    transition: 500ms ease
+  .progress {
+    background-color: #6484e6;
+    width: 0%;
+    transition: 500ms ease;
   }
   .progress-step[data-title] {
-   font-size: 0.8rem;
+    font-size: 0.8rem;
   }
-  .progressContainer{
-    position:relative;
+  .progressContainer {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    width:90%;
+    width: 90%;
     height: 4rem;
     margin: 1.2rem auto;
   }
-  .progressContainer::before, .progress{
+  .progressContainer::before,
+  .progress {
     content: "";
     position: absolute;
-    top:25%;
-    left:0;
+    top: 25%;
+    left: 0;
     transform: translateY(-50%);
     width: 100%;
     height: 3px;
@@ -405,10 +422,10 @@ input[data-id="5"]:focus {
     transition: 500ms ease;
     z-index: 1;
   }
-  .progress{
-    background-color: #6484E6;
-    width:0%;
-    transition: 500ms ease
+  .progress {
+    background-color: #6484e6;
+    width: 0%;
+    transition: 500ms ease;
   }
 }
 
@@ -564,7 +581,7 @@ input[data-id="5"]:focus {
   }
   .progress-step[data-title] {
     font-size: 1rem;
-   }
+  }
 }
 
 @media screen and (min-width: 1536px) {

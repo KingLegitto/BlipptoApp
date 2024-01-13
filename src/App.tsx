@@ -20,34 +20,34 @@ import VerifyEmail from "./components/verifyEmail";
 
 const queryClient = new QueryClient();
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
-      <QueryClientProvider client={queryClient} >
-      <Routes>
-        <Route path="/">
-          <Route index element={<Navigate to="/landing" replace />} />
-          <Route path="/dashboard" element={<SideBar />}>
-            <Route path="/dashboard/home" element={<EstateDashboard />} />
-            <Route path="/dashboard/keypad" element={<CheckIn />} />
-            <Route path="/dashboard/facility" element={<Facility />} />
-            <Route path="/dashboard/residents" element={<Residents />} />
-            <Route path="/dashboard/guards" element={<Guards />} />
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Navigate to="/landing" replace />} />
+            <Route path="/dashboard" element={<SideBar />}>
+              <Route path="/dashboard/home" element={<EstateDashboard />} />
+              <Route path="/dashboard/keypad" element={<CheckIn />} />
+              <Route path="/dashboard/facility" element={<Facility />} />
+              <Route path="/dashboard/residents" element={<Residents />} />
+              <Route path="/dashboard/guards" element={<Guards />} />
               <Route path="/dashboard/user/profile" element={<UserProfile />} />
+            </Route>
           </Route>
-        </Route>
-        <Route path='/notifications' element={<Notifications />} />
-        <Route path='/alarms' element={<Alarms />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/signin' element={<SignIn />} />
-        <Route path='/staff/register' element={<Onboarding/>} />
-        <Route path='/user/register' element={<UserRegisteration/>} />
-        <Route path='/landing' element={<LandingPage/>} />
-        <Route path='/verifyEmail' element={<VerifyEmail/>} />
-      </Routes>
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/alarms" element={<Alarms />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/staff/register" element={<Onboarding />} />
+          <Route path="/user/register" element={<UserRegisteration />} />
+          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/verifyEmail" element={<VerifyEmail />} />
+        </Routes>
       </QueryClientProvider>
     </div>
   );
-}
+};
 
 export default App;

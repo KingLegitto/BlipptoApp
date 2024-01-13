@@ -405,9 +405,7 @@ const CountryFlag = ({ country, size }) => {
   }
 
   return (
-    <FlagComponent
-      style={{ cursor: "pointer", width: size, height: size }}
-    />
+    <FlagComponent style={{ cursor: "pointer", width: size, height: size }} />
   );
 };
 
