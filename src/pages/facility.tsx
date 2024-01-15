@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import { ReactComponent as Search } from "../../assets/search.svg";
-import { ReactComponent as TopRight } from "../../assets/Group 5.svg";
-import { ReactComponent as Filter } from "../../assets/Filter.svg";
-import { ReactComponent as Expand } from "../../assets/expand.svg";
-import { ReactComponent as Pending } from "../../assets/pending.svg";
-import { ReactComponent as Approved } from "../../assets/approved.svg";
+import { ReactComponent as Search } from "../assets/search.svg";
+import { ReactComponent as TopRight } from "../assets/Group 5.svg";
+import { ReactComponent as Filter } from "../assets/Filter.svg";
+import { ReactComponent as Expand } from "../assets/expand.svg";
+import { ReactComponent as Pending } from "../assets/pending.svg";
+import { ReactComponent as Approved } from "../assets/approved.svg";
 import AddIcon from "@mui/icons-material/Add";
-import { ReactComponent as Calendar } from "../../assets/calendar.svg";
-import { ReactComponent as EmptyFacility } from "../../assets/emptyFacility.svg";
-import BookedFacilitiesChart from "./components/bookedFacilitiesChart";
-import Select from "../utils/select";
-import Menu from "../utils/menu";
-import NotificationIcons from "../notifications/notificationsIcons";
-import { facilitiesData } from "../../dummydata/facilityDummyData";
+import { ReactComponent as Calendar } from "../assets/calendar.svg";
+import { ReactComponent as EmptyFacility } from "../assets/emptyFacility.svg";
+import BookedFacilitiesChart from "../components/facility/bookedFacilitiesChart";
+import Select from "../components/utilComponents/select";
+import Menu from "../components/utilComponents/menu";
+import NotificationIcons from "../components/notifications/notificationsIcons";
+import { facilitiesData } from "../dummydata/facilityDummyData";
 
 const Facility: React.FC = () => {
   const [hasData] = useState<Boolean>(false);

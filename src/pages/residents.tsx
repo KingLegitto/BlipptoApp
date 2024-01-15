@@ -2,13 +2,13 @@ import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AddIcon from "@mui/icons-material/Add";
-import { ReactComponent as Filter } from "../../assets/Filter.svg";
-import { ReactComponent as Expand } from "../../assets/expand.svg";
-import { ReactComponent as MenuIcon } from "../../assets/menu.svg";
-import { ReactComponent as Search } from "../../assets/search.svg";
-import FirstResidentChart from "./components/residentSatisfactoryChart";
-import NotificationIcons from "../notifications/notificationsIcons";
-import Select from "../utils/select";
+import { ReactComponent as Filter } from "../assets/Filter.svg";
+import { ReactComponent as Expand } from "../assets/expand.svg";
+import { ReactComponent as MenuIcon } from "../assets/menu.svg";
+import { ReactComponent as Search } from "../assets/search.svg";
+import FirstResidentChart from "../components/residents/residentSatisfactoryChart";
+import NotificationIcons from "../components/notifications/notificationsIcons";
+import Select from "../components/utilComponents/select";
 
 
 const tableData = [

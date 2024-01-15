@@ -1,7 +1,7 @@
 import React from "react";
-import { ReactComponent as ArrowLeftIcon } from "../../../assets/arrowLeft.svg";
+import { ReactComponent as ArrowLeftIcon } from "../../assets/arrowLeft.svg";
 import AlarmAnalysisChart from "./alarmAnalysisChart";
-import Select from "../../utils/select";
+import Select from "../utilComponents/select";
 
 interface ActivateAlarmsProps {
   setShowAlarmSection: (value: boolean) => void;

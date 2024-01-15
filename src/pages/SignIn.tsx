@@ -1,45 +1,35 @@
 import React, { useRef, useState } from "react";
-import { ReactComponent as WavingHand } from "../../assets/wavingHand.svg";
-import { ReactComponent as FacebookLogo } from "../../assets/facebook.svg";
-import { ReactComponent as GoogleLogo } from "../../assets/google.svg";
-import { ReactComponent as Lock } from "../../assets/lock.svg";
-import { ReactComponent as EmailLogo } from "../../assets/sendMail.svg";
-import { ReactComponent as ConcentricCircles } from "../../assets/concentricCircles.svg";
-import { ReactComponent as InvertedLogo } from "../../assets/invertedLogo.svg";
-import { ReactComponent as VisibilityOff } from "../../assets/visibilityOff.svg";
-import VisibleIcon from "../icons/visibilityIcon";
-import { Link, useLocation } from "react-router-dom";
+import { ReactComponent as FacebookLogo } from "../assets/facebook.svg";
+import { ReactComponent as GoogleLogo } from "../assets/google.svg";
+import { ReactComponent as Lock } from "../assets/lock.svg";
+import { ReactComponent as EmailLogo } from "../assets/sendMail.svg";
+import { ReactComponent as InvertedLogo } from "../assets/invertedLogo.svg";
+import { ReactComponent as VisibilityOff } from "../assets/visibilityOff.svg";
+import GridPalette1 from "../assets/GridPalette1.svg";
+import GridPalette2 from "../assets/GridPalette2.svg";
+import VisibleIcon from "../components/icons/visibilityIcon";
+import { Link } from "react-router-dom";
 import {
-  useSignup,
+  useLogin,
   useSignUpWithFacebook,
   useSignUpWithGoogle,
-} from "../../hooks/useAuth";
+} from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import Loader from "../Loader/Loader";
 import { validateEmail } from "../utils/helpersForOnboarding";
+import Loader from "../components/Loader/Loader";
 
-const SignUp: React.FC = () => {
+const SignIn: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const [isError, setIsError] = useState<Boolean>(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<Boolean>(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { mutate: signUp } = useSignup();
+  const { mutate: login } = useLogin();
   const { data: googleData, refetch: googleRefetch } = useSignUpWithGoogle();
   const { data: facebookData, refetch: facebookRefetch } =
     useSignUpWithFacebook();
-
-  const handleFacebookAuthentication = () => {
-    facebookRefetch();
-    const { token } = facebookData?.data?.data;
-    if (facebookData?.data.status !== 200) {
-    }
-    window.localStorage.setItem("Tkn", `${token}`);
-    navigate(`/${location.state.type}/register`);
-  };
 
   const handleGoogleAuthentication = () => {
     googleRefetch();
@@ -47,7 +37,16 @@ const SignUp: React.FC = () => {
     if (googleData?.data.status !== 200) {
     }
     window.localStorage.setItem("Tkn", `${token}`);
-    navigate(`/${location.state.type}/register`);
+    navigate("/dashboard/user/profile");
+  };
+
+  const handleFacebookAuthentication = () => {
+    facebookRefetch();
+    const { token } = facebookData?.data?.data;
+    if (facebookData?.data.status !== 200) {
+    }
+    window.localStorage.setItem("Tkn", `${token}`);
+    navigate("/dashboard/user/profile");
   };
 
   const handleSubmit = () => {
@@ -65,12 +64,11 @@ const SignUp: React.FC = () => {
       password: passwordRef.current!.value.trim(),
     };
 
-    signUp(data, {
+    login(data, {
       onSuccess: (data) => {
         setLoading(false);
         window.localStorage.setItem("Tkn", `${data.data.token}`);
-        const userType = window.sessionStorage.getItem("userType") || "user";
-        navigate(`/${userType}/register`);
+        navigate("/dashboard/user/profile");
       },
       onError: (error: any) => {
         setLoading(false);
@@ -82,31 +80,8 @@ const SignUp: React.FC = () => {
   return (
     <>
       {loading && <Loader />}
-      <div className="flex">
-        <div className="hidden lg:flex w-[55%] bg-brand p-10 flex-col justify-center relative h-screen overflow-clip">
-          <p className="md:text-3xl 2xl:text-[64px] font-bold text-white md:leading-4 2xl:leading-[80px]">
-            Hello,
-            <WavingHand className="inline" />
-            <br /> Welcome to Blippto!
-          </p>
-          <p className="leading-4 2xl:leaing-6 text-xs lg:text-sm 2xl:text-lg text-white md:w-[80%] 2xl:w-[70%] mt-7">
-            Enhance the protection of your estate with our comprehensive
-            security management services. Join us to experience a seamless
-            integration of cutting-edge technology and expert personnel
-            dedicated to ensuring the utmost safety of your property. Our
-            commitment is unwavering, and we prioritize your security as our
-            topmost concern. Invest in peace of mind as we tailor solutions to
-            elevate the overall security infrastructure of your estate. Your
-            safety is not just a priority; it's our unwavering commitment.
-          </p>
-          <p className="lg:text-sm 2xl:text-xl font-medium text-white absolute bottom-10">
-            <span className="relative z-10 mr-8">Terms</span>
-            <span className="relative z-10">Privacy</span>
-          </p>
-          <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
-          <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
-        </div>
-        <div className="w-full lg:w-[45%] flex flex-col items-center bg-background relative p-7 sm:p-10 h-screen overflow-scroll">
+      <div className="flex bg-background">
+        <div className="w-full lg:w-[50%] flex flex-col items-center relative p-7 sm:p-10 h-screen">
           <p className="self-start">
             <InvertedLogo className="scale-[0.7] lg:scale-75" />
           </p>
@@ -116,9 +91,9 @@ const SignUp: React.FC = () => {
                 Let's get started
               </p>
               <p className="text-sm 2xl:text-lg text-center text-[#00000099]">
-                Already have an account?{" "}
-                <Link to="/signin" className="text-black">
-                  Login
+                Don't have an account?{" "}
+                <Link to="/signup" className="text-black">
+                  Sign Up
                 </Link>
               </p>
             </div>
@@ -128,7 +103,7 @@ const SignUp: React.FC = () => {
             >
               <div className="flex items-center">
                 <GoogleLogo className="mr-3 2xl:mr-5 scale-[0.7] lg:scale-75" />
-                <p className="text-sm font-medium">Sign up with Google</p>
+                <p className="text-sm font-medium">Continue with Google</p>
               </div>
             </button>
             <button
@@ -137,7 +112,7 @@ const SignUp: React.FC = () => {
             >
               <div className="flex items-center">
                 <FacebookLogo className="mr-3 2xl:mr-5 scale-[0.7] lg:scale-75" />
-                <p className="text-sm font-medium">Sign up with Facebook</p>
+                <p className="text-sm font-medium">Continue with Facebook</p>
               </div>
             </button>
             <div className="h-10 2xl:h-12 flex relative items-center">
@@ -207,13 +182,25 @@ const SignUp: React.FC = () => {
               onClick={() => handleSubmit()}
               className="flex relative z-10 justify-center items-center rounded-full text-base bg-accenture h-12 2xl:h-16 w-full font-semibold"
             >
-              Create Account
+              Login
             </button>
           </div>
+        </div>
+        <div className="blipto-signIn-right hidden lg:flex gap-8 justify-end h-[90vh] fixed right-0 lg:w-[50%]">
+          <img
+            src={GridPalette1}
+            className="max-w-[48%] object-contain absolute right-[52%] min-h-[90vh] h-[90vh]"
+            alt="/"
+          />
+          <img
+            src={GridPalette2}
+            className="max-w-[48%] object-contain absolute min-h-[80vh] h-[80vh]"
+            alt="/"
+          />
         </div>
       </div>
     </>
   );
 };
 
-export default SignUp;
+export default SignIn;

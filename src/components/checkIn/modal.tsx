@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 import PersonIcon from "@mui/icons-material/Person";
-import { ReactComponent as Envelope } from "../../../assets/envelope.svg";
-import { ReactComponent as Alarm } from "../../../assets/Alarm.svg";
+import { ReactComponent as Envelope } from "../../assets/envelope.svg";
+import { ReactComponent as Alarm } from "../../assets/Alarm.svg";
 import {
   Tabs,
   TabsHeader,

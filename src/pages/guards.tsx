@@ -1,16 +1,16 @@
 import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import AddIcon from "@mui/icons-material/Add";
-import { ReactComponent as AddGuard } from "../../assets/addGuard.svg";
-import { ReactComponent as ArrowUpRight } from "../../assets/arrowUpRight.svg";
-import { ReactComponent as DeleteIcon } from "../../assets/delete.svg";
-import { ReactComponent as SendMailIcon } from "../../assets/sendMail.svg";
-import { ReactComponent as EditIcon } from "../../assets/edit.svg";
-import NotificationIcons from "../notifications/notificationsIcons";
-import { scheduledGuardsData } from "../../dummydata/scheduledGuardsDummyData";
-import { estateGuardsData } from "../../dummydata/estateGuardsDummyData";
-import Select from "../utils/select";
-import CalendarComponent from "./components/calendar";
+import { ReactComponent as AddGuard } from "../assets/addGuard.svg";
+import { ReactComponent as ArrowUpRight } from "../assets/arrowUpRight.svg";
+import { ReactComponent as DeleteIcon } from "../assets/delete.svg";
+import { ReactComponent as SendMailIcon } from "../assets/sendMail.svg";
+import { ReactComponent as EditIcon } from "../assets/edit.svg";
+import NotificationIcons from "../components/notifications/notificationsIcons";
+import { scheduledGuardsData } from "../dummydata/scheduledGuardsDummyData";
+import { estateGuardsData } from "../dummydata/estateGuardsDummyData";
+import Select from "../components/utilComponents/select";
+import CalendarComponent from "../components/guards/calendar";
 
 const Guards: React.FC = () => {
   return (

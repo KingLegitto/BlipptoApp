@@ -1,18 +1,18 @@
 import React, { useState, useRef } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { ReactComponent as Search } from "../../assets/search.svg";
-import { ReactComponent as Filter } from "../../assets/Filter.svg";
-import { ReactComponent as Issues } from "../../assets/issues.svg";
-import { ReactComponent as Delete } from "../../assets/delete.svg";
-import { ReactComponent as Star } from "../../assets/star.svg";
-import NotificationIcons from "./notificationsIcons";
-import Select from "../utils/select";
+import { ReactComponent as Search } from "../assets/search.svg";
+import { ReactComponent as Filter } from "../assets/Filter.svg";
+import { ReactComponent as Issues } from "../assets/issues.svg";
+import { ReactComponent as Delete } from "../assets/delete.svg";
+import { ReactComponent as Star } from "../assets/star.svg";
+import NotificationIcons from "../components/notifications/notificationsIcons";
+import Select from "../components/utilComponents/select";
 import AddIcon from "@mui/icons-material/Add";
 import { formatCurrentDate, showDynamicDate } from "../utils/helpersForDates";
 import { Link, useNavigate } from "react-router-dom";
-import { ReactComponent as Selected } from "../../assets/selected.svg";
-import { notificationsData } from "../../dummydata/notificationDummyData";
-import { ReactComponent as EmptyNotification } from "../../assets/emptyNotification.svg";
+import { ReactComponent as Selected } from "../assets/selected.svg";
+import { notificationsData } from "../dummydata/notificationDummyData";
+import { ReactComponent as EmptyNotification } from "../assets/emptyNotification.svg";
 
 const Notifications: React.FC = () => {
   const [hasNotifications] = useState<Boolean>(false);
@@ -211,7 +211,7 @@ const Notifications: React.FC = () => {
             <h1 className="flex items-center text-lg font-bold md:text-xl 2xl:text-3xl">
               <div
                 className="flex w-10 h-10 items-center justify-start cursor-pointer"
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/dashboard/home")}
               >
                 <ArrowBackIcon />
               </div>

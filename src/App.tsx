@@ -1,22 +1,22 @@
 import React from "react";
 import "./App.scss";
-import EstateDashboard from "./components/dashboard/estateDashboard";
+import EstateDashboard from "./pages/estateDashboard";
 import { Route, Routes, Navigate } from "react-router-dom";
-import CheckIn from "./components/checkIn/checkIn";
+import CheckIn from "./pages/checkIn";
 import SideBar from "./components/sidebar/sideBar";
-import Facility from "./components/facility/facility";
-import Residents from "./components/residents/residents";
-import Notifications from "./components/notifications/notifications";
-import Alarms from "./components/alarms/alarms";
-import Guards from "./components/guards/guards";
-import SignUp from "./components/signUp/signUp";
+import Facility from "./pages/facility";
+import Residents from "./pages/residents";
+import Notifications from "./pages/notifications";
+import Alarms from "./pages/alarms";
+import Guards from "./pages/guards";
+import SignUp from "./pages/signUp";
 import { QueryClientProvider, QueryClient } from "react-query";
-import SignIn from "./components/SignIn/SignIn";
-import UserProfile from "./components/UserProfile/UserProfile";
-import Onboarding from "./components/onboarding/onboarding";
-import LandingPage from "./components/landingPage";
-import UserRegisteration from "./components/userRegistration";
-import VerifyEmail from "./components/verifyEmail";
+import SignIn from "./pages/SignIn";
+import UserProfile from "./pages/UserProfile";
+import Onboarding from "./pages/onboarding/onboarding";
+import LandingPage from "./pages/landingPage";
+import UserRegisteration from "./pages/userRegistration";
+import VerifyEmail from "./pages/verifyEmail";
 
 const queryClient = new QueryClient();
 

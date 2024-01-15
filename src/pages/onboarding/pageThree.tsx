@@ -2,15 +2,20 @@ import React, { useRef } from "react";
 import { ReactComponent as ArrowRight } from "../../assets/pointRight.svg";
 import { ReactComponent as ArrowLeft } from "../../assets/pointLeft.svg";
 import { ReactComponent as InvertedLogo } from "../../assets/invertedLogo.svg";
-import CarouselIndicator from "../carouselIndicator";
+import FileInput from "../../components/fileUploader/fileUploader";
+import CarouselIndicator from "../../components/carouselIndicator";
 import { ReactComponent as ConcentricCircles } from "../../assets/concentricCircles.svg";
 import { RegisterPageProps, FormInputRefs } from "../../propTypes";
-import DropdownSelect from "../dropDowns/onboardingDropDown";
-import DropdownSelectWithSearch from "../dropDowns/dropDownWithSearch";
+import DropdownSelect from "../../components/dropDowns/onboardingDropDown";
+import DropdownSelectWithSearch from "../../components/dropDowns/dropDownWithSearch";
 
 const requiredFields = [
-  "name",
+  "firstName",
+  "lastName",
+  "gender",
+  "maritalStatus",
   "email",
+  "jobTitle",
   "phoneNumber",
   "country",
   "state",
@@ -26,12 +31,12 @@ const initializeRefs = (fields: string[]): FormInputRefs => {
   return refs;
 };
 
-const RegisterSecondPage: React.FC<RegisterPageProps> = ({
+const RegisterThirdPage: React.FC<RegisterPageProps> = ({
   currentStep,
   setCurrentStep,
   children,
-  formData,
   handleInputChange,
+  formData,
   handleSelectChange,
   countryList,
   stateList,
@@ -41,7 +46,7 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
 
   const moveToNextpage = () => {
     const missingFields = requiredFields.filter(
-      (field) => !(formData.estate as any)[field]
+      (field) => !(formData.staff as any)[field]
     );
     if (missingFields.length > 0) {
       const inputRef = inputRefs.current[missingFields[0]];
@@ -57,16 +62,12 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
     <div className="flex">
       <div className="hidden w-[55%] bg-brand p-10 lg:flex flex-col justify-center relative h-screen overflow-clip">
         <p className="md:text-3xl 2xl:text-[64px] font-bold text-white md:leading-9 2xl:leading-[80px] w-[80%]">
-          Secure Estate Operations: Staff Essentials
+          Get Acquainted With The Team
         </p>
         <p className="md:leading-4 2xl:leading-6 text-xs xl:text-lg text-white md:w-[80%] 2xl:w-[70%] mt-7">
-          As part of our dedicated team, managing estate details becomes a
-          breeze. We prioritize security and seamless entry, providing staff
-          with all the necessary information for efficient estate management.
-          Your role is vital in creating a safe and welcoming environment.
-          Explore the details, streamline processes, and contribute to the
-          overall excellence of our estate management. Together, we ensure a
-          secure and smooth experience for everyone involved!
+          Meet Our Team: Get to know the fantastic individuals driving our
+          success. We're excited to have you join our journey and discover the
+          unique talents that makes our team special.
         </p>
         <CarouselIndicator
           currentStep={currentStep}
@@ -84,37 +85,100 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
           <InvertedLogo className="scale-[0.6] xl:scale-75" />
         </p>
         <div className="mt-5">{children}</div>
-        <div className="w-full p-5 sm:p-7 xl:pr-10 rounded-2xl bg-white min-h-[350px] sm:min-h-[450px] 2xl:min-h-[500px] flex flex-col justify-between shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]">
-          <p className="text-lg 2xl:text-2xl font-medium">Estate Details</p>
+        <div className="w-full p-5 sm:p-7 xl:pr-10 rounded-2xl bg-white min-h-[650px] sm:min-h-[750px] 2xl:min-h-[830px] flex flex-col justify-between shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]">
+          <p className="text-lg 2xl:text-2xl font-medium">Staff Details</p>
           <div className="w-full flex">
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
               <input
-                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 pr-3 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                className="border-[1px] border-black bg-white rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
                 type="text"
-                name="name"
-                ref={inputRefs.current.name}
-                value={(formData.estate && formData.estate.name) || ""}
+                name="firstName"
+                ref={inputRefs.current.firstName}
+                defaultValue={
+                  (formData.staff && formData.staff.firstName) || ""
+                }
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "estate")
+                  handleInputChange(e, "staff")
                 }
               />
               <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Estate name
+                First name
               </p>
             </div>
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
               <input
-                className="border-[1px] bg-white border-black rounded-[2rem] h-full w-full pl-6 pr-3 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                className="border-[1px] border-black bg-white rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                name="lastName"
+                ref={inputRefs.current.lastName}
+                defaultValue={(formData.staff && formData.staff.lastName) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "staff")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+                Last Name
+              </p>
+            </div>
+          </div>
+          <div className="w-full flex">
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative rounded-[2rem]">
+              <DropdownSelect
+                options={["Male", "Female"]}
+                name={"gender"}
+                handleSelectChange={handleSelectChange}
+                category={"staff"}
+                formData={formData}
+                ref={inputRefs.current.gender}
+              />
+            </div>
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
+              <input
+                className="border-[1px] border-black bg-white rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                ref={inputRefs.current.maritalStatus}
+                name="maritalStatus"
+                defaultValue={
+                  (formData.staff && formData.staff.maritalStatus) || ""
+                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "staff")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+                Marital Status
+              </p>
+            </div>
+          </div>
+          <div className="w-full flex">
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+              <input
+                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 pr-3 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
                 type="email"
                 name="email"
                 ref={inputRefs.current.email}
-                value={(formData.estate && formData.estate.email) || ""}
+                value={(formData.staff && formData.staff.email) || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "estate")
+                  handleInputChange(e, "staff")
                 }
               />
               <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
                 Email
+              </p>
+            </div>
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
+              <input
+                className="appearance-none bg-white border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                name="jobTitle"
+                ref={inputRefs.current.jobTitle}
+                value={(formData.staff && formData.staff.jobTitle) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "staff")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+                Job title
               </p>
             </div>
           </div>
@@ -125,9 +189,9 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
                 type="number"
                 name="phoneNumber"
                 ref={inputRefs.current.phoneNumber}
-                value={(formData.estate && formData.estate.phoneNumber) || ""}
+                value={(formData.staff && formData.staff.phoneNumber) || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "estate")
+                  handleInputChange(e, "staff")
                 }
               />
               <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
@@ -138,24 +202,26 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
               <input
                 className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
                 type="number"
-                name="zipCode"
-                value={(formData.estate && formData.estate.zipCode) || ""}
+                name="alternatePhoneNumber"
+                value={
+                  (formData.staff && formData.staff.alternatePhoneNumber) || ""
+                }
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "estate")
+                  handleInputChange(e, "staff")
                 }
               />
               <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Zip code
+                Alternate number
               </p>
             </div>
           </div>
           <div className="w-full flex">
-            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative flex mr-4 sm:mr-8">
               <DropdownSelectWithSearch
                 options={countryList!}
                 name={"country"}
                 handleSelectChange={handleSelectChange}
-                category={"estate"}
+                category={"staff"}
                 formData={formData}
                 handleSelectedCountryCode={handleSelectedCountryCode!}
                 ref={inputRefs.current.country}
@@ -166,7 +232,7 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
                 options={stateList!}
                 name={"state"}
                 handleSelectChange={handleSelectChange}
-                category={"estate"}
+                category={"staff"}
                 formData={formData}
                 ref={inputRefs.current.state}
               />
@@ -175,29 +241,50 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
           <div className="w-full">
             <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
               <input
-                className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[20%] xl:w-[15%] pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[20%] xl:w-[15%] pl-6 outline-none focus:border-yellow-300 focus:border-2 text-sm"
                 type="text"
                 placeholder="Block"
-                ref={inputRefs.current.block}
                 name="block"
-                value={(formData.estate && formData.estate.block) || ""}
+                ref={inputRefs.current.block}
+                value={(formData.staff && formData.staff.block) || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "estate")
+                  handleInputChange(e, "staff")
                 }
               />
               <input
-                className="border-[1px] border-black rounded-r-[2rem] h-full w-[80%] xl:w-[85%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                className="border-[1px] border-black rounded-r-[2rem] h-full w-[80%] xl:w-[85%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-sm"
                 type="text"
                 placeholder="Street"
                 name="street"
                 ref={inputRefs.current.street}
-                value={(formData.estate && formData.estate.street) || ""}
+                value={(formData.staff && formData.staff.street) || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "estate")
+                  handleInputChange(e, "staff")
                 }
               />
               <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
                 Address
+              </p>
+            </div>
+          </div>
+          <div className="w-full flex h-auto relative">
+            <FileInput
+              handleInputChange={handleInputChange}
+              formData={formData}
+              category={"staff"}
+            />
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative ml-8">
+              <input
+                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-sm"
+                type="number"
+                name="zipCode"
+                value={(formData.staff && formData.staff.zipCode) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "staff")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+                Zip Code
               </p>
             </div>
           </div>
@@ -223,4 +310,4 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
   );
 };
 
-export default RegisterSecondPage;
+export default RegisterThirdPage;

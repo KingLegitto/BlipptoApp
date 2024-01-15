@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useGetUserProfile } from "../../hooks/useUser";
+import { useGetUserProfile } from "../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 
 const UserProfile: React.FC = () => {

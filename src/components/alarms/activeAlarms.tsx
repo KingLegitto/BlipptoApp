@@ -1,6 +1,6 @@
 import React from "react";
-import { activeAlarmData } from "../../../dummydata/alarmDummyData";
-import { ReactComponent as GridView } from "../../../assets/gridView.svg";
+import { activeAlarmData } from "../../dummydata/alarmDummyData";
+import { ReactComponent as GridView } from "../../assets/gridView.svg";
 
 const ActiveAlarms: React.FC = () => {
   return (

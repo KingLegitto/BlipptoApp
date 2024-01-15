@@ -8,7 +8,7 @@ import {
 } from "../../propTypes";
 import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 import CountryFlag from "../CountryFlag/CountryFlag";
-import { replaceSpacesWithUnderscore } from "../utils/helpersForOnboarding";
+import { replaceSpacesWithUnderscore } from "../../utils/helpersForOnboarding";
 
 const DropdownSelectWithSearch: React.ForwardRefRenderFunction<
   HTMLDivElement,

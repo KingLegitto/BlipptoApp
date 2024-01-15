@@ -1,12 +1,12 @@
 import React from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { ReactComponent as MedicalAlarmIcon } from "../../../assets/medicalAlarmIcon.svg";
-import { ReactComponent as HazardAlarmIcon } from "../../../assets/hazardAlarmIcon.svg";
-import { ReactComponent as RobberyAlarmIcon } from "../../../assets/robberyAlarmIcon.svg";
-import { ReactComponent as ThreatAlarmIcon } from "../../../assets/threatAlarmIcon.svg";
-import { ReactComponent as OtherAlarmIcon } from "../../../assets/otherAlarmIcon.svg";
-import { ReactComponent as QuestionMarkIcon } from "../../../assets/questionMark.svg";
-import { ReactComponent as ArrowRightIcon } from "../../../assets/arrowRight.svg";
+import { ReactComponent as MedicalAlarmIcon } from "../../assets/medicalAlarmIcon.svg";
+import { ReactComponent as HazardAlarmIcon } from "../../assets/hazardAlarmIcon.svg";
+import { ReactComponent as RobberyAlarmIcon } from "../../assets/robberyAlarmIcon.svg";
+import { ReactComponent as ThreatAlarmIcon } from "../../assets/threatAlarmIcon.svg";
+import { ReactComponent as OtherAlarmIcon } from "../../assets/otherAlarmIcon.svg";
+import { ReactComponent as QuestionMarkIcon } from "../../assets/questionMark.svg";
+import { ReactComponent as ArrowRightIcon } from "../../assets/arrowRight.svg";
 
 interface ActivateAlarmsProps {
   setShowAlarmSection: (value:boolean) => void; 

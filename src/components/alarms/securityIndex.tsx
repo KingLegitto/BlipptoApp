@@ -1,7 +1,7 @@
 import React from "react";
 import SecurityIndexChart from "./securityIndexChart";
-import { ReactComponent as ExclamationIcon } from "../../../assets/exclamation.svg";
-import Select from "../../utils/select";
+import { ReactComponent as ExclamationIcon } from "../../assets/exclamation.svg";
+import Select from "../utilComponents/select";
 
 const SecurityIndex: React.FC = () => {
   return (

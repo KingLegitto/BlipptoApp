@@ -1,5 +1,5 @@
 import React from 'react'
-import { alarmAnalysisData } from '../../../dummydata/alarmAnalysisDummyData';
+import { alarmAnalysisData } from '../../dummydata/alarmAnalysisDummyData';
 
 import {
     LineChart,

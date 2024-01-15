@@ -7,8 +7,8 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import ReactCodeInput from "react-code-input";
-import { ReactComponent as Bottomsvg } from "../../../assets/Group3.svg";
-import { ReactComponent as Topsvg } from "../../../assets/Group4.svg";
+import { ReactComponent as Bottomsvg } from "../../assets/Group3.svg";
+import { ReactComponent as Topsvg } from "../../assets/Group4.svg";
 import CloseIcon from "@mui/icons-material/Close";
 import Modal from "./modal";
 
@@ -81,14 +81,14 @@ const Keypad: React.FC = () => {
       </div>
       <Tabs value="checkIn" className="overflow-visible">
         <TabsHeader placeholder="header" className="rounded-full h-12 xl:h-14 2xl:h-16 w-full md:w-[55%] lg:w-[45%] mx-auto bg-white p-0 tabHeader duration-1000 ease-in-out transition-all">
-          <Tab placeholder="arrival" value="checkIn" className="pills">
+          <Tab placeholder="checkin" value="checkIn" className="pills">
             CheckIn
           </Tab>
-          <Tab placeholder="departure" value="checkOut" className="pills">
+          <Tab placeholder="checkout" value="checkOut" className="pills">
             CheckOut
           </Tab>
         </TabsHeader>
-        <TabsBody placeholder="content" className="bg-white mt-7 shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] rounded-3xl">
+        <TabsBody placeholder="body" className="bg-white mt-7 shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)] rounded-3xl">
           <TabPanel value="checkIn">
             <div className="checkin relative flex flex-col justify-between items-center bg-white  h-[35vh] md:h-[40vh] lg:h-[50vh] 2xl:h-[60vh] box-border p-4 md:p-5">
               <div className=" rounded-2xl md:h-[40%] lg:h-[60%] relative z-10">

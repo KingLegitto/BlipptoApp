@@ -7,10 +7,10 @@ import React, {
 } from "react";
 import { ReactComponent as ArrowRight } from "../assets/pointRight.svg";
 import { ReactComponent as InvertedLogo } from "../assets/invertedLogo.svg";
-import FileInput from "./fileUploader/fileUploader";
+import FileInput from "../components/fileUploader/fileUploader";
 import { ReactComponent as ConcentricCircles } from "../assets/concentricCircles.svg";
-import DropdownSelect from "./dropDowns/onboardingDropDown";
-import DropdownSelectWithSearch from "./dropDowns/dropDownWithSearch";
+import DropdownSelect from "../components/dropDowns/onboardingDropDown";
+import DropdownSelectWithSearch from "../components/dropDowns/dropDownWithSearch";
 import {
   FormInputRefs,
   FormData,
@@ -27,7 +27,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getCountryListData,
   getStateListData,
-} from "./utils/helpersForOnboarding";
+} from "../utils/helpersForOnboarding";
 
 const requiredFields = [
   "firstName",

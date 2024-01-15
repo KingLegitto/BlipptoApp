@@ -3,7 +3,7 @@ import RegisterFirstPage from "./pageOne";
 import RegisterSecondPage from "./pageTwo";
 import RegisterThirdPage from "./pageThree";
 import RegisterFourthPage from "./pageFour";
-import Stepper from "../stepper/stepper";
+import Stepper from "../../components/stepper/stepper";
 import {
   FormData,
   PersonalData,
@@ -14,7 +14,7 @@ import {
 } from "../../propTypes";
 import { initialState } from "../../dummydata/onboardingInitialState";
 import Swal from "sweetalert2";
-import { getCountryListData, getStateListData } from "../utils/helpersForOnboarding";
+import { getCountryListData, getStateListData } from "../../utils/helpersForOnboarding";
 
 
 const Onboarding:React.FC = () => {

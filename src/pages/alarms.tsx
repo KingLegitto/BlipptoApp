@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NotificationIcons from "../notifications/notificationsIcons";
+import NotificationIcons from "../components/notifications/notificationsIcons";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ActivateAlarms from "./components/activateAlarm";
-import SecurityIndex from "./components/securityIndex";
-import AlarmAnalysis from "./components/alarmAnalysis";
-import ActiveAlarms from "./components/activeAlarms";
+import ActivateAlarms from "../components/alarms/activateAlarm";
+import SecurityIndex from "../components/alarms/securityIndex";
+import AlarmAnalysis from "../components/alarms/alarmAnalysis";
+import ActiveAlarms from "../components/alarms/activeAlarms";
 
 const Alarms = () => {
   const navigate = useNavigate();
