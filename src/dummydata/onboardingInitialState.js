@@ -22,7 +22,7 @@ export const initialState = {
       zipCode: "",
       block: "",
       street: "",
-      country: "",
+      country: "nigeria",
       type: "residential",
     },
     staff: {
@@ -33,7 +33,7 @@ export const initialState = {
       jobTitle: "",
       phoneNumber: "",
       alternatePhoneNumber: "",
-      country: "",
+      country: "nigeria",
       state: "",
       zipCode: "",
       block: "",

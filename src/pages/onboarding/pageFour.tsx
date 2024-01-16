@@ -82,12 +82,12 @@ const RegisterFourthPage: React.FC<RegisterPageProps> = ({
         <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
         <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
       </div>
-      <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen overflow-scroll">
+      <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen">
         <p>
           <InvertedLogo className="scale-[0.6] xl:scale-75" />
         </p>
         <div className="mt-5">{children}</div>
-        <div className="w-full p-5 sm:p-7 xl:pr-10 rounded-2xl bg-background h-auto flex flex-col gap-y-7 mt-7 shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]">
+        <div className="w-full p-5 sm:p-7 xl:pr-10 rounded-2xl bg-background flex flex-col gap-y-6 mt-7 shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)] min-h-[65%] overflow-scroll">
           <p className="text-lg 2xl:text-2xl font-medium">Payment Details</p>
           <Payment
             formData={formData}

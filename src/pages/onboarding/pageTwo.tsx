@@ -79,12 +79,12 @@ const RegisterSecondPage: React.FC<RegisterPageProps> = ({
         <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
         <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
       </div>
-      <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen overflow-scroll">
+      <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen">
         <p>
           <InvertedLogo className="scale-[0.6] xl:scale-75" />
         </p>
         <div className="mt-5">{children}</div>
-        <div className="w-full p-5 sm:p-7 xl:pr-10 rounded-2xl bg-white min-h-[350px] sm:min-h-[450px] 2xl:min-h-[500px] flex flex-col justify-between shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]">
+        <div className="w-full p-5 sm:p-7 xl:pr-10 rounded-2xl bg-white gap-y-6 flex flex-col justify-between shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)] min-h-[70%] overflow-scroll">
           <p className="text-lg 2xl:text-2xl font-medium">Estate Details</p>
           <div className="w-full flex">
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">

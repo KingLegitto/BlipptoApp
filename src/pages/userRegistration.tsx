@@ -170,7 +170,7 @@ const UserRegistrationPage: React.FC = () => {
         <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
         <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
       </div>
-      <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen overflow-scroll">
+      <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen">
         <p>
           <InvertedLogo className="scale-[0.6] xl:scale-75" />
         </p>

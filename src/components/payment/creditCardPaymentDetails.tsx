@@ -33,7 +33,7 @@ const CreditCardPaymentDetails: React.ForwardRefRenderFunction<HTMLDivElement,Cr
           required
           ref={inputRefs.current?.cardHolderName}
           name="cardHolderName"
-          className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-16 xl:pl-20 text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
+          className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-14 2xl:pl-20 text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
           placeholder="Card Holder Name"
           value={(formData.card && formData.card.cardHolderName) || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -52,7 +52,7 @@ const CreditCardPaymentDetails: React.ForwardRefRenderFunction<HTMLDivElement,Cr
           required
           ref={inputRefs.current?.cardNumber}
           name="cardNumber"
-          className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-16 xl:pl-20 text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
+          className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-14 2xl:pl-20 text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
           placeholder="Card Number"
           value={(formData.card && formData.card.cardNumber) || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -72,8 +72,8 @@ const CreditCardPaymentDetails: React.ForwardRefRenderFunction<HTMLDivElement,Cr
             required
             ref={inputRefs.current?.expirationDate}
             name="expirationDate"
-            className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-16 xl:pl-20 text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
-            placeholder="Expiration Date"
+            className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-14 2xl:pl-20 text-gray-900 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
+            placeholder="Exp. Date"
             value={(formData.card && formData.card.expirationDate) || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleInputChange(e, "card")
@@ -92,7 +92,7 @@ const CreditCardPaymentDetails: React.ForwardRefRenderFunction<HTMLDivElement,Cr
             name="cvv"
             id="cvv"
             ref={inputRefs.current?.cvv}
-            className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-16 xl:pl-20 text-gray-900 outline-0 focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
+            className="block w-full rounded-[2rem] h-full bg-background border-[1px] border-black pl-12 sm:pl-14 2xl:pl-20 text-gray-900 outline-0 focus:border-yellow-300 focus:border-2 text-xs sm:text-sm leading-6"
             placeholder="CVV"
             value={(formData.card && formData.card.cvv) || ''}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

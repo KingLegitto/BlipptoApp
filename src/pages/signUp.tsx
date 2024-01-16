@@ -106,7 +106,7 @@ const SignUp: React.FC = () => {
           <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
           <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
         </div>
-        <div className="w-full lg:w-[45%] flex flex-col items-center bg-background relative p-7 sm:p-10 h-screen overflow-scroll">
+        <div className="w-full lg:w-[45%] flex flex-col items-center bg-background relative p-7 sm:p-10 h-screen">
           <p className="self-start">
             <InvertedLogo className="scale-[0.7] lg:scale-75" />
           </p>
