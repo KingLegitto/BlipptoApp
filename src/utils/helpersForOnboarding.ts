@@ -1,3 +1,5 @@
+export const BLIPPTO_LOCAL_STORAGE_USER_EMAIL = "blipptoUserEmail"
+
 export const validateEmail = (emailAddress: string) => {
   const emailPattern =
     /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$/;
@@ -42,3 +44,33 @@ export function replaceSpacesWithUnderscore(inputString: string) {
   }
   return inputString;
 }
+
+
+
+ export const stepsText = [
+    {
+      description:
+        "Make sure to check your email inbox for the verification code.",
+      description2: "Once received, proceed to the next step.",
+    },
+    {
+      description:
+        "You're almost there! We've sent a verification code to your email address. Check your inbox for an     email from us. Copy the code and paste in the boxes provided.",
+    },
+    {
+      description:
+        "It's time to secure your account! Please enter a new password. Make sure it's something strong and memorable. ",
+    },
+    {
+      description:
+        "Congratulations!  Your password has been successfully reset. You're all set to access your account using your new password.",
+    },
+  ];
+
+
+   export const stepsData = [
+    { label: "Step1", value: 1 },
+    { label: "Step2", value: 2 },
+    { label: "Step3", value: 3 },
+    { label: "Step4", value: 4 },
+  ];

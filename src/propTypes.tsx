@@ -1,70 +1,69 @@
-import React,{ChangeEvent, DragEvent, ForwardedRef} from "react"
+import React, { ChangeEvent, DragEvent, ForwardedRef } from "react";
 
 export interface PersonalData {
-    firstName: string;
-    lastName: string;
-    gender: string;
-    maritalStatus: string;
-    occupation: string;
-    phoneNumber: string;
-    alternatePhoneNumber: string;
-    country: string;
-    state: string;
-    zipCode: string;
-    block: string;
-    street: string;
-    image: File | null;
-  }
-  
-  export interface EstateData {
-    name: string;
-    email: string;
-    phoneNumber: string;
-    state: string;
-    zipCode: string;
-    block: string;
-    street: string;
-    country: string
-    type: string
-  }
-  
- export interface StaffData {
-    firstName: string;
-    lastName: string;
-    gender: string;
-    maritalStatus: string;
-    jobTitle: string;
-    phoneNumber: string;
-    alternatePhoneNumber: string;
-    country: string;
-    state: string;
-    zipCode: string;
-    block: string;
-    street: string;
-    image: File | null;
-    email: string;
-  }
-  
-  export interface CardData {
-    cardHolderName: string;
-    cardNumber: string;
-    expirationDate: string;
-    cvv: string;
-  }
-  
-  export interface FormData {
-    personal: PersonalData;
-    estate: EstateData;
-    staff: StaffData;
-    card: CardData;
-  };
+  firstName: string;
+  lastName: string;
+  gender: string;
+  maritalStatus: string;
+  occupation: string;
+  phoneNumber: string;
+  alternatePhoneNumber: string;
+  country: string;
+  state: string;
+  zipCode: string;
+  block: string;
+  street: string;
+  image: File | null;
+}
 
-  export interface CountryData {
-    id: string,
-    name: string,
-    iso2: string
-  }
-  
+export interface EstateData {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  state: string;
+  zipCode: string;
+  block: string;
+  street: string;
+  country: string;
+  type: string;
+}
+
+export interface StaffData {
+  firstName: string;
+  lastName: string;
+  gender: string;
+  maritalStatus: string;
+  jobTitle: string;
+  phoneNumber: string;
+  alternatePhoneNumber: string;
+  country: string;
+  state: string;
+  zipCode: string;
+  block: string;
+  street: string;
+  image: File | null;
+  email: string;
+}
+
+export interface CardData {
+  cardHolderName: string;
+  cardNumber: string;
+  expirationDate: string;
+  cvv: string;
+}
+
+export interface FormData {
+  personal: PersonalData;
+  estate: EstateData;
+  staff: StaffData;
+  card: CardData;
+}
+
+export interface CountryData {
+  id: string;
+  name: string;
+  iso2: string;
+}
 
 export interface RegisterPageProps {
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
@@ -75,14 +74,14 @@ export interface RegisterPageProps {
     category: string
   ) => void;
   formData: FormData;
-  handleSelectChange: (
-    name: string,
-    category: string,
-    value: string
-  ) => void;
+  handleSelectChange: (name: string, category: string, value: string) => void;
   countryList?: CountryData[];
   stateList?: string[];
-  handleSelectedCountryCode?: (countryCode: string) => void
+  handleSelectedCountryCode?: (countryCode: string) => void;
+}
+
+export interface ForgotPasswordPageProps {
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface FileInputProps {
@@ -96,38 +95,36 @@ export interface FileInputProps {
 
 export interface DropdownProps {
   options: string[];
-  name:  keyof PersonalData | keyof EstateData | keyof StaffData | keyof CardData;
-  category: keyof FormData
-  handleSelectChange: (
-    name: string,
-    category: string,
-    value: string
-  ) => void
-  formData: FormData,
-  ref?: ForwardedRef<HTMLDivElement>
+  name:
+    | keyof PersonalData
+    | keyof EstateData
+    | keyof StaffData
+    | keyof CardData;
+  category: keyof FormData;
+  handleSelectChange: (name: string, category: string, value: string) => void;
+  formData: FormData;
+  ref?: ForwardedRef<HTMLDivElement>;
 }
 
 export interface DropdownWithSearchProps {
   options: CountryData[];
-  name:  keyof PersonalData | keyof EstateData | keyof StaffData | keyof CardData;
-  category: keyof FormData
-  handleSelectChange: (
-    name: string,
-    category: string,
-    value: string
-  ) => void
-  formData: FormData,
+  name:
+    | keyof PersonalData
+    | keyof EstateData
+    | keyof StaffData
+    | keyof CardData;
+  category: keyof FormData;
+  handleSelectChange: (name: string, category: string, value: string) => void;
+  formData: FormData;
   ref?: ForwardedRef<HTMLDivElement>;
-  handleSelectedCountryCode: (countryCode: string) => void
+  handleSelectedCountryCode: (countryCode: string) => void;
 }
 
 export interface FormInputRefs {
   [key: string]: React.RefObject<HTMLInputElement>;
 }
 
-export interface UserData  {
+export interface UserData {
   email: string;
   password: string;
-};
-
-
+}

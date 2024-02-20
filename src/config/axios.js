@@ -1,22 +1,22 @@
 import axios from "axios";
 
 export const axiosAuth = (authToken) => {
-  const url = process.env.REACT_APP_BACKEND_BASE_URL
+  const url = "https://192.168.1.23:1887";
 
   if (authToken === null) {
     return axios.create({
       baseURL: url,
       headers: {
-        "Content-Type": "application/json"
-      }
-    })
+        "Content-Type": "application/json",
+      },
+    });
   } else {
     return axios.create({
       baseURL: url,
       headers: {
-        "Authorization": `Bearer ${authToken}`,
-        "Content-Type": "application/json"
-      }
-    })
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+    });
   }
-}
+};

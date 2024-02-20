@@ -1,12 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactComponent as FacebookLogo } from "../assets/facebook.svg";
 import { ReactComponent as GoogleLogo } from "../assets/google.svg";
 import { ReactComponent as Lock } from "../assets/lock.svg";
 import { ReactComponent as EmailLogo } from "../assets/sendMail.svg";
 import { ReactComponent as InvertedLogo } from "../assets/invertedLogo.svg";
 import { ReactComponent as VisibilityOff } from "../assets/visibilityOff.svg";
-import GridPalette1 from "../assets/GridPalette1.svg";
-import GridPalette2 from "../assets/GridPalette2.svg";
 import VisibleIcon from "../components/icons/visibilityIcon";
 import { Link } from "react-router-dom";
 import {
@@ -16,8 +14,12 @@ import {
 } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { validateEmail } from "../utils/helpersForOnboarding";
+import {
+  BLIPPTO_LOCAL_STORAGE_USER_EMAIL,
+  validateEmail,
+} from "../utils/helpersForOnboarding";
 import Loader from "../components/Loader/Loader";
+import { BLIPPTO_PAGES } from "../utils/navigationRoutes";
 
 const SignIn: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -25,11 +27,16 @@ const SignIn: React.FC = () => {
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const [isError, setIsError] = useState<Boolean>(false);
   const [loading, setLoading] = useState<Boolean>(false);
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
   const { mutate: login } = useLogin();
   const { data: googleData, refetch: googleRefetch } = useSignUpWithGoogle();
   const { data: facebookData, refetch: facebookRefetch } =
     useSignUpWithFacebook();
+
+  const userEmail = localStorage.getItem(
+    BLIPPTO_LOCAL_STORAGE_USER_EMAIL || ""
+  );
 
   const handleGoogleAuthentication = () => {
     googleRefetch();
@@ -59,6 +66,14 @@ const SignIn: React.FC = () => {
     }
 
     setLoading(true);
+
+    if (rememberMe) {
+      const value = emailRef.current!.value.trim();
+      localStorage.setItem(BLIPPTO_LOCAL_STORAGE_USER_EMAIL, value);
+    } else if (!rememberMe && userEmail) {
+      localStorage.removeItem(BLIPPTO_LOCAL_STORAGE_USER_EMAIL);
+    }
+
     const data = {
       email: emailRef.current!.value.trim(),
       password: passwordRef.current!.value.trim(),
@@ -77,11 +92,20 @@ const SignIn: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (userEmail) {
+      if (emailRef.current) {
+        emailRef.current!.value = userEmail;
+      }
+      setRememberMe(true);
+    }
+  }, []);
+
   return (
     <>
       {loading && <Loader />}
-      <div className="flex bg-background">
-        <div className="w-full lg:w-[50%] flex flex-col items-center relative p-7 sm:p-10 h-screen">
+      <div className="flex signin-bg flex-row-reverse">
+        <div className="w-full lg:w-[45%] flex flex-col items-center relative p-7 sm:p-10 h-screen">
           <p className="self-start">
             <InvertedLogo className="scale-[0.7] lg:scale-75" />
           </p>
@@ -98,7 +122,7 @@ const SignIn: React.FC = () => {
               </p>
             </div>
             <button
-              className="h-12 2xl:h-16 rounded-[2rem] bg-white flex justify-center items-center shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)]"
+              className="h-12 2xl:h-16 rounded-[2rem] bg-white flex justify-center items-center shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]"
               onClick={() => handleGoogleAuthentication()}
             >
               <div className="flex items-center">
@@ -107,7 +131,7 @@ const SignIn: React.FC = () => {
               </div>
             </button>
             <button
-              className="h-12 2xl:h-16 rounded-[2rem] bg-white flex justify-center items-center shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)]"
+              className="h-12 2xl:h-16 rounded-[2rem] bg-white flex justify-center items-center  shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]"
               onClick={() => handleFacebookAuthentication()}
             >
               <div className="flex items-center">
@@ -117,7 +141,7 @@ const SignIn: React.FC = () => {
             </button>
             <div className="h-10 2xl:h-12 flex relative items-center">
               <hr className="border-black w-full h-[0.05rem]" />
-              <div className="absolute h-10 2xl:h-12 w-16 z-10 bg-background flex justify-center items-center left-[50%] -translate-x-[50%]">
+              <div className="absolute h-10 2xl:h-12 w-16 z-10 bg-white flex justify-center items-center left-[50%] -translate-x-[50%]">
                 or
               </div>
             </div>
@@ -168,16 +192,30 @@ const SignIn: React.FC = () => {
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 >
                   {showPassword ? (
-                    <VisibleIcon />
+                    <VisibleIcon className="scale-[0.8] lg:scale-75" />
                   ) : (
                     <VisibilityOff className="scale-[0.7] lg:scale-75" />
                   )}
                 </span>
               </div>
             </div>
-            <p className="ml-7 xl:ml-8">
-              <input type="checkbox" className="mr-4" /> remember me
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="ml-7 xl:ml-8 flex items-center">
+                <input
+                  type="checkbox"
+                  className="mr-4  min-w-[15px] max-w-[15px]"
+                  checked={rememberMe}
+                  onChange={() => setRememberMe(!rememberMe)}
+                />{" "}
+                Remember me
+              </p>
+              <button
+                className="ml-7 xl:ml-8 flex items-center font-bold border-none cursor-pointer"
+                onClick={() => navigate(BLIPPTO_PAGES.forgotPassword)}
+              >
+                Forgot password?
+              </button>
+            </div>
             <button
               onClick={() => handleSubmit()}
               className="flex relative z-10 justify-center items-center rounded-full text-base bg-accenture h-12 2xl:h-16 w-full font-semibold"
@@ -186,18 +224,7 @@ const SignIn: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className="blipto-signIn-right hidden lg:flex gap-8 justify-end h-[90vh] fixed right-0 lg:w-[50%]">
-          <img
-            src={GridPalette1}
-            className="max-w-[48%] object-contain absolute right-[52%] min-h-[90vh] h-[90vh]"
-            alt="/"
-          />
-          <img
-            src={GridPalette2}
-            className="max-w-[48%] object-contain absolute min-h-[80vh] h-[80vh]"
-            alt="/"
-          />
-        </div>
+        <div className="blipto-signIn-right hidden lg:flex flex-col lg:w-[55%]"></div>
       </div>
     </>
   );

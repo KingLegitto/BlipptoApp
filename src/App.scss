@@ -249,7 +249,7 @@ input[type="checkbox"]:checked::before {
   transition-property: transform;
   transition-duration: 500ms;
   transition-timing-function: ease-in-out;
-  inset:auto !important;
+  inset: auto !important;
 }
 
 .tabHeader,
@@ -338,6 +338,17 @@ input[data-id="5"]:focus {
 
 .svg-loader path {
   fill: #4c73eb !important;
+}
+
+.blipto-signIn-right {
+  background-image: url(../src/assets/images/Signin-left3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.forgot-password-transparent-btn {
+  border: 1px solid #ffd601;
 }
 
 @media screen and (max-width: 425px) {
@@ -731,10 +742,10 @@ input[data-id="5"]:focus {
     }
     &-right {
       > img {
-        width: 48% !important;
-        &:first-child {
-          right: 50% !important;
-        }
+        width: 80% !important;
+        max-width: 80% !important;
+        object-fit: cover;
+        height: 80vh;
       }
     }
   }

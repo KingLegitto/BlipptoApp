@@ -1,6 +1,10 @@
 import React from "react";
 
-const VisibleIcon: React.FC = () => {
+interface visibilityIconProps {
+  className?: string;
+}
+
+const VisibleIcon: React.FC<visibilityIconProps> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,7 +12,7 @@ const VisibleIcon: React.FC = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="w-6 h-6"
+      className={`w-[28px] h-[28px] ${className}`}
     >
       <path
         strokeLinecap="round"

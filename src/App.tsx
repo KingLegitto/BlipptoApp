@@ -17,6 +17,7 @@ import Onboarding from "./pages/onboarding/onboarding";
 import LandingPage from "./pages/landingPage";
 import UserRegisteration from "./pages/userRegistration";
 import VerifyEmail from "./pages/verifyEmail";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App: React.FC = () => {
           <Route path="/user/register" element={<UserRegisteration />} />
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/verifyEmail" element={<VerifyEmail />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </QueryClientProvider>
     </div>
