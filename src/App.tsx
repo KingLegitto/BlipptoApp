@@ -18,36 +18,43 @@ import LandingPage from "./pages/landingPage";
 import UserRegisteration from "./pages/userRegistration";
 import VerifyEmail from "./pages/verifyEmail";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import clientStore from "./redux/store/clientStore";
+import { Provider } from "react-redux";
 
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Navigate to="/landing" replace />} />
-            <Route path="/dashboard" element={<SideBar />}>
-              <Route path="/dashboard/home" element={<EstateDashboard />} />
-              <Route path="/dashboard/keypad" element={<CheckIn />} />
-              <Route path="/dashboard/facility" element={<Facility />} />
-              <Route path="/dashboard/residents" element={<Residents />} />
-              <Route path="/dashboard/guards" element={<Guards />} />
-              <Route path="/dashboard/user/profile" element={<UserProfile />} />
+      <Provider store={clientStore}>
+        <QueryClientProvider client={queryClient}>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Navigate to="/landing" replace />} />
+              <Route path="/dashboard" element={<SideBar />}>
+                <Route path="/dashboard/home" element={<EstateDashboard />} />
+                <Route path="/dashboard/keypad" element={<CheckIn />} />
+                <Route path="/dashboard/facility" element={<Facility />} />
+                <Route path="/dashboard/residents" element={<Residents />} />
+                <Route path="/dashboard/guards" element={<Guards />} />
+                <Route
+                  path="/dashboard/user/profile"
+                  element={<UserProfile />}
+                />
+              </Route>
             </Route>
-          </Route>
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/alarms" element={<Alarms />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/staff/register" element={<Onboarding />} />
-          <Route path="/user/register" element={<UserRegisteration />} />
-          <Route path="/landing" element={<LandingPage />} />
-          <Route path="/verifyEmail" element={<VerifyEmail />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-        </Routes>
-      </QueryClientProvider>
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/alarms" element={<Alarms />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/staff/register" element={<Onboarding />} />
+            <Route path="/user/register" element={<UserRegisteration />} />
+            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/verifyEmail" element={<VerifyEmail />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          </Routes>
+        </QueryClientProvider>
+      </Provider>
     </div>
   );
 };

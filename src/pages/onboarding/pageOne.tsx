@@ -74,7 +74,7 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
           currentStep={currentStep}
           numOfSteps={[1, 2, 3, 4]}
         />
-        <p className="lg:text-sm 2xl:text-xlfont-medium text-white absolute bottom-10">
+        <p className="lg:text-sm 2xl:text-xl font-medium text-white absolute bottom-10">
           <span className="relative z-10 mr-8">Terms</span>
           <span className="relative z-10">Privacy</span>
         </p>

@@ -7,56 +7,59 @@ import { ReactComponent as InvertedLogo } from "../assets/invertedLogo.svg";
 import { ReactComponent as VisibilityOff } from "../assets/visibilityOff.svg";
 import VisibleIcon from "../components/icons/visibilityIcon";
 import { Link } from "react-router-dom";
-import {
-  useLogin,
-  useSignUpWithFacebook,
-  useSignUpWithGoogle,
-} from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import {
   BLIPPTO_LOCAL_STORAGE_USER_EMAIL,
   validateEmail,
 } from "../utils/helpersForOnboarding";
 import Loader from "../components/Loader/Loader";
 import { BLIPPTO_PAGES } from "../utils/navigationRoutes";
+import {
+  useLazyLoginQuery,
+  useLazySignUpWithGoogleQuery,
+} from "../redux/services/auth";
 
 const SignIn: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const [isError, setIsError] = useState<Boolean>(false);
-  const [loading, setLoading] = useState<Boolean>(false);
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
-  const { mutate: login } = useLogin();
-  const { data: googleData, refetch: googleRefetch } = useSignUpWithGoogle();
-  const { data: facebookData, refetch: facebookRefetch } =
-    useSignUpWithFacebook();
 
   const userEmail = localStorage.getItem(
     BLIPPTO_LOCAL_STORAGE_USER_EMAIL || ""
   );
 
-  const handleGoogleAuthentication = () => {
-    googleRefetch();
-    const { token } = googleData?.data?.data;
-    if (googleData?.data.status !== 200) {
-    }
-    window.localStorage.setItem("Tkn", `${token}`);
-    navigate("/dashboard/user/profile");
+  const [
+    doLogin,
+    {
+      data,
+      isSuccess: loginSuccessful,
+      isFetching: loading,
+      isError: loginError,
+      error,
+    },
+  ] = useLazyLoginQuery();
+
+  const [
+    signUpWIthGoogle,
+    {
+      data: googleData,
+      isSuccess: googleLoginSuccessful,
+      isFetching: googleQueryLoading,
+      isError: googleQueryError,
+      error: googleError,
+    },
+  ] = useLazySignUpWithGoogleQuery();
+
+  const handleGoogleAuthentication = async () => {
+    await signUpWIthGoogle("");
   };
 
-  const handleFacebookAuthentication = () => {
-    facebookRefetch();
-    const { token } = facebookData?.data?.data;
-    if (facebookData?.data.status !== 200) {
-    }
-    window.localStorage.setItem("Tkn", `${token}`);
-    navigate("/dashboard/user/profile");
-  };
+  const handleFacebookAuthentication = () => {};
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       !validateEmail(emailRef.current!.value.trim()) ||
       passwordRef.current!.value.trim() === ""
@@ -64,8 +67,6 @@ const SignIn: React.FC = () => {
       setIsError(true);
       return;
     }
-
-    setLoading(true);
 
     if (rememberMe) {
       const value = emailRef.current!.value.trim();
@@ -79,17 +80,12 @@ const SignIn: React.FC = () => {
       password: passwordRef.current!.value.trim(),
     };
 
-    login(data, {
-      onSuccess: (data) => {
-        setLoading(false);
-        window.localStorage.setItem("Tkn", `${data.data.token}`);
-        navigate("/dashboard/user/profile");
-      },
-      onError: (error: any) => {
-        setLoading(false);
-        Swal.fire("error", error.response.data.message, "error");
-      },
-    });
+    if (process.env.REACT_APP_ENV === "local") {
+      navigate(BLIPPTO_PAGES.userProfile);
+      return;
+    }
+
+    await doLogin(data);
   };
 
   useEffect(() => {
@@ -99,7 +95,16 @@ const SignIn: React.FC = () => {
       }
       setRememberMe(true);
     }
-  }, []);
+
+    if (loginSuccessful) {
+      window.localStorage.setItem("Tkn", `${data?.data?.token}`);
+      navigate(BLIPPTO_PAGES.userProfile);
+    }
+    if (googleLoginSuccessful) {
+      window.localStorage.setItem("Tkn", `${googleData?.data?.token}`);
+      navigate(BLIPPTO_PAGES.userProfile);
+    }
+  }, [loginSuccessful, googleLoginSuccessful]);
 
   return (
     <>
@@ -200,7 +205,7 @@ const SignIn: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <p className="ml-7 xl:ml-8 flex items-center">
+              <p className="xl:ml-8 flex items-center max-[400px]:text-xs">
                 <input
                   type="checkbox"
                   className="mr-4  min-w-[15px] max-w-[15px]"
@@ -210,7 +215,7 @@ const SignIn: React.FC = () => {
                 Remember me
               </p>
               <button
-                className="ml-7 xl:ml-8 flex items-center font-bold border-none cursor-pointer"
+                className="ml-7 xl:ml-8 flex items-center font-bold border-none cursor-pointer max-[400px]:text-xs"
                 onClick={() => navigate(BLIPPTO_PAGES.forgotPassword)}
               >
                 Forgot password?

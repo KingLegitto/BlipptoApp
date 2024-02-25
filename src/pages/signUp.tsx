@@ -8,6 +8,7 @@ import { ReactComponent as ConcentricCircles } from "../assets/concentricCircles
 import { ReactComponent as InvertedLogo } from "../assets/invertedLogo.svg";
 import { ReactComponent as VisibilityOff } from "../assets/visibilityOff.svg";
 import VisibleIcon from "../components/icons/visibilityIcon";
+import { BLIPPTO_PAGES } from "../utils/navigationRoutes";
 import { Link, useLocation } from "react-router-dom";
 import {
   useSignup,
@@ -64,6 +65,12 @@ const SignUp: React.FC = () => {
       email: emailRef.current!.value.trim(),
       password: passwordRef.current!.value.trim(),
     };
+
+    if (process.env.REACT_APP_ENV === "local") {
+      const userType = window.sessionStorage.getItem("userType") || "user";
+      navigate(`/${userType}/register`);
+      return;
+    }
 
     signUp(data, {
       onSuccess: (data) => {

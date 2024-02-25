@@ -14,6 +14,13 @@ export const useSignup = () => {
   return mutation;
 };
 
+// export const useSignup = () => {
+//   const mutation = useMutation((data: UserData) =>
+//     axiosAuth().post("/api/auth/register", data)
+//   );
+//   return mutation;
+// };
+
 export const useRegisterEstate = () => {
   const mutation = useMutation((data: FormData) =>
     axiosAuth().post("/api/auth/register/estate", data)

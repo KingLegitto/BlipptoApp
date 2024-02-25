@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { ReactComponent as InvertedLogo } from "../../assets/invertedLogo.svg";
 import CarouselIndicator from "../../components/carouselIndicator";
 import { ReactComponent as ConcentricCircles } from "../../assets/concentricCircles.svg";
-
 import Stepper from "../../components/stepper/stepper";
 import StepOne from "./Steps/StepOne";
 import StepTwo from "./Steps/StepTwo";
 import StepThree from "./Steps/StepThree";
 import StepFour from "./Steps/StepFour";
 import { stepsData, stepsText } from "../../utils/helpersForOnboarding";
+import { Link } from "react-router-dom";
 
 const ForgotPassword: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -23,7 +23,7 @@ const ForgotPassword: React.FC = () => {
       case 3:
         return <StepThree setCurrentStep={setCurrentStep} />;
       case 4:
-        return <StepFour setCurrentStep={setCurrentStep} />;
+        return <StepFour />;
       default:
         return <div>Invalid Step</div>;
     }
@@ -62,6 +62,14 @@ const ForgotPassword: React.FC = () => {
           currentStep={currentStep}
           numOfSteps={[1, 2, 3, 4]}
         />
+        <p className="lg:text-sm 2xl:text-xl font-medium text-white absolute bottom-10">
+          <Link to={"/"} className="relative z-10 mr-8">
+            Terms
+          </Link>
+          <Link to={"/"} className="relative z-10">
+            Privacy
+          </Link>
+        </p>
       </div>
     </div>
   );

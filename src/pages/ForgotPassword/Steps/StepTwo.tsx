@@ -13,7 +13,7 @@ const StepTwo: React.FC<ForgotPasswordPageProps> = ({ setCurrentStep }) => {
       return;
     }
 
-    setCurrentStep((prevStep) => prevStep + 1);
+    setCurrentStep((prevStep: number) => prevStep + 1);
   };
 
   const getInputIndexes = (target: HTMLElement) => {
@@ -105,12 +105,12 @@ const StepTwo: React.FC<ForgotPasswordPageProps> = ({ setCurrentStep }) => {
     }
   };
   return (
-    <div className="w-full sm:w-[70%] 2xl:w-[522px] flex flex-col gap-y-4 xl:gap-y-6  bg-white shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)] min-h-[65vh] p-4 sm:p-8 rounded-2xl lg:bg-background lg:shadow-none lg:min-h-auto lg:p-0 lg:rounded-none">
+    <div className="w-full xl:w-[70%] 2xl:w-[522px] flex flex-col gap-y-4 xl:gap-y-6  bg-white shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)] min-h-[65vh] p-4 sm:p-8 rounded-2xl lg:bg-background lg:shadow-none lg:min-h-auto lg:p-0 lg:rounded-none">
       <div>
         <p className="font-semibold text-lg xl:text-[26px] text-center mb-2 2xl:mb-5 xl:leading-6">
           Password Reset
         </p>
-        <p className="text-base xl:text-xl text-center xl:leading-6">
+        <p className="text-base xl:text-xl text-center xl:leading-6 max-w-[90%] overflow-hidden whitespace-nowrap text-ellipsis">
           We sent a code to <b>udechimamanda@gmail.com</b>
         </p>
       </div>
@@ -127,7 +127,7 @@ const StepTwo: React.FC<ForgotPasswordPageProps> = ({ setCurrentStep }) => {
                 isError && otp.length !== 6
                   ? "border-2 border-red-500 focus:border-red-500"
                   : ""
-              } w-[60px] h-[60px] pl-[23px] text-[32px] font-bold flex-shrink-0 rounded-5.23 border border-solid border-rgba-56-57-64-30 focus:outline-yellow-300 max-[768px]:w-[40px] max-[768px]:h-[40px] max-[768px]:pl-[13px] `}
+              } w-[60px] h-[60px] pl-[23px] text-[32px] font-bold flex-shrink-0 rounded-5.23 border border-solid border-rgba-56-57-64-30 focus:outline-yellow-300 max-[768px]:w-[40px] max-[768px]:h-[40px] max-[768px]:pl-[13px] max-[320px]:w-[30px] max-[320px]:h-[30px] `}
               onKeyDown={handleKeyPress}
               onPaste={handlePaste}
             />

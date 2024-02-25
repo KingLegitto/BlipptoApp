@@ -10,6 +10,7 @@ const StepThree: React.FC<ForgotPasswordPageProps> = ({ setCurrentStep }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [invalidPassword, setInvalidPassword] = useState(false);
+
   const [showPassword, setShowPassword] = useState<{
     first: boolean;
     confirmFirst: boolean;
