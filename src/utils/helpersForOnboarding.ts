@@ -38,6 +38,22 @@ export const getStateListData = async (ISOCode: string) => {
   return result
 };
 
+export const getCountryDialingCode = async (ISOCode: string) => {
+  const apiKey: string =
+    process.env.REACT_APP_API_KEY ||
+    "M2FKTWQ0aUZkajhKQTE0bFhReE9mOVNyZDByMzRVelExN2xJRjlUdQ==";
+
+  const response = await fetch(`https://api.countrystatecity.in/v1/countries/${ISOCode}`, {
+    method: "GET",
+    headers: {
+      "X-CSCAPI-KEY": apiKey,
+    },
+  });
+
+  const result = await response.json()
+  return result
+};
+
 export function replaceSpacesWithUnderscore(inputString: string) {
   if (inputString.includes(' ')) {
     return inputString.replace(/\s+/g, '_');

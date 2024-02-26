@@ -12,7 +12,7 @@ export const initialState = {
       zipCode: "",
       block: "",
       street: "",
-      image: null,
+      profilePhoto: null,
     },
     estate: {
       name: "",
@@ -38,7 +38,7 @@ export const initialState = {
       zipCode: "",
       block: "",
       street: "",
-      image: null,
+      profilePhoto: null,
       email: "",
     },
     card: {

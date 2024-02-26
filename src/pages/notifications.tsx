@@ -15,7 +15,7 @@ import { notificationsData } from "../dummydata/notificationDummyData";
 import { ReactComponent as EmptyNotification } from "../assets/emptyNotification.svg";
 
 const Notifications: React.FC = () => {
-  const [hasNotifications] = useState<Boolean>(false);
+  const [hasNotifications] = useState<Boolean>(true);
   const [selectedValues, setSelectedValues] = useState<number[]>([]);
   const [isSelected, setSelected] = useState<Boolean>(false);
   const navigate = useNavigate();

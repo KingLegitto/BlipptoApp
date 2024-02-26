@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { ReactComponent as ArrowRight } from "../../assets/pointRight.svg";
 import { ReactComponent as ArrowLeft } from "../../assets/pointLeft.svg";
 import { ReactComponent as InvertedLogo } from "../../assets/invertedLogo.svg";
@@ -8,6 +8,8 @@ import { ReactComponent as ConcentricCircles } from "../../assets/concentricCirc
 import { RegisterPageProps, FormInputRefs } from "../../propTypes";
 import DropdownSelect from "../../components/dropDowns/onboardingDropDown";
 import DropdownSelectWithSearch from "../../components/dropDowns/dropDownWithSearch";
+import { validateEmail } from "../../utils/helpersForOnboarding";
+import { Link } from "react-router-dom";
 
 const requiredFields = [
   "firstName",
@@ -16,11 +18,12 @@ const requiredFields = [
   "maritalStatus",
   "email",
   "jobTitle",
-  "phoneNumber",
-  "country",
   "state",
+  "phoneNumber",
   "block",
   "street",
+  "profilePhoto",
+  "zipCode"
 ];
 
 const initializeRefs = (fields: string[]): FormInputRefs => {
@@ -41,8 +44,10 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
   countryList,
   stateList,
   handleSelectedCountryCode,
+  dialCode
 }) => {
   const inputRefs = useRef<FormInputRefs>(initializeRefs(requiredFields));
+  const [error, setError] = useState<Boolean>(false);
 
   const moveToNextpage = () => {
     const missingFields = requiredFields.filter(
@@ -53,6 +58,10 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
       if (inputRef && inputRef.current) {
         inputRef.current.focus();
       }
+      return;
+    }
+    if (!validateEmail(formData.staff.email)) {
+      setError(true);
       return;
     }
     setCurrentStep((prev: number) => prev + 1);
@@ -74,11 +83,15 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
           numOfSteps={[1, 2, 3, 4]}
         />
         <p className="lg:text-sm 2xl:text-xl font-medium text-white absolute bottom-10">
-          <span className="relative z-10 mr-8">Terms</span>
-          <span className="relative z-10">Privacy</span>
+        <Link to={"/"} className="relative z-10 mr-8">
+            Terms
+          </Link>
+          <Link to={"/"} className="relative z-10">
+            Privacy
+          </Link>
         </p>
-        <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
-        <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
+        <ConcentricCircles className="absolute -right-[320px] -top-[230px] xl:-top-[200px] lg:scale-[0.5] xl:scale-[0.7]" />
+        <ConcentricCircles className="absolute -bottom-[300px] -left-[300px] xl:-left[260px] lg:scale-[0.5] xl:scale-[0.7]" />
       </div>
       <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen">
         <p>
@@ -101,7 +114,7 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "staff")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 First name
               </p>
             </div>
@@ -116,7 +129,7 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "staff")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Last Name
               </p>
             </div>
@@ -126,6 +139,7 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
               <DropdownSelect
                 options={["Male", "Female"]}
                 name={"gender"}
+                label={"Gender"}
                 handleSelectChange={handleSelectChange}
                 category={"staff"}
                 formData={formData}
@@ -133,36 +147,34 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
               />
             </div>
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
-              <input
-                className="border-[1px] border-black bg-white rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                type="text"
-                ref={inputRefs.current.maritalStatus}
-                name="maritalStatus"
-                defaultValue={
-                  (formData.staff && formData.staff.maritalStatus) || ""
-                }
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "staff")
-                }
+            <DropdownSelect
+                options={["Single", "Married", "Other"]}
+                name={"maritalStatus"}
+                label={'Marital Status'}
+                ref={inputRefs.current.gender}
+                handleSelectChange={handleSelectChange}
+                category={"staff"}
+                formData={formData}
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Marital Status
-              </p>
             </div>
           </div>
           <div className="w-full flex">
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
               <input
-                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 pr-3 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                className={`bg-white rounded-[2rem] h-full w-full pl-6 pr-3 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm ${
+                  error
+                    ? "border-red-500 border-2"
+                    : "border-black border-[1px]"
+                }`}
                 type="email"
                 name="email"
                 ref={inputRefs.current.email}
                 value={(formData.staff && formData.staff.email) || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "staff")
+                  error ? setError(false) : handleInputChange(e, "staff")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Email
               </p>
             </div>
@@ -177,49 +189,17 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "staff")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Job title
               </p>
             </div>
           </div>
           <div className="w-full flex">
-            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
-              <input
-                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                type="number"
-                name="phoneNumber"
-                ref={inputRefs.current.phoneNumber}
-                value={(formData.staff && formData.staff.phoneNumber) || ""}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "staff")
-                }
-              />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Phone number
-              </p>
-            </div>
-            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
-              <input
-                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                type="number"
-                name="alternatePhoneNumber"
-                value={
-                  (formData.staff && formData.staff.alternatePhoneNumber) || ""
-                }
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "staff")
-                }
-              />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Alternate number
-              </p>
-            </div>
-          </div>
-          <div className="w-full flex">
-            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative flex mr-4 sm:mr-8">
+          <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative flex mr-4 sm:mr-8">
               <DropdownSelectWithSearch
                 options={countryList!}
                 name={"country"}
+                label={"Country"}
                 handleSelectChange={handleSelectChange}
                 category={"staff"}
                 formData={formData}
@@ -231,11 +211,63 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
               <DropdownSelect
                 options={stateList!}
                 name={"state"}
+                label={"State"}
                 handleSelectChange={handleSelectChange}
                 category={"staff"}
                 formData={formData}
                 ref={inputRefs.current.state}
               />
+            </div>
+          </div>
+          <div className="w-full flex">
+          <div className="w-[50%] mr-4 sm:mr-8">
+              <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
+                <input
+                  className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[37%] xl:w-[30%] pl-4 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="text"
+                  value={dialCode}
+                  readOnly
+                />
+                <input
+                  className="border-[1px] border-black rounded-r-[2rem] h-full w-[63%] xl:w-[70%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="number"
+                  ref={inputRefs.current.phoneNumber}
+                  name="phoneNumber"
+                  value={
+                    (formData.staff && formData.staff.phoneNumber) || ""
+                  }
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleInputChange(e, "staff")
+                  }
+                />
+                <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                  Phone Number
+                </p>
+              </div>
+            </div>
+            <div className="w-[50%]">
+              <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
+                <input
+                  className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[37%] xl:w-[30%] pl-4 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="text"
+                  value={dialCode}
+                  readOnly
+                />
+                <input
+                  className="border-[1px] border-black rounded-r-[2rem] h-full w-[63%] xl:w-[70%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="number"
+                  name="alternatePhoneNumber"
+                  value={
+                    (formData.staff && formData.staff.alternatePhoneNumber) || ""
+                  }
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleInputChange(e, "staff")
+                  }
+                />
+                <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+                  Alternate Number
+                </p>
+              </div>
             </div>
           </div>
           <div className="w-full">
@@ -262,7 +294,7 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "staff")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Address
               </p>
             </div>
@@ -272,18 +304,20 @@ const RegisterThirdPage: React.FC<RegisterPageProps> = ({
               handleInputChange={handleInputChange}
               formData={formData}
               category={"staff"}
+              ref={inputRefs.current.profilePhoto}
             />
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative ml-8">
               <input
                 className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-sm"
                 type="number"
                 name="zipCode"
+                ref={inputRefs.current.zipCode}
                 value={(formData.staff && formData.staff.zipCode) || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInputChange(e, "staff")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Zip Code
               </p>
             </div>

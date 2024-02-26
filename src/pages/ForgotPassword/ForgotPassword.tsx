@@ -31,7 +31,7 @@ const ForgotPassword: React.FC = () => {
 
   useEffect(() => {
     setWidth((100 / (stepsData.length - 1)) * (currentStep - 1));
-  }, [currentStep, stepsData.length]);
+  }, [currentStep]);
 
   return (
     <div className="flex">

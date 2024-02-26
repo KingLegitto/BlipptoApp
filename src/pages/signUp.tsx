@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { ReactComponent as WavingHand } from "../assets/wavingHand.svg";
 import { ReactComponent as FacebookLogo } from "../assets/facebook.svg";
 import { ReactComponent as GoogleLogo } from "../assets/google.svg";
@@ -8,50 +8,51 @@ import { ReactComponent as ConcentricCircles } from "../assets/concentricCircles
 import { ReactComponent as InvertedLogo } from "../assets/invertedLogo.svg";
 import { ReactComponent as VisibilityOff } from "../assets/visibilityOff.svg";
 import VisibleIcon from "../components/icons/visibilityIcon";
-import { BLIPPTO_PAGES } from "../utils/navigationRoutes";
-import { Link, useLocation } from "react-router-dom";
-import {
-  useSignup,
-  useSignUpWithFacebook,
-  useSignUpWithGoogle,
-} from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loader from "../components/Loader/Loader";
 import { validateEmail } from "../utils/helpersForOnboarding";
+import {
+  useLazySignupQuery,
+  useLazySignUpWithGoogleQuery,
+} from "../redux/services/auth";
 
 const SignUp: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState<Boolean>(false);
   const [isError, setIsError] = useState<Boolean>(false);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { mutate: signUp } = useSignup();
-  const { data: googleData, refetch: googleRefetch } = useSignUpWithGoogle();
-  const { data: facebookData, refetch: facebookRefetch } =
-    useSignUpWithFacebook();
 
-  const handleFacebookAuthentication = () => {
-    facebookRefetch();
-    const { token } = facebookData?.data?.data;
-    if (facebookData?.data.status !== 200) {
-    }
-    window.localStorage.setItem("Tkn", `${token}`);
-    navigate(`/${location.state.type}/register`);
+
+  const [
+    doSignup,
+    {
+      data,
+      isSuccess: signupSuccessful,
+      isFetching: loading,
+      isError: isSignupError,
+      error: signupError,
+    },
+  ] = useLazySignupQuery();
+
+  const [
+    signUpWIthGoogle,
+    {
+      data: googleData,
+      isSuccess: googleSignupSuccessful,
+      isFetching,
+      isError: isGoogleQueryError,
+      error: googleError,
+    },
+  ] = useLazySignUpWithGoogleQuery();
+
+  const handleGoogleAuthentication = async () => {
+    await signUpWIthGoogle("");
   };
 
-  const handleGoogleAuthentication = () => {
-    googleRefetch();
-    const { token } = googleData?.data?.data;
-    if (googleData?.data.status !== 200) {
-    }
-    window.localStorage.setItem("Tkn", `${token}`);
-    navigate(`/${location.state.type}/register`);
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       !validateEmail(emailRef.current!.value.trim()) ||
       passwordRef.current!.value.trim() === ""
@@ -60,7 +61,6 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    setLoading(true);
     const data = {
       email: emailRef.current!.value.trim(),
       password: passwordRef.current!.value.trim(),
@@ -72,19 +72,28 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    signUp(data, {
-      onSuccess: (data) => {
-        setLoading(false);
-        window.localStorage.setItem("Tkn", `${data.data.token}`);
-        const userType = window.sessionStorage.getItem("userType") || "user";
-        navigate(`/${userType}/register`);
-      },
-      onError: (error: any) => {
-        setLoading(false);
-        Swal.fire("error", error.response.data.message, "error");
-      },
-    });
+    await doSignup(data);
+
   };
+
+  useEffect(() => {
+    if (isSignupError || isGoogleQueryError) {
+      let errorMessage
+      console.log(signupError, googleError)
+      const statusCode = (signupError as any)?.response?.status;
+      if (statusCode === 409) errorMessage = "User already exist"
+      if (statusCode === 500) errorMessage = "Something went wrong"
+       Swal.fire("error", errorMessage, "error")
+       return
+    }
+
+    if (signupSuccessful || googleSignupSuccessful) {
+      window.localStorage.setItem("Tkn", `${(data || googleData)?.data?.token}`);
+      const userType = window.sessionStorage.getItem("userType") || "user";
+        navigate(`/${userType}/register`);
+    }
+ 
+  }, [signupSuccessful, googleSignupSuccessful, data, googleData, navigate, isSignupError, isGoogleQueryError]);
 
   return (
     <>
@@ -110,8 +119,8 @@ const SignUp: React.FC = () => {
             <span className="relative z-10 mr-8">Terms</span>
             <span className="relative z-10">Privacy</span>
           </p>
-          <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
-          <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
+          <ConcentricCircles className="absolute -right-[320px] -top-[230px] xl:-top-[200px] lg:scale-[0.5] xl:scale-[0.7]" />
+          <ConcentricCircles className="absolute -bottom-[300px] -left-[300px] xl:-left[260px] lg:scale-[0.5] xl:scale-[0.7]" />
         </div>
         <div className="w-full lg:w-[45%] flex flex-col items-center bg-background relative p-7 sm:p-10 h-screen">
           <p className="self-start">
@@ -139,8 +148,8 @@ const SignUp: React.FC = () => {
               </div>
             </button>
             <button
+            disabled
               className="h-12 2xl:h-16 rounded-[2rem] bg-white flex justify-center items-center shadow-[4px_4px_3.2px_0px_rgba(100,132,230,0.20)]"
-              onClick={() => handleFacebookAuthentication()}
             >
               <div className="flex items-center">
                 <FacebookLogo className="mr-3 2xl:mr-5 scale-[0.7] lg:scale-75" />
@@ -207,9 +216,6 @@ const SignUp: React.FC = () => {
                 </span>
               </div>
             </div>
-            <p className="ml-7 xl:ml-8">
-              <input type="checkbox" className="mr-4" /> remember me
-            </p>
             <button
               onClick={() => handleSubmit()}
               className="flex relative z-10 justify-center items-center rounded-full text-base bg-accenture h-12 2xl:h-16 w-full font-semibold"

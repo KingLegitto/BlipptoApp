@@ -10,18 +10,23 @@ import {
   EstateData,
   StaffData,
   CardData,
-  CountryData
+  CountryData,
 } from "../../propTypes";
 import { initialState } from "../../dummydata/onboardingInitialState";
 import Swal from "sweetalert2";
-import { getCountryListData, getStateListData } from "../../utils/helpersForOnboarding";
+import {
+  getCountryListData,
+  getStateListData,
+  getCountryDialingCode,
+} from "../../utils/helpersForOnboarding";
 
-
-const Onboarding:React.FC = () => {
+const Onboarding: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const [countryList, setCountryList] = useState<CountryData[]>([])
-  const [countryCode, setCountryCode] = useState<string>("NG")
-  const [stateList, setStateList] = useState<string[]>([])
+  const [countryList, setCountryList] = useState<CountryData[]>([]);
+  const [countryCode, setCountryCode] = useState<string>("NG");
+  const [dialCode, setDialCode] = useState<string>("234");
+  const [stateList, setStateList] = useState<string[]>([]);
+  const [formData, setFormData] = useState<FormData>(initialState);
   const stepsData = [
     { label: "Personal", value: 1 },
     { label: "Estate", value: 2 },
@@ -31,25 +36,27 @@ const Onboarding:React.FC = () => {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    (async function(){
-      const countryData = await getCountryListData()
-      setCountryList(countryData)
-    })() 
-  }, [])
+    (async function () {
+      const countryData = await getCountryListData();
+      setCountryList(countryData);
+    })();
+  }, []);
 
   useEffect(() => {
-    (async function(){
-      const stateData = await getStateListData(countryCode)
-      const updatedStateData = stateData.map((state:any) => state.name)
-      setStateList(updatedStateData.sort())
-    })() 
-  }, [countryCode])
+    (async function () {
+      const [stateData, countryData] = await Promise.all([
+        getStateListData(countryCode),
+        getCountryDialingCode(countryCode),
+      ]);
+      const updatedStateData = stateData.map((state: any) => state.name);
+      setStateList(updatedStateData.sort());
+      setDialCode(countryData.phonecode);
+    })();
+  }, [countryCode]);
 
   useEffect(() => {
     setWidth((100 / (stepsData.length - 1)) * (currentStep - 1));
   }, [currentStep, stepsData.length]);
-
-  const [formData, setFormData] = useState<FormData>(initialState);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement> | DragEvent<HTMLDivElement>,
@@ -60,17 +67,19 @@ const Onboarding:React.FC = () => {
     let updatedSection: PersonalData | EstateData | StaffData | CardData;
 
     if ((e as DragEvent<HTMLDivElement>).dataTransfer) {
-      const droppedFile = (e as DragEvent<HTMLDivElement>).dataTransfer
-        .files[0];
+      const droppedFile = (e as DragEvent<HTMLDivElement>).dataTransfer.files[0];
       if (droppedFile.size > 5000000)
         return Swal.fire("error", "file too large", "error");
-      updatedSection = { ...currentSection, image: droppedFile };
+
+      updatedSection = { ...currentSection, profilePhoto: droppedFile };
     } else if ((e as ChangeEvent<HTMLInputElement>).target) {
       const { name, value, files } = e.target as HTMLInputElement;
       if (files) {
         const file = files[0];
-        if (file.size > 5000000) return Swal.fire("error", "file too large", "error")
-        updatedSection = { ...currentSection, image: file };
+        if (file.size > 5000000)
+          return Swal.fire("error", "file too large", "error");
+
+        updatedSection = { ...currentSection, profilePhoto: file };
       } else if (value !== undefined) {
         updatedSection = { ...currentSection, [name]: value };
       }
@@ -98,8 +107,8 @@ const Onboarding:React.FC = () => {
   };
 
   const handleSelectedCountryCode = (ISOCode: string) => {
-    setCountryCode(ISOCode)
-  }
+    setCountryCode(ISOCode);
+  };
 
   return (
     <div>
@@ -113,6 +122,7 @@ const Onboarding:React.FC = () => {
           countryList={countryList}
           stateList={stateList}
           handleSelectedCountryCode={handleSelectedCountryCode}
+          dialCode={dialCode}
         >
           <Stepper
             currentStep={currentStep}
@@ -131,6 +141,7 @@ const Onboarding:React.FC = () => {
           countryList={countryList}
           stateList={stateList}
           handleSelectedCountryCode={handleSelectedCountryCode}
+          dialCode={dialCode}
         >
           <Stepper
             currentStep={currentStep}
@@ -149,6 +160,7 @@ const Onboarding:React.FC = () => {
           countryList={countryList}
           stateList={stateList}
           handleSelectedCountryCode={handleSelectedCountryCode}
+          dialCode={dialCode}
         >
           <Stepper
             currentStep={currentStep}

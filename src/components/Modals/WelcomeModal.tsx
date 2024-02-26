@@ -1,13 +1,13 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Illustration from "../../assets/images/welcome_avatar3.png";
 import { ReactComponent as InvertedLogo } from "../../assets/invertedLogo.svg";
 import { ReactComponent as DoubleChevron } from "../../assets/double-chevron-right.svg";
 
-interface welcomeModalProps {
+interface WelcomeModalProps {
   handleButtonClick: Function;
 }
 
-const WelcomeModal: React.FC<welcomeModalProps> = ({ handleButtonClick }) => {
+const WelcomeModal: React.FC<WelcomeModalProps> = ({ handleButtonClick }) => {
   const [animate, setAnimate] = useState<boolean>(false);
 
   useEffect(() => {

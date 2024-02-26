@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosAuth = (authToken) => {
-  const url = "https://192.168.1.23:1887";
+  const url = process.env.REACT_APP_BACKEND_BASE_URL 
 
   if (authToken === null) {
     return axios.create({

@@ -16,7 +16,7 @@ import NotificationIcons from "../components/notifications/notificationsIcons";
 import { facilitiesData } from "../dummydata/facilityDummyData";
 
 const Facility: React.FC = () => {
-  const [hasData] = useState<Boolean>(false);
+  const [hasData] = useState<Boolean>(true);
   const [selectAll, setSelectAll] = useState<Boolean>(false);
 
   const selectedAction = function (value: string) {

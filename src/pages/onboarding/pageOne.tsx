@@ -7,6 +7,7 @@ import { ReactComponent as ConcentricCircles } from "../../assets/concentricCirc
 import { RegisterPageProps, FormInputRefs } from "../../propTypes";
 import DropdownSelect from "../../components/dropDowns/onboardingDropDown";
 import DropdownSelectWithSearch from "../../components/dropDowns/dropDownWithSearch";
+import { Link } from "react-router-dom";
 
 const requiredFields = [
   "firstName",
@@ -16,8 +17,10 @@ const requiredFields = [
   "occupation",
   "phoneNumber",
   "state",
+  "zipCode",
   "block",
   "street",
+  "profilePhoto",
 ];
 
 const initializeRefs = (fields: string[]): FormInputRefs => {
@@ -38,6 +41,7 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
   countryList,
   stateList,
   handleSelectedCountryCode,
+  dialCode
 }) => {
   const inputRefs = useRef<FormInputRefs>(initializeRefs(requiredFields));
 
@@ -45,9 +49,9 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
     const missingFields = requiredFields.filter(
       (field) => !(formData.personal as any)[field]
     );
-
     if (missingFields.length > 0) {
       const inputRef = inputRefs.current[missingFields[0]];
+      
       if (inputRef && inputRef.current) {
         inputRef.current.focus();
       }
@@ -75,11 +79,15 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
           numOfSteps={[1, 2, 3, 4]}
         />
         <p className="lg:text-sm 2xl:text-xl font-medium text-white absolute bottom-10">
-          <span className="relative z-10 mr-8">Terms</span>
-          <span className="relative z-10">Privacy</span>
+        <Link to={"/"} className="relative z-10 mr-8">
+            Terms
+          </Link>
+          <Link to={"/"} className="relative z-10">
+            Privacy
+          </Link>
         </p>
-        <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
-        <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
+        <ConcentricCircles className="absolute -right-[320px] -top-[230px] xl:-top-[200px] lg:scale-[0.5] xl:scale-[0.7]" />
+        <ConcentricCircles className="absolute -bottom-[300px] -left-[300px] xl:-left[260px] lg:scale-[0.5] xl:scale-[0.7]" />
       </div>
       <div className="w-full lg:w-[45%] flex flex-col bg-background p-6 sm:p-10 h-screen">
         <p>
@@ -100,7 +108,7 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "personal")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 First name
               </p>
             </div>
@@ -115,7 +123,7 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "personal")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Last name
               </p>
             </div>
@@ -125,6 +133,7 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
               <DropdownSelect
                 options={["Male", "Female"]}
                 name={"gender"}
+                label={'Gender'}
                 ref={inputRefs.current.gender}
                 handleSelectChange={handleSelectChange}
                 category={"personal"}
@@ -132,21 +141,15 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
               />
             </div>
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
-              <input
-                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                type="text"
+            <DropdownSelect
+                options={["Single", "Married", "Other"]}
+                name={"maritalStatus"}
+                label={'Marital Status'}
                 ref={inputRefs.current.maritalStatus}
-                name="maritalStatus"
-                value={
-                  (formData.personal && formData.personal.maritalStatus) || ""
-                }
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "personal")
-                }
+                handleSelectChange={handleSelectChange}
+                category={"personal"}
+                formData={formData}
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Marital Status
-              </p>
             </div>
           </div>
           <div className="w-full flex">
@@ -163,51 +166,15 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "personal")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Occupation
-              </p>
-            </div>
-            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
-              <input
-                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                type="number"
-                name="phoneNumber"
-                ref={inputRefs.current.phoneNumber}
-                value={
-                  (formData.personal && formData.personal.phoneNumber) || ""
-                }
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "personal")
-                }
-              />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Phone number
-              </p>
-            </div>
-          </div>
-          <div className="w-full flex">
-            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
-              <input
-                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                type="number"
-                name="alternatePhoneNumber"
-                value={
-                  (formData.personal &&
-                    formData.personal.alternatePhoneNumber) ||
-                  ""
-                }
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(e, "personal")
-                }
-              />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-                Alternate number
               </p>
             </div>
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative flex">
               <DropdownSelectWithSearch
                 options={countryList!}
                 name={"country"}
+                label={"Country"}
                 handleSelectChange={handleSelectChange}
                 category={"personal"}
                 formData={formData}
@@ -216,10 +183,62 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
             </div>
           </div>
           <div className="w-full flex">
+          <div className="w-[50%] mr-4 sm:mr-8">
+              <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
+                <input
+                  className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[37%] xl:w-[30%] pl-4 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="text"
+                  value={dialCode}
+                  readOnly
+                />
+                <input
+                  className="border-[1px] border-black rounded-r-[2rem] h-full w-[63%] xl:w-[70%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="number"
+                  ref={inputRefs.current.phoneNumber}
+                  name="phoneNumber"
+                  value={
+                    (formData.personal && formData.personal.phoneNumber) || ""
+                  }
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleInputChange(e, "personal")
+                  }
+                />
+                <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                  Phone Number
+                </p>
+              </div>
+            </div>
+            <div className="w-[50%]">
+              <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
+                <input
+                  className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[37%] xl:w-[30%] pl-4 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="text"
+                  value={dialCode}
+                  readOnly
+                />
+                <input
+                  className="border-[1px] border-black rounded-r-[2rem] h-full w-[63%] xl:w-[70%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="number"
+                  name="alternatePhoneNumber"
+                  value={
+                    (formData.personal && formData.personal.alternatePhoneNumber) || ""
+                  }
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleInputChange(e, "personal")
+                  }
+                />
+                <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+                  Alternate Number
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="w-full flex">
             <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
               <DropdownSelect
                 options={stateList!}
                 name={"state"}
+                label={"State"}
                 ref={inputRefs.current.state}
                 handleSelectChange={handleSelectChange}
                 category={"personal"}
@@ -231,12 +250,13 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
                 className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
                 type="number"
                 name="zipCode"
+                ref={inputRefs.current.zipCode}
                 value={(formData.personal && formData.personal.zipCode) || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInputChange(e, "personal")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Zip code
               </p>
             </div>
@@ -265,7 +285,7 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
                   handleInputChange(e, "personal")
                 }
               />
-              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
                 Address
               </p>
             </div>
@@ -274,6 +294,7 @@ const RegisterFirstPage: React.FC<RegisterPageProps> = ({
             handleInputChange={handleInputChange}
             formData={formData}
             category={"personal"}
+            ref={inputRefs.current.profilePhoto}
           />
           <div className="flex justify-end">
             <button

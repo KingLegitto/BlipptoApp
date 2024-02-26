@@ -28,6 +28,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getCountryListData,
   getStateListData,
+  getCountryDialingCode,
 } from "../utils/helpersForOnboarding";
 import WelcomeModal from "../components/Modals/WelcomeModal";
 
@@ -39,8 +40,10 @@ const requiredFields = [
   "occupation",
   "phoneNumber",
   "state",
+  "zipCode",
   "block",
   "street",
+  "profilePhoto",
 ];
 
 const initializeRefs = (fields: string[]): FormInputRefs => {
@@ -58,6 +61,7 @@ const UserRegistrationPage: React.FC = () => {
   const navigate = useNavigate();
   const [countryList, setCountryList] = useState<CountryData[]>([]);
   const [countryCode, setCountryCode] = useState<string>("NG");
+  const [dialCode, setDialCode] = useState<string>("234");
   const [stateList, setStateList] = useState<string[]>([]);
   const [showWelcome, setShowWelcome] = useState<Boolean>(false);
   const [loading, setLoading] = useState<Boolean>(false);
@@ -71,9 +75,13 @@ const UserRegistrationPage: React.FC = () => {
 
   useEffect(() => {
     (async function () {
-      const stateData = await getStateListData(countryCode);
+      const [stateData, countryData] = await Promise.all([
+        getStateListData(countryCode),
+        getCountryDialingCode(countryCode),
+      ]);
       const updatedStateData = stateData.map((state: any) => state.name);
       setStateList(updatedStateData.sort());
+      setDialCode(countryData.phonecode);
     })();
   }, [countryCode]);
 
@@ -90,14 +98,14 @@ const UserRegistrationPage: React.FC = () => {
         .files[0];
       if (droppedFile.size > 5000000)
         return Swal.fire("error", "file too large", "error");
-      updatedSection = { ...currentSection, image: droppedFile };
+      updatedSection = { ...currentSection, profilePhoto: droppedFile };
     } else if ((e as ChangeEvent<HTMLInputElement>).target) {
       const { name, value, files } = e.target as HTMLInputElement;
       if (files) {
         const file = files[0];
         if (file.size > 5000000)
           return Swal.fire("error", "file too large", "error");
-        updatedSection = { ...currentSection, image: file };
+        updatedSection = { ...currentSection, profilePhoto: file };
       } else if (value !== undefined) {
         updatedSection = { ...currentSection, [name]: value };
       }
@@ -132,7 +140,6 @@ const UserRegistrationPage: React.FC = () => {
     const missingFields = requiredFields.filter(
       (field) => !(formData.personal as any)[field]
     );
-
     if (missingFields.length > 0) {
       const inputRef = inputRefs.current[missingFields[0]];
       if (inputRef && inputRef.current) {
@@ -197,97 +204,108 @@ const UserRegistrationPage: React.FC = () => {
           <p>
             <InvertedLogo className="scale-[0.6] xl:scale-75" />
           </p>
-          <div className="w-full p-5 xl:p-7 xl:pr-10 rounded-2xl bg-white gap-y-6 flex flex-col mt-12 shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)] min-h-[70%] overflow-scroll">
-            <p className="text-lg xl:text-2xl font-medium">Personal Details</p>
-            <div className="w-full flex">
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
-                <input
-                  className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 text-sm focus:border-2"
-                  type="text"
-                  name="firstName"
-                  ref={inputRefs.current.firstName}
-                  value={
-                    (formData.personal && formData.personal.firstName) || ""
-                  }
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange(e, "personal")
-                  }
-                />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  First name
-                </p>
-              </div>
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
-                <input
-                  className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                  type="text"
-                  name="lastName"
-                  ref={inputRefs.current.lastName}
-                  value={
-                    (formData.personal && formData.personal.lastName) || ""
-                  }
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange(e, "personal")
-                  }
-                />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  Last name
-                </p>
-              </div>
+          <div className="w-full p-5 sm:p-7 2xl:pr-10 rounded-2xl bg-white gap-y-6 flex flex-col mt-12 shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)] min-h-[70%] overflow-scroll">
+          <p className="text-lg 2xl:text-2xl font-medium">Personal Details</p>
+          <div className="w-full flex">
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+              <input
+                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                name="firstName"
+                ref={inputRefs.current.firstName}
+                value={(formData.personal && formData.personal.firstName) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "personal")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                First name
+              </p>
             </div>
-            <div className="w-full flex">
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
-                <DropdownSelect
-                  options={["Male", "Female"]}
-                  name={"gender"}
-                  handleSelectChange={handleSelectChange}
-                  category={"personal"}
-                  formData={formData}
-                  ref={inputRefs.current.gender}
-                />
-              </div>
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
-                <input
-                  className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                  type="text"
-                  name="maritalStatus"
-                  ref={inputRefs.current.maritalStatus}
-                  value={
-                    (formData.personal && formData.personal.maritalStatus) || ""
-                  }
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange(e, "personal")
-                  }
-                />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  Marital Status
-                </p>
-              </div>
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
+              <input
+                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                name="lastName"
+                ref={inputRefs.current.lastName}
+                value={(formData.personal && formData.personal.lastName) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "personal")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                Last name
+              </p>
             </div>
-            <div className="w-full flex">
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+          </div>
+          <div className="w-full flex">
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+              <DropdownSelect
+                options={["Male", "Female"]}
+                name={"gender"}
+                label={'Gender'}
+                ref={inputRefs.current.gender}
+                handleSelectChange={handleSelectChange}
+                category={"personal"}
+                formData={formData}
+              />
+            </div>
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
+            <DropdownSelect
+                options={["Single", "Married", "Other"]}
+                name={"maritalStatus"}
+                label={'Marital Status'}
+                ref={inputRefs.current.maritalStatus}
+                handleSelectChange={handleSelectChange}
+                category={"personal"}
+                formData={formData}
+              />
+            </div>
+          </div>
+          <div className="w-full flex">
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+              <input
+                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                ref={inputRefs.current.occupation}
+                name="occupation"
+                value={
+                  (formData.personal && formData.personal.occupation) || ""
+                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "personal")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                Occupation
+              </p>
+            </div>
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative flex">
+              <DropdownSelectWithSearch
+                options={countryList!}
+                name={"country"}
+                label={"Country"}
+                handleSelectChange={handleSelectChange}
+                category={"personal"}
+                formData={formData}
+                handleSelectedCountryCode={handleSelectedCountryCode!}
+              />
+            </div>
+          </div>
+          <div className="w-full flex">
+          <div className="w-[50%] mr-4 sm:mr-8">
+              <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
                 <input
-                  className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[37%] xl:w-[30%] pl-4 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
                   type="text"
-                  name="occupation"
-                  ref={inputRefs.current.occupation}
-                  value={
-                    (formData.personal && formData.personal.occupation) || ""
-                  }
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange(e, "personal")
-                  }
+                  value={dialCode}
+                  readOnly
                 />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  Occupation
-                </p>
-              </div>
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
                 <input
-                  className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  className="border-[1px] border-black rounded-r-[2rem] h-full w-[63%] xl:w-[70%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
                   type="number"
-                  name="phoneNumber"
                   ref={inputRefs.current.phoneNumber}
+                  name="phoneNumber"
                   value={
                     (formData.personal && formData.personal.phoneNumber) || ""
                   }
@@ -295,111 +313,109 @@ const UserRegistrationPage: React.FC = () => {
                     handleInputChange(e, "personal")
                   }
                 />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  Phone number
+                <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                  Phone Number
                 </p>
               </div>
             </div>
-            <div className="w-full flex">
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+            <div className="w-[50%]">
+              <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
                 <input
-                  className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[37%] xl:w-[30%] pl-4 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                  type="text"
+                  value={dialCode}
+                  readOnly
+                />
+                <input
+                  className="border-[1px] border-black rounded-r-[2rem] h-full w-[63%] xl:w-[70%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
                   type="number"
                   name="alternatePhoneNumber"
                   value={
-                    (formData.personal &&
-                      formData.personal.alternatePhoneNumber) ||
-                    ""
+                    (formData.personal && formData.personal.alternatePhoneNumber) || ""
                   }
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange(e, "personal")
                   }
                 />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  Alternate number
+                <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
+                  Alternate Number
                 </p>
               </div>
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative flex">
-                <DropdownSelectWithSearch
-                  options={countryList!}
-                  name={"country"}
-                  handleSelectChange={handleSelectChange}
-                  category={"personal"}
-                  formData={formData}
-                  handleSelectedCountryCode={handleSelectedCountryCode!}
-                />
-              </div>
-            </div>
-            <div className="w-full flex">
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
-                <DropdownSelect
-                  options={stateList}
-                  name={"state"}
-                  handleSelectChange={handleSelectChange}
-                  category={"personal"}
-                  formData={formData}
-                  ref={inputRefs.current.state}
-                />
-              </div>
-              <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
-                <input
-                  className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                  type="number"
-                  name="zipCode"
-                  value={(formData.personal && formData.personal.zipCode) || ""}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange(e, "personal")
-                  }
-                />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  Zip code
-                </p>
-              </div>
-            </div>
-            <div className="w-full">
-              <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
-                <input
-                  className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[20%] xl:w-[15%] pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                  type="text"
-                  placeholder="Block"
-                  ref={inputRefs.current.block}
-                  name="block"
-                  value={(formData.personal && formData.personal.block) || ""}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange(e, "personal")
-                  }
-                />
-                <input
-                  className="border-[1px] border-black rounded-r-[2rem] h-full w-[80%] xl:w-[85%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
-                  type="text"
-                  placeholder="Street"
-                  ref={inputRefs.current.street}
-                  name="street"
-                  value={(formData.personal && formData.personal.street) || ""}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleInputChange(e, "personal")
-                  }
-                />
-                <p className="font-medium text-xs 2xl:text-base absolute bg-white h-4 -top-2 2xl:-top-3.5 left-4 p-1 px-2 leading-[0.5rem]">
-                  Address
-                </p>
-              </div>
-            </div>
-            <FileInput
-              handleInputChange={handleInputChange}
-              formData={formData}
-              category={"personal"}
-            />
-            <div className="flex justify-end">
-              <button
-                className="h-9 xl:h-12 w-[5rem] xl:w-[7.6rem] bg-accenture rounded-full flex justify-center items-center"
-                onClick={() => handleSubmit()}
-              >
-                <p className="text-xs 2xl:text-base font-semibold ml-2">Done</p>
-                <ArrowRight className="scale-[0.6] xl:scale-75" />
-              </button>
             </div>
           </div>
+          <div className="w-full flex">
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] mr-4 sm:mr-8 relative">
+              <DropdownSelect
+                options={stateList!}
+                name={"state"}
+                label={"State"}
+                ref={inputRefs.current.state}
+                handleSelectChange={handleSelectChange}
+                category={"personal"}
+                formData={formData}
+              />
+            </div>
+            <div className="w-[50%] h-9 sm:h-12 2xl:h-[3.2rem] relative">
+              <input
+                className="border-[1px] border-black rounded-[2rem] h-full w-full pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="number"
+                name="zipCode"
+                ref={inputRefs.current.zipCode}
+                value={(formData.personal && formData.personal.zipCode) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "personal")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                Zip code
+              </p>
+            </div>
+          </div>
+          <div className="w-full">
+            <div className="w-full h-9 sm:h-12 2xl:h-[3.2rem] relative">
+              <input
+                className="border-[1px] border-black border-r-0 rounded-l-[2rem] h-full w-[20%] sm:w-[15%] lg:w-[20%] pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                placeholder="Block"
+                name="block"
+                ref={inputRefs.current.block}
+                value={(formData.personal && formData.personal.block) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "personal")
+                }
+              />
+              <input
+                className="border-[1px] border-black rounded-r-[2rem] h-full w-[80%] sm:w-[85%] lg:w-[80%] pl-3 2xl:pl-6 outline-none focus:border-yellow-300 focus:border-2 text-xs sm:text-sm"
+                type="text"
+                placeholder="Street"
+                name="street"
+                ref={inputRefs.current.street}
+                value={(formData.personal && formData.personal.street) || ""}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(e, "personal")
+                }
+              />
+              <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+                Address
+              </p>
+            </div>
+          </div>
+          <FileInput
+            handleInputChange={handleInputChange}
+            formData={formData}
+            category={"personal"}
+            ref={inputRefs.current.profilePhoto}
+          />
+          <div className="flex justify-end">
+            <button
+              className="h-9 xl:h-12 w-[5rem] xl:w-[7.6rem] bg-accenture rounded-full flex justify-center items-center"
+              onClick={() => handleSubmit()}
+            >
+              <p className="text-xs 2xl:text-base font-semibold ml-2">Done</p>
+              <ArrowRight className="scale-[0.6] xl:scale-75" />
+            </button>
+          </div>
+        </div>
         </div>
       </div>
     </>

@@ -16,7 +16,6 @@ import UserProfile from "./pages/UserProfile";
 import Onboarding from "./pages/onboarding/onboarding";
 import LandingPage from "./pages/landingPage";
 import UserRegisteration from "./pages/userRegistration";
-import VerifyEmail from "./pages/verifyEmail";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import clientStore from "./redux/store/clientStore";
 import { Provider } from "react-redux";
@@ -50,7 +49,6 @@ const App: React.FC = () => {
             <Route path="/staff/register" element={<Onboarding />} />
             <Route path="/user/register" element={<UserRegisteration />} />
             <Route path="/landing" element={<LandingPage />} />
-            <Route path="/verifyEmail" element={<VerifyEmail />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Routes>
         </QueryClientProvider>

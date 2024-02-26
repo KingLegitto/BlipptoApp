@@ -84,4 +84,5 @@ export const {
   useLazyLoginQuery,
   useLazyForgotPasswordQuery,
   useLazySignUpWithGoogleQuery,
+  useLazySignupQuery
 } = authApi;

@@ -29,10 +29,10 @@ const LandingPage: React.FC = () => {
           <span className="mr-8">Terms</span>
           <span>Privacy</span>
         </p>
-        <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
-        <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />
+        <ConcentricCircles className="absolute -right-[320px] -top-[230px] xl:-top-[200px] lg:scale-[0.5] xl:scale-[0.7]" />
+        <ConcentricCircles className="absolute -bottom-[300px] -left-[300px] xl:-left[260px] lg:scale-[0.5] xl:scale-[0.7]" />
       </div>
-      <div className="w-full lg:w-[45%] flex flex-col p-6 sm:p-10 items-center bg-background relative">
+      <div className="w-full lg:w-[45%] flex flex-col p-6 sm:p-10 items-center bg-background relative h-screen">
         <p className="self-start">
           <InvertedLogo className="scale-[0.7] lg:scale-75" />
         </p>

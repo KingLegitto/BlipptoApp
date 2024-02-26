@@ -130,6 +130,11 @@ input[type="checkbox"]:checked::before {
   border: none;
 }
 
+.required::after{
+  content: ' *';
+  color:red
+}
+
 .progressContainer {
   position: relative;
   display: flex;

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import WelcomeModal from "../../components/Modals/WelcomeModal";
 import Loader from "../../components/Loader/Loader";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const requiredFields = [
   "cardHolderName",
@@ -99,8 +100,12 @@ const RegisterFourthPage: React.FC<RegisterPageProps> = ({
             numOfSteps={[1, 2, 3, 4]}
           />
           <p className="lg:text-sm 2xl:text-xl font-medium text-white absolute bottom-10">
-            <span className="relative z-10 mr-8">Terms</span>
-            <span className="relative z-10">Privacy</span>
+          <Link to={"/"} className="relative z-10 mr-8">
+            Terms
+          </Link>
+          <Link to={"/"} className="relative z-10">
+            Privacy
+          </Link>
           </p>
           <ConcentricCircles className="absolute -right-5 translate-x-[50%] -translate-y-[35%] lg:scale-[0.6] xl:scale-75" />
           <ConcentricCircles className="absolute -translate-x-[50%] translate-y-[50%] lg:scale-[0.6] xl:scale-75" />

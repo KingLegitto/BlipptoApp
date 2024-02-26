@@ -17,6 +17,7 @@ const DropdownSelectWithSearch: React.ForwardRefRenderFunction<
   {
     options,
     name,
+    label,
     category,
     handleSelectChange,
     formData,
@@ -30,7 +31,7 @@ const DropdownSelectWithSearch: React.ForwardRefRenderFunction<
   return (
     <div className="flex flex-col h-9 sm:h-12 2xl:h-[3.2rem] w-full">
       <div
-        className="relative flex w-full rounded-full bg-white border-[1px] border-black items-center h-full pl-6"
+        className="relative flex w-full rounded-full bg-white border-[1px] border-black items-center h-full pl-4 2xl:pl-6"
         ref={ref}
         tabIndex={0}
         onFocus={() => {
@@ -112,8 +113,8 @@ const DropdownSelectWithSearch: React.ForwardRefRenderFunction<
             </button>
           </div>
         </div>
-        <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-          {name.charAt(0).toUpperCase() + name.slice(1)}
+        <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+          {label}
         </p>
       </div>
       {isOpen && (

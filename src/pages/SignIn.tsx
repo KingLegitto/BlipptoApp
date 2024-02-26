@@ -18,6 +18,7 @@ import {
   useLazyLoginQuery,
   useLazySignUpWithGoogleQuery,
 } from "../redux/services/auth";
+import Swal from "sweetalert2";
 
 const SignIn: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -37,8 +38,8 @@ const SignIn: React.FC = () => {
       data,
       isSuccess: loginSuccessful,
       isFetching: loading,
-      isError: loginError,
-      error,
+      isError: isLoginError,
+      error: loginError,
     },
   ] = useLazyLoginQuery();
 
@@ -47,8 +48,8 @@ const SignIn: React.FC = () => {
     {
       data: googleData,
       isSuccess: googleLoginSuccessful,
-      isFetching: googleQueryLoading,
-      isError: googleQueryError,
+      isFetching,
+      isError: isGoogleQueryError,
       error: googleError,
     },
   ] = useLazySignUpWithGoogleQuery();
@@ -57,7 +58,6 @@ const SignIn: React.FC = () => {
     await signUpWIthGoogle("");
   };
 
-  const handleFacebookAuthentication = () => {};
 
   const handleSubmit = async () => {
     if (
@@ -84,6 +84,7 @@ const SignIn: React.FC = () => {
       navigate(BLIPPTO_PAGES.userProfile);
       return;
     }
+  
 
     await doLogin(data);
   };
@@ -96,15 +97,22 @@ const SignIn: React.FC = () => {
       setRememberMe(true);
     }
 
-    if (loginSuccessful) {
-      window.localStorage.setItem("Tkn", `${data?.data?.token}`);
+    if (isLoginError || isGoogleQueryError) {
+      let errorMessage
+      console.log(loginError, googleError)
+      const statusCode = (loginError as any)?.response?.status;
+      if (statusCode === 404) errorMessage = "User doesn't exist"
+      if (statusCode === 500) errorMessage = "Something went wrong"
+       Swal.fire("error", errorMessage, "error")
+       return
+    }
+
+    if (loginSuccessful || googleLoginSuccessful) {
+      window.localStorage.setItem("Tkn", `${(data || googleData)?.data?.token}`);
       navigate(BLIPPTO_PAGES.userProfile);
     }
-    if (googleLoginSuccessful) {
-      window.localStorage.setItem("Tkn", `${googleData?.data?.token}`);
-      navigate(BLIPPTO_PAGES.userProfile);
-    }
-  }, [loginSuccessful, googleLoginSuccessful]);
+ 
+  }, [loginSuccessful, googleLoginSuccessful, data, googleData, navigate, userEmail, isLoginError, isGoogleQueryError]);
 
   return (
     <>
@@ -128,7 +136,7 @@ const SignIn: React.FC = () => {
             </div>
             <button
               className="h-12 2xl:h-16 rounded-[2rem] bg-white flex justify-center items-center shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]"
-              onClick={() => handleGoogleAuthentication()}
+              onClick={handleGoogleAuthentication}
             >
               <div className="flex items-center">
                 <GoogleLogo className="mr-3 2xl:mr-5 scale-[0.7] lg:scale-75" />
@@ -136,8 +144,8 @@ const SignIn: React.FC = () => {
               </div>
             </button>
             <button
+            disabled
               className="h-12 2xl:h-16 rounded-[2rem] bg-white flex justify-center items-center  shadow-[0px_2px_8px_0px_rgba(100,132,230,0.20)]"
-              onClick={() => handleFacebookAuthentication()}
             >
               <div className="flex items-center">
                 <FacebookLogo className="mr-3 2xl:mr-5 scale-[0.7] lg:scale-75" />
@@ -205,10 +213,10 @@ const SignIn: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <p className="xl:ml-8 flex items-center max-[400px]:text-xs">
+              <p className="ml-3 xl:ml-8 flex items-center max-[400px]:text-xs">
                 <input
                   type="checkbox"
-                  className="mr-4  min-w-[15px] max-w-[15px]"
+                  className="mr-2 min-w-[15px] max-w-[15px]"
                   checked={rememberMe}
                   onChange={() => setRememberMe(!rememberMe)}
                 />{" "}

@@ -11,7 +11,7 @@ const DropdownSelect: React.ForwardRefRenderFunction<
   HTMLDivElement,
   DropdownProps
 > = (
-  { options, name, category, handleSelectChange, formData },
+  { options, name, category, handleSelectChange, formData, label },
   ref: ForwardedRef<HTMLDivElement>
 ) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,8 +83,8 @@ const DropdownSelect: React.ForwardRefRenderFunction<
             )}
           </button>
         </div>
-        <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4">
-          {name.charAt(0).toUpperCase() + name.slice(1)}
+        <p className="font-medium text-xs 2xl:text-base absolute bg-white py-0.5 px-2 -top-2.5 2xl:-top-3.5 left-4 required">
+          {label}
         </p>
       </div>
       {isOpen && (
