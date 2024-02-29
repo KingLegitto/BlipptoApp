@@ -1,12 +1,4 @@
 import React, { useState } from "react";
-import { ReactComponent as Guard } from "../../assets/Guard.svg";
-import { ReactComponent as Facilities } from "../../assets/Facilities.svg";
-import { ReactComponent as Users } from "../../assets/Users.svg";
-import { ReactComponent as Staffs } from "../../assets/Staffs.svg";
-import { ReactComponent as Bills } from "../../assets/bills.svg";
-import { ReactComponent as Keypad } from "../../assets/keypad.svg";
-import { ReactComponent as Services } from "../../assets/Services.svg";
-import { ReactComponent as Home } from "../../assets/Home.svg";
 import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import { ReactComponent as Settings } from "../../assets/settings.svg";
 import { ReactComponent as Preferences } from "../../assets/preferences.svg";
@@ -14,49 +6,21 @@ import { ReactComponent as Logout } from "../../assets/logout.svg";
 import { Outlet, NavLink } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { staffCategories, userCategories, residentCategories } from "../../utils/helpersForSidebars";
 
-const categories = [
-  {
-    icon: Home,
-    title: "Home",
-    route: "/dashboard/home",
-  },
-  {
-    icon: Users,
-    title: "Residents",
-    route: "/dashboard/residents",
-  },
-  {
-    icon: Facilities,
-    title: "Facilities",
-    route: "/dashboard/facility",
-  },
-  {
-    icon: Keypad,
-    title: "Check-In",
-    route: "/dashboard/keypad",
-  },
-  {
-    icon: Bills,
-    title: "Bills",
-    route: "/dashboard/billing",
-  },
-  {
-    icon: Staffs,
-    title: "Staffs",
-    route: "/dashboard/staffs",
-  },
-  {
-    icon: Guard,
-    title: "Guards",
-    route: "/dashboard/guards",
-  },
-  {
-    icon: Services,
-    title: "Services",
-    route: "/dashboard/services",
-  },
-];
+
+let categories;
+const profileType = localStorage.getItem('profileType') || "user"; 
+
+if (profileType === "user") {
+  categories = userCategories;
+}
+else if (profileType === "resident") {
+  categories = residentCategories;
+}
+else if (profileType === "staff") {
+  categories = staffCategories;
+}
 
 const menuItems = [
   {
@@ -146,7 +110,7 @@ export default function SideBar() {
         </div>
         <div className="md:basis-[83%] lg:basis-[77%] xl:basis-[80%] 2xl:basis-[81%] p-3 navlink">
           <ul className="h-full flex flex-col justify-start md:gap-y-8 lg:gap-y-5 xl:gap-y-8 2xl:gap-y-11 list">
-            {categories.map((el, key) => {
+            {categories?.map((el, key) => {
               return (
                 <NavLink to={el.route} key={key}>
                   <div className="selected bg-brand transition duration-150 md:h-9 lg:h-8 xl:h-10 2xl:h-13 flex items-center p-2  xl:p-3 xl:pl-5">
