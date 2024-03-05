@@ -7,6 +7,8 @@ import DoughnutChart from "../components/charts/doughnutChart";
 import { ReactComponent as Bottomsvg } from "../assets/Group3.svg";
 import NotificationIcons from "../components/notifications/notificationsIcons";
 import Select from "../components/utilComponents/select";
+import CodeNotification from "../components/codeNotification";
+import Header from "../components/header";
 
 const EstateDashboard: React.FC = () => {
   const selectedAction = function (value: string) {
@@ -15,7 +17,8 @@ const EstateDashboard: React.FC = () => {
 
   return (
     <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
-      <div className="flex flex-col md:flex-row justify-between md:items-center h-[13vh] md:h-[4vh]">
+      
+      {/* <div className="flex flex-col md:flex-row justify-between md:items-center h-[13vh] md:h-[4vh]">
         <div className="order-1 md:order-none header">
           <h1 className="text-xl font-bold md:text-2xl 2xl:text-4xl">
             Welcome back, Admin
@@ -27,7 +30,13 @@ const EstateDashboard: React.FC = () => {
           </div>
           <NotificationIcons />
         </div>
+        
       </div>
+
+      <CodeNotification /> */}
+
+      <Header headerMssg={'Welcome back, Admin'} searchBar={false} code={543210} />
+      
       <div className=" my-3 mb-6 md:my-5 bg-white rounded-2xl h-[32vh] md:h-[30vh] lg:h-[42vh] 2xl:h-[30vh] box-border hero">
         <div className="h-[75%] flex p-4 justify-between relative">
           <div className="h-full w-[50%] sm:w-[75%]">
@@ -83,6 +92,9 @@ const EstateDashboard: React.FC = () => {
           </div>
         </div>
       </div>
+
+      
+
       <div className="grid gap-3 2xl:gap-5 grid-cols-2 md:grid-cols-3">
         <div className="bg-white rounded-lg sm:rounded-2xl p-2 sm:p-3 2xl:p-5 h-[22vh] md:h-[25vh] lg:h-[28vh] xl:h-[27vh] shadow-[2.4px_2.4px_3.2px_rgba(100,132,230,0.20)]">
           <div className="flex justify-between items-center mb-2 h-[15%] lg:mb-5 ">

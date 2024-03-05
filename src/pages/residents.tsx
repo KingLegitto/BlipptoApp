@@ -9,6 +9,7 @@ import { ReactComponent as Search } from "../assets/search.svg";
 import FirstResidentChart from "../components/residents/residentSatisfactoryChart";
 import NotificationIcons from "../components/notifications/notificationsIcons";
 import Select from "../components/utilComponents/select";
+import Header from "../components/header";
 
 
 const tableData = [
@@ -51,7 +52,7 @@ const selectedAction = function (value: string) {
 const Residents: React.FC = () => {
   return (
     <div className="h-full sm:h-screen md:overflow-scroll p-5 pr-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 sm:mb-0">
-      <div className="flex flex-col md:flex-row justify-between md:items-center h-24 md:h-10 mb-5">
+      {/* <div className="flex flex-col md:flex-row justify-between md:items-center h-24 md:h-10 mb-5">
         <div className="order-1 md:order-none w-full md:w-[60%] flex">
           <div className="w-10 h-10 rounded-md bg-brand mr-3 flex justify-center items-center">
             <Filter className="scale-[0.6] xl:scale-75" />
@@ -77,7 +78,10 @@ const Residents: React.FC = () => {
           </div>
           <NotificationIcons />
         </div>
-      </div>
+      </div> */}
+
+      <Header headerMssg={''} searchBar={true} code={999000}/>
+
       <button className="flex justify-center gap-x-1 md:gap-x-2 items-center rounded-full text-base bg-accenture h-9 md:h-10 w-28 md:w-32">
         <div className="w-5 h-5 p-0.5 2xl:w-6 2xl:h-6 flex justify-center items-center bg-white rounded-full">
           <AddIcon className="scale-[0.7] lg:scale-75" />

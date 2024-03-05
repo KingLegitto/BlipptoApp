@@ -11,16 +11,20 @@ import { scheduledGuardsData } from "../dummydata/scheduledGuardsDummyData";
 import { estateGuardsData } from "../dummydata/estateGuardsDummyData";
 import Select from "../components/utilComponents/select";
 import CalendarComponent from "../components/guards/calendar";
+import Header from "../components/header";
 
 const Guards: React.FC = () => {
   return (
     <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full max-w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
-        <div className="flex flex-row justify-between items-center md:justify-end h-10 mb-5 md:mb-10">
+        {/* <div className="flex flex-row justify-between items-center md:justify-end h-10 mb-5 md:mb-10">
           <div className="flex md:hidden w-10 h-10 rounded-full bg-gray-400 items-center justify-center">
             <PersonIcon />
           </div>
           <NotificationIcons />
-        </div>
+        </div> */}
+
+        <Header code={777777}/>
+
       {/* for mobile screens */}
       <button className="flex md:hidden justify-center gap-x-1 md:gap-x-2 items-center rounded-full text-base bg-accenture h-9 md:h-10 w-28 md:w-32 mb-3">
         <div className="w-5 h-5 p-0.5 2xl:w-6 2xl:h-6 flex justify-center items-center bg-white rounded-full">

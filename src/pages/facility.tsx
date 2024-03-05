@@ -14,6 +14,7 @@ import Select from "../components/utilComponents/select";
 import Menu from "../components/utilComponents/menu";
 import NotificationIcons from "../components/notifications/notificationsIcons";
 import { facilitiesData } from "../dummydata/facilityDummyData";
+import Header from "../components/header";
 
 const Facility: React.FC = () => {
   const [hasData] = useState<Boolean>(true);
@@ -33,7 +34,7 @@ const Facility: React.FC = () => {
     <>
       {hasData ? (
         <div className="h-full md:h-screen md:overflow-scroll p-5 md:p-6 md:pr-9 bg-background w-full md:w-4/5 lg:w-5/6 box-border mb-16 md:mb-0">
-          <div className="flex flex-col md:flex-row md:items-center h-24 md:h-10 mb-5 justify-between">
+          {/* <div className="flex flex-col md:flex-row md:items-center h-24 md:h-10 mb-5 justify-between">
             <div className="order-1 md:order-none w-full md:w-[60%] flex">
               <div className="w-10 h-10 rounded-md bg-brand mr-3 flex justify-center items-center">
                 <Filter className="scale-[0.6] xl:scale-75" />
@@ -59,7 +60,10 @@ const Facility: React.FC = () => {
               </div>
               <NotificationIcons />
             </div>
-          </div>
+          </div> */}
+
+          <Header headerMssg={''} searchBar={true} />
+
           <button className="flex justify-center gap-x-1 md:gap-x-2 items-center rounded-full text-base bg-accenture h-9 md:h-10 w-28 md:w-32">
             <div className="w-5 h-5 p-0.5 2xl:w-6 2xl:h-6 flex justify-center items-center bg-white rounded-full">
               <AddIcon className="scale-[0.7] lg:scale-75" />
@@ -130,7 +134,7 @@ const Facility: React.FC = () => {
                     </p>
                     <p className="text-xs xl:text-sm flex">
                       <span className="flex justify-center items-center mr-2 bg-[#4BB543] h-5 w-5 rounded-full">
-                        <Approved />
+                        <Approved fill="white"/>
                       </span>
                       <span>{`Bookings ${approvedRequest}`}</span>
                     </p>

@@ -19,6 +19,7 @@ import UserRegisteration from "./pages/userRegistration";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import clientStore from "./redux/store/clientStore";
 import { Provider } from "react-redux";
+import CodeNotification from "./components/codeNotification";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +30,8 @@ const App: React.FC = () => {
         <QueryClientProvider client={queryClient}>
           <Routes>
             <Route path="/">
-              <Route index element={<Navigate to="/landing" replace />} />
+              {/* <Route index element={<Navigate to="/landing" replace />} /> */}
+              <Route index element={<Navigate to="/dashboard/home" replace />} />
               <Route path="/dashboard" element={<SideBar />}>
                 <Route path="/dashboard/home" element={<EstateDashboard />} />
                 <Route path="/dashboard/keypad" element={<CheckIn />} />
